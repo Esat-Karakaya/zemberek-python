@@ -17,8 +17,8 @@ if __name__ == "__main__":
     # Noun Cases (Dictionary Match)
     test_generation("elma", ["A3pl", "Dat"], "elmalara")
     test_generation("limon", ["A3sg", "P1pl"], "limonumuz")
-    test_generation("ev", ["Dat"], "eve")
-    test_generation("okul", ["Dat"], "okula")
+    test_generation("hak", ["Dat"], "hakka")
+    test_generation("burun", ["Gen"], "burnun")
     
     # Verb Cases (Dictionary Match)
     test_generation("gel", ["Prog1", "A1sg"], "geliyorum")

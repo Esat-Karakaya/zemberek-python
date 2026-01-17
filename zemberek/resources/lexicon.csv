@@ -52569,9 +52569,7 @@ hal_Noun_2	hal	hal	Noun	None	hal	2	null	 NoVoicing
 hal_Noun	hal	hal	Noun	None	hal	0	null	 NoVoicing InverseHarmony Doubling
 hal_Noun_1	hal	hal	Noun	None	hal	1	null	 NoVoicing InverseHarmony
 yumurcak_Noun	yumurcak	yumurcak	Noun	None	yumurcak	0	null	 Voicing
-hak_Adj	hak	hak	Adj	None	hak	0	null	 NoVoicing
 hak_Noun	hak	hak	Noun	None	hak	0	null	 NoVoicing Doubling
-hak_Noun_1	hak	hak	Noun	None	hak	1	null	 NoVoicing InverseHarmony Doubling
 han_Noun	han	han	Noun	None	han	0	null	 NoVoicing
 ham_Adj	ham	ham	Adj	None	ham	0	null	 NoVoicing
 hap_Noun	hap	hap	Noun	None	hap	0	null	 NoVoicing
