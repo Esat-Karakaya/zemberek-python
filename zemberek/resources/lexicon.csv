@@ -54125,12 +54125,10 @@ kal_Noun	kal	kal	Noun	None	kal	0	null	 NoVoicing
 kan_Noun	kan	kan	Noun	None	kan	0	null	 NoVoicing
 Kutlualp_Noun_Prop	Kutlualp	kutlualp	Noun	Prop	kutlualp	0	null	 PronunciationGuessed
 atıştırmak_Verb	atıştırmak	atıştır	Verb	None	atıştır	0	null	 Aorist_I Causative_t
-kap_Noun_1	kap	kap	Noun	None	kap	1	null	 NoVoicing
 kap_Noun	kap	kap	Noun	None	kap	0	null	 Voicing
 sefarethane_Noun	sefarethane	sefarethane	Noun	None	sefarethane	0	null	0
 kas_Noun	kas	kas	Noun	None	kas	0	null	 NoVoicing
 kar_Noun	kar	kar	Noun	None	kar	0	null	 NoVoicing
-kat_Noun_1	kat	kat	Noun	None	kat	1	null	 NoVoicing InverseHarmony
 kat_Noun	kat	kat	Noun	None	kat	0	null	 NoVoicing
 sincapgiller_Noun	sincapgiller	sincapgiller	Noun	None	sincapgiller	0	null	 ImplicitPlural
 kav_Noun	kav	kav	Noun	None	kav	0	null	 NoVoicing
