@@ -6,43 +6,42 @@ import logging
 # Configure logging to show errors but avoid noise
 logging.basicConfig(level=logging.ERROR)
 
-def test_generation(root, suffix_ids, expected):
-    result = generate_word(root, suffix_ids)
-    print(f"Root: {root}, Suffixes: {suffix_ids} -> Result: {result}, Expected: {expected}")
+def test_generation(root, pos, suffix_ids, expected):
+    result = generate_word(root, pos, suffix_ids)
+    print(f"Root: {root} ({pos}), Suffixes: {suffix_ids} -> Result: {result}, Expected: {expected}")
     assert result == expected
 
 if __name__ == "__main__":
-    print("Starting generation tests with auto-POS inference (Morpheme objects)...")
+    print("Starting generation tests...")
     
     # Noun Cases (Dictionary Match)
-    test_generation("elma", ["A3pl", "Dat"], "elmalara")
-    test_generation("limon", ["A3sg", "P1pl"], "limonumuz")
-    test_generation("hak", ["Dat"], "hakka")
-    test_generation("burun", ["Gen"], "burnun")
+    test_generation("elma", "Noun", ["A3pl", "Dat"], "elmalara")
+    test_generation("limon", "Noun", ["A3sg", "P1pl"], "limonumuz")
+    test_generation("hak", "Noun", ["Dat"], "hakka")
+    test_generation("burun", "Noun", ["Gen"], "burnun")
     
     # Verb Cases (Dictionary Match)
-    test_generation("gel", ["Prog1", "A1sg"], "geliyorum")
-    test_generation("gel", ["Past", "A1sg"], "geldim")
+    test_generation("gel", "Verb", ["Prog1", "A1sg"], "geliyorum")
+    test_generation("gel", "Verb", ["Past", "A1sg"], "geldim")
     
-    # Ambiguous / Suffix Inference
-    test_generation("at", ["Dat"], "ata") 
-    test_generation("at", ["Fut", "Narr", "A1sg"], "atacakmışım")
+    # POS Inference
+    test_generation("at", "Noun", ["Dat"], "ata") 
+    test_generation("at", "Verb", ["Fut", "Narr", "A1sg"], "atacakmışım")
 
-    # Agressive Suffix Inference
-    """ 
-    test_generation("elma", ["Fut", "Narr", "A1sg"], "elmayacakmışım")
-    test_generation("gel", ["P1pl", "Gen"], "gelimizin")
-    """
-    
+    # Aggressive POS Inference
+    test_generation("elma", "Verb", ["Fut", "Narr", "A1sg"], "elmayacakmışım")
+    test_generation("gel", "Noun", ["P1pl", "Gen"], "gelimizin")
+
     # Pronoun
-    test_generation("biz", ["A3pl"], "bizler")
+    test_generation("biz", "Noun", ["A3pl"], "bizler")
 
-    # Unknown Named Entity
-    test_generation("Çıtçıt", ["Dat"], "Çıtçıt'a")
-    test_generation("Bürokratistan", ["Loc", "Rel", "A3pl", "Gen"], "Bürokratistan'dakilerin")
+    # Named Entity (Proper Noun)
+    test_generation("Çıtçıt", "NamedEntity", ["Dat"], "Çıtçıt'a")
+    test_generation("Bürokratistan", "NamedEntity", ["Loc", "Rel", "A3pl", "Gen"], "Bürokratistan'dakilerin")
+    test_generation("Ahmet", "NamedEntity", ["Dat"], "Ahmet'e")
 
-    # Unknown Root (Inference from suffix)
-    test_generation("bloop", ["Dat"], "bloopa")
-    test_generation("bloop", ["Prog1"], "bloopuyor")
+    # Unknown Root
+    test_generation("bloop", "Noun", ["Dat"], "bloopa")
+    test_generation("bloop", "Verb", ["Prog1"], "bloopuyor")
 
     print("\nAll tests passed!")
