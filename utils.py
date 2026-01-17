@@ -166,6 +166,8 @@ def generate_word(root: str, suffixes: Union[List[Morpheme], List[str]]) -> str:
             continue
             
         surface = root
+        is_proper = root[0].isupper() if root else False
+        apostrophe_added = False
         attributes = AttributesHelper.get_morphemic_attributes(surface)
         
         current_suffixes_to_process = list(suffixes)
@@ -180,11 +182,6 @@ def generate_word(root: str, suffixes: Union[List[Morpheme], List[str]]) -> str:
             # We just need to find the NEXT STATE that corresponds to target_suffix.
             # Intervening states must be EMPTY transitions.
             
-            queue = [(current_state, "")]
-            visited = {current_state}
-            path_found = None # (transition_to_target, accumulated_surface)
-            
-            # Limited depth BFS to find target suffix via empty transitions
             import collections
             bfs_q = collections.deque([(current_state, [])]) # state, list of transitions
             visited_states = {current_state}
@@ -196,9 +193,6 @@ def generate_word(root: str, suffixes: Union[List[Morpheme], List[str]]) -> str:
                 s, path = bfs_q.popleft()
                 
                 # Check if this state's outgoing transitions lead to target
-                # But "s" is where we are coming FROM. 
-                # We need to find a transition T from S such that T leads to target morpheme.
-                
                 # Direct check first
                 match = None
                 for t in s.outgoing:
@@ -211,12 +205,8 @@ def generate_word(root: str, suffixes: Union[List[Morpheme], List[str]]) -> str:
                     break
                 
                 # If not direct, look for empty transitions to traverse
-                # Limit depth to avoid infinite loops or deep searches (arbitrary limit 5)
                 if len(path) < 5:
                     for t in s.outgoing:
-                        # Empty transition check: template is empty/None
-                        # SuffixTransition usually has surface_template. If it is empty or None, it produces no surface.
-                        # MorphemeState.add_empty uses SuffixTransition but without template (defaults to "")
                         is_empty_transition = False
                         if hasattr(t, 'surface_template') and not t.surface_template:
                             is_empty_transition = True
@@ -227,15 +217,17 @@ def generate_word(root: str, suffixes: Union[List[Morpheme], List[str]]) -> str:
 
             if found_transition_path:
                 # Apply the path
-                # Note: The path might contain multiple empty transitions and finally the target transition.
-                # We need to generate surface and update attributes for EACH step in the path actually, 
-                # because even empty transitions move state. 
-                # BUT `generate_surface` on empty transition adds nothing.
-                
                 for trans in found_transition_path:
                     suffix_surface = SurfaceTransition.generate_surface(trans, attributes)
+                    
+                    if is_proper and not apostrophe_added and suffix_surface:
+                        surface += "'"
+                        apostrophe_added = True
+                    
                     surface += suffix_surface
-                    attributes = AttributesHelper.get_morphemic_attributes(surface)
+                    # Calculate attributes strictly from phonetic content (ignore apostrophe)
+                    phonetic_surface = surface.replace("'", "")
+                    attributes = AttributesHelper.get_morphemic_attributes(phonetic_surface)
                     current_state = trans.to
                 
                 # We successfully processed this suffix

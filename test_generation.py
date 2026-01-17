@@ -36,8 +36,8 @@ if __name__ == "__main__":
     test_generation("biz", ["A3pl"], "bizler")
 
     # Unknown Named Entity
-    # test_generation("Çıtçıt", ["Dat"], "bloopa")
-    test_generation("bloop", ["Prog1"], "bloopuyor")
+    test_generation("Çıtçıt", ["Dat"], "Çıtçıt'a")
+    test_generation("Bürokratistan", ["Loc", "Rel", "A3pl", "Gen"], "Bürokratistan'dakilerin")
 
     # Unknown Root (Inference from suffix)
     test_generation("bloop", ["Dat"], "bloopa")
