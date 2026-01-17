@@ -6,13 +6,8 @@ import logging
 # Configure logging to show errors but avoid noise
 logging.basicConfig(level=logging.ERROR)
 
-# Initialize morphotactics to populate the morpheme map
-get_morphotactics()
-m_map = get_morpheme_map()
-
 def test_generation(root, suffix_ids, expected):
-    suffixes = [m_map[sid] for sid in suffix_ids]
-    result = generate_word(root, suffixes)
+    result = generate_word(root, suffix_ids)
     print(f"Root: {root}, Suffixes: {suffix_ids} -> Result: {result}, Expected: {expected}")
     assert result == expected
 

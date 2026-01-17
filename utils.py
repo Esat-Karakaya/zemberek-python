@@ -1,7 +1,8 @@
-from typing import List
+from typing import List, Union
 from zemberek.core.turkish.primary_pos import PrimaryPos
 from zemberek.morphology.morphotactics.morpheme import Morpheme
 from zemberek.morphology.morphotactics.turkish_morphotactics import get_morpheme_map
+from dictionary import morpheme_map
 
 def get_primary_pos_for_suffix(morpheme: Morpheme) -> List[PrimaryPos]:
     """
@@ -69,9 +70,6 @@ def get_primary_pos_for_suffix(morpheme: Morpheme) -> List[PrimaryPos]:
     return [PrimaryPos.Unknown]
 
 _morphotactics = None
-# Initialize morphotactics to populate the morpheme map
-get_morphotactics()
-m_map = get_morpheme_map()
 
 def get_morphotactics():
     global _morphotactics
@@ -85,8 +83,6 @@ def get_morphotactics():
 def guess_primary_pos_given_suffixes(root: str, suffixes: List[Morpheme]) -> List[PrimaryPos]:
 
     morphotactics = get_morphotactics()
-    
-    # 1. Determine Candidate Primary POSs
     candidate_pos_list = []
     
     # A. Check Dictionary
@@ -121,11 +117,11 @@ def guess_primary_pos_given_suffixes(root: str, suffixes: List[Morpheme]) -> Lis
     
     return final_candidates
 
-def generate_word(root: str, suffixes: List[Morpheme]) -> str:
+def generate_word(root: str, suffixes: Union[List[Morpheme], List[str]]) -> str:
     """
     Args:
         root (str): The root word string (e.g., "elma", "gel").
-        suffixes (List[Morpheme]): A list of suffix Morpheme objects to attach.
+        suffixes (List[Morpheme] or List[str]): A list of suffix Morpheme objects or suffix ids to attach.
         
     Returns:
         str: The generated surface form (e.g., "elmalara"). 
@@ -139,6 +135,11 @@ def generate_word(root: str, suffixes: List[Morpheme]) -> str:
         return root
 
     morphotactics = get_morphotactics()
+
+    suffixes = [
+        s if type(s) == Morpheme else morpheme_map[s]
+        for s in suffixes
+    ]
 
     # 1. Guess Primary POS from suffixes
     final_candidates = guess_primary_pos_given_suffixes(root, suffixes)
