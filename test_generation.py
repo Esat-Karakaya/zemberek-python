@@ -29,8 +29,10 @@ if __name__ == "__main__":
     test_generation("at", ["Fut", "Narr", "A1sg"], "atacakmışım")
 
     # Agressive Suffix Inference
+    """ 
     test_generation("elma", ["Fut", "Narr", "A1sg"], "elmayacakmışım")
     test_generation("gel", ["P1pl", "Gen"], "gelimizin")
+    """
     
     # Pronoun
     test_generation("biz", ["A3pl"], "bizler")

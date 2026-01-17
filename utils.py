@@ -1,8 +1,9 @@
-from typing import List, Union
+from typing import List, Union, Literal
 from zemberek.core.turkish.primary_pos import PrimaryPos
 from zemberek.morphology.morphotactics.morpheme import Morpheme
 from zemberek.morphology.morphotactics.turkish_morphotactics import get_morpheme_map
 from dictionary import morpheme_map
+from zemberek.morphology.generator.word_generator import WordGenerator
 
 def get_primary_pos_for_suffix(morpheme: Morpheme) -> List[PrimaryPos]:
     """
@@ -117,128 +118,40 @@ def guess_primary_pos_given_suffixes(root: str, suffixes: List[Morpheme]) -> Lis
     
     return final_candidates
 
-def generate_word(root: str, suffixes: Union[List[Morpheme], List[str]]) -> str:
-    """
-    Args:
-        root (str): The root word string (e.g., "elma", "gel").
-        suffixes (List[Morpheme] or List[str]): A list of suffix Morpheme objects or suffix ids to attach.
-        
-    Returns:
-        str: The generated surface form (e.g., "elmalara"). 
-            Returns the best effort generation (or just the root) if strictly valid generation fails.
-    """
-    from zemberek.morphology.analysis.attributes_helper import AttributesHelper
-    from zemberek.morphology.analysis.surface_transitions import SurfaceTransition
-    from zemberek.morphology.morphotactics.morpheme import Morpheme
+def generate_word(root: str, primary_pos: Literal["Noun", "Verb", "NamedEntity"], suffixes: Union[List[Morpheme], List[str]]) -> str:
+    """Generate a word form using Zemberek's WordGenerator.
 
+    This replaces the previous custom BFS implementation and leverages the
+    built‑in generator which correctly handles phonetic exceptions such as
+    voicing, doubling and last‑vowel drop.
+    """
     if not suffixes:
         return root
 
+    # Convert suffix identifiers to Morpheme objects when necessary
+    suffix_objs = [s if isinstance(s, Morpheme) else morpheme_map[s] for s in suffixes]
+
+    # Determine candidate primary POS values for the root based on the suffixes
+    pos_candidates = guess_primary_pos_given_suffixes(root, suffix_objs)
+
     morphotactics = get_morphotactics()
+    generator = WordGenerator(morphotactics)
+    lexicon = morphotactics.get_root_lexicon()
 
-    suffixes = [
-        s if type(s) == Morpheme else morpheme_map[s]
-        for s in suffixes
-    ]
+    for pos in pos_candidates:
+        # Find dictionary items matching the root and the candidate POS
+        matching_items = [item for item in lexicon.item_map.get(root, []) if item.primary_pos == pos]
+        # Try each matching item with its stem transitions
+        for item in matching_items:
+            stem_transitions = morphotactics.stem_transitions.get_transitions_for_item(item)
+            results = generator.generate(item=item, morphemes=tuple(suffix_objs), candidates=stem_transitions)
+            if results:
+                return results[0].surface
+        # Fallback: generate using generic stem transitions for the raw root string
+        generic_transitions = morphotactics.stem_transitions.get_transitions(root)
+        results = generator.generate(morphemes=tuple(suffix_objs), candidates=generic_transitions)
+        if results:
+            return results[0].surface
 
-    # 1. Guess Primary POS from suffixes
-    final_candidates = guess_primary_pos_given_suffixes(root, suffixes)
-
-    # 2. Try Generation for each Candidate
-    best_result = root
-    
-    for pos in final_candidates:
-        # Map primary pos to start state
-        current_state = None
-        if pos == PrimaryPos.Noun:
-            current_state = morphotactics.noun_S
-        elif pos == PrimaryPos.Verb:
-            current_state = morphotactics.verbRoot_S
-        elif pos == PrimaryPos.Adjective:
-            current_state = morphotactics.adjectiveRoot_ST
-        elif pos == PrimaryPos.Numeral:
-            current_state = morphotactics.numeralRoot_ST
-        elif pos == PrimaryPos.Pronoun:
-            current_state = morphotactics.pronPers_S
-        # Add other POS mappings as needed
-        
-        if current_state is None:
-            continue
-            
-        surface = root
-        is_proper = root[0].isupper() if root else False
-        apostrophe_added = False
-        attributes = AttributesHelper.get_morphemic_attributes(surface)
-        
-        current_suffixes_to_process = list(suffixes)
-        success = True
-        
-        while current_suffixes_to_process:
-            target_suffix = current_suffixes_to_process[0]
-            
-            # Search for path to target suffix (BFS)
-            # Queue stores: (state, attributes, path_surface)
-            # But wait, attributes depend on surface generated so far in the path.
-            # We just need to find the NEXT STATE that corresponds to target_suffix.
-            # Intervening states must be EMPTY transitions.
-            
-            import collections
-            bfs_q = collections.deque([(current_state, [])]) # state, list of transitions
-            visited_states = {current_state}
-            
-            found_transition_path = None
-            
-            # We iterate to find a path of transitions: Empty -> Empty -> ... -> TargetSuffix
-            while bfs_q:
-                s, path = bfs_q.popleft()
-                
-                # Check if this state's outgoing transitions lead to target
-                # Direct check first
-                match = None
-                for t in s.outgoing:
-                    if t.to.morpheme.id_ == target_suffix.id_:
-                         match = t
-                         break
-                
-                if match:
-                    found_transition_path = path + [match]
-                    break
-                
-                # If not direct, look for empty transitions to traverse
-                if len(path) < 5:
-                    for t in s.outgoing:
-                        is_empty_transition = False
-                        if hasattr(t, 'surface_template') and not t.surface_template:
-                            is_empty_transition = True
-                        
-                        if is_empty_transition and t.to not in visited_states:
-                            visited_states.add(t.to)
-                            bfs_q.append((t.to, path + [t]))
-
-            if found_transition_path:
-                # Apply the path
-                for trans in found_transition_path:
-                    suffix_surface = SurfaceTransition.generate_surface(trans, attributes)
-                    
-                    if is_proper and not apostrophe_added and suffix_surface:
-                        surface += "'"
-                        apostrophe_added = True
-                    
-                    surface += suffix_surface
-                    # Calculate attributes strictly from phonetic content (ignore apostrophe)
-                    phonetic_surface = surface.replace("'", "")
-                    attributes = AttributesHelper.get_morphemic_attributes(phonetic_surface)
-                    current_state = trans.to
-                
-                # We successfully processed this suffix
-                current_suffixes_to_process.pop(0)
-            else:
-                success = False
-                break
-        
-        if success:
-            return surface
-        else:
-            pass
-
-    return best_result
+    # If all attempts fail, return the original root as a safe fallback
+    return root
