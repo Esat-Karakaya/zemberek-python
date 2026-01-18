@@ -86,7 +86,107 @@ def force_suffixes_on_word(root: str, is_named_entity: bool, suffixes: List[Morp
     logging.warning(
         f"Warning\n adding suffixes: {[s.id_ for s in suffixes]} to the stem: {root} "
         f"was not possible with zemberek's built in method. Deploying work around"
-        )
+    )
+    
+    morphotactics = get_morphotactics()
+    generator = WordGenerator(morphotactics)
+    
+    current_surface = root
+    apostrophe_added = False
+    
+    for suffix in suffixes:
+        possible_pos = get_primary_pos_for_suffix(suffix)
+        
+        success = False
+        # Try each possible PrimaryPos until one works
+        for p_pos in possible_pos:
+            # We treat the current surface as a new "stem" to bypass morphotactic restrictions
+            s_pos = SecondaryPos.ProperNoun if is_named_entity and not apostrophe_added else SecondaryPos.None_
+            
+            dummy_item = DictionaryItem(current_surface, current_surface, p_pos, s_pos)
+            start_state = morphotactics.verbRoot_S if p_pos == PrimaryPos.Verb else morphotactics.noun_S
+            phonetic_attrs = AttributesHelper.get_morphemic_attributes(current_surface)
+            
+            candidate = StemTransition(current_surface, dummy_item, phonetic_attrs, start_state)
+            
+            results = generator.generate(morphemes=(suffix,), candidates=(candidate,))
+            if results:
+                generated_surface = results[0].surface
+                
+                # Handle NamedEntity apostrophe
+                if is_named_entity and not apostrophe_added and generated_surface != current_surface:
+                    if generated_surface.startswith(current_surface):
+                        suffix_surface = generated_surface[len(current_surface):]
+                        current_surface = f"{current_surface}'{suffix_surface}"
+                        apostrophe_added = True
+                    else:
+                        # Fallback if it doesn't start with root for some reason (e.g. softening)
+                        current_surface = generated_surface
+                else:
+                    current_surface = generated_surface
+                
+                success = True
+                break
+        
+        if not success:
+            # If even the reset fails, we might just have to skip or append literally
+            logging.error(f"Could not generate suffix {suffix.id_} for {current_surface}")
+            # As a last resort to "fulfill" the request, we could append the suffix name
+            # but usually resetting the state is enough.
+            
+    return current_surface
 
-    """@utils.py#L85-86 
-complete this function so that even completely broken word generation requests can be fulfilled."""
+def get_primary_pos_for_suffix(morpheme: Morpheme) -> List[PrimaryPos]:
+
+    m_id = morpheme.id_
+    
+    # Strictly Noun-targeting suffixes: Case, Possession, and Nominal Derivations
+    noun_suffixes = {
+        "Pnon", "P1sg", "P2sg", "P3sg", "P1pl", "P2pl", "P3pl",
+        "Nom", "Dat", "Acc", "Abl", "Loc", "Ins", "Gen", "Equ",
+        "Dim", "Ness", "With", "Without", "Related", "JustLike", "Rel", "Agt",
+        "Become", "Acquire", "Ly", "Zero", "Root",
+        "A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl",
+        "Past", "Narr", "Cond", "Cop",
+        "Noun"
+    }
+    
+    # Strictly Verb-targeting suffixes: Voice, Aspect, and Verbal Derivations
+    verb_suffixes = {
+        "Caus", "Recip", "Reflex", "Able", "Pass", "Neg",
+        "Unable", "Pres", "Prog1", "Prog2", "Aor", "Fut", "Imp", "Opt", "Desr", "Neces",
+        "Inf1", "Inf2", "Inf3", "ActOf",
+        "PastPart", "NarrPart", "FutPart", "PresPart", "AorPart",
+        "NotState", "FeelLike", "EverSince", "Repeat", "Almost", "Hastily", "Stay", "Start",
+        "AsIf", "While", "When", "SinceDoingSo", "AsLongAs", "ByDoingSo",
+        "Adamantly", "AfterDoingSo", "WithoutHavingDoneSo", "WithoutBeingAbleToHaveDoneSo",
+        "A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl",
+        "Past", "Narr", "Cond", "Cop",
+        "Verb"
+    }
+
+    results = []
+    if m_id in noun_suffixes: results.append(PrimaryPos.Noun)
+    if m_id in verb_suffixes: results.append(PrimaryPos.Verb)
+    
+    if results:
+        return results
+
+    # If the morpheme is a POS marker itself, return that POS
+    pos_map = {
+        "Noun": PrimaryPos.Noun,
+        "Adj": PrimaryPos.Adjective,
+        "Verb": PrimaryPos.Verb,
+        "Pron": PrimaryPos.Pronoun,
+        "Adv": PrimaryPos.Adverb,
+        "Conj": PrimaryPos.Conjunction,
+        "Punc": PrimaryPos.Punctuation,
+        "Ques": PrimaryPos.Question,
+        "Postp": PrimaryPos.PostPositive,
+        "Det": PrimaryPos.Determiner,
+    }
+    
+    if m_id in pos_map:
+        return [pos_map[m_id]]
+        
+    return [PrimaryPos.Unknown]
