@@ -80,3 +80,6 @@ def generate_word(root: str, primary_pos: Literal["Noun", "Verb", "NamedEntity"]
         return generated_surface
 
     return root
+
+def force_suffixes_on_word(root: str, is_named_entity: bool, suffixes: List[Morpheme]) -> str:
+    pass
