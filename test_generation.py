@@ -45,6 +45,6 @@ if __name__ == "__main__":
     test_generation("bloop", "Verb", ["Prog1"], "bloopuyor")
 
     # Broken Generation
-    test_generation("kap", "Noun", ["Prog1", "A2pl"], "kap('Noun', 'Prog1', 'A2pl')")
+    test_generation("kap", "Noun", ["Prog1", "Dim", "A3pl"], "kapıyorcuklar")
 
     print("\nAll tests passed!")

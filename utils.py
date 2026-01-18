@@ -84,8 +84,8 @@ def generate_word(root: str, primary_pos: Literal["Noun", "Verb", "NamedEntity"]
 
 def force_suffixes_on_word(root: str, is_named_entity: bool, suffixes: List[Morpheme]) -> str:
     logging.warning(
-        f"Warning\n adding suffixes: {[s.id_ for s in suffixes]} to the stem: {root} "
-        f"was not possible with zemberek's built in method. Deploying work around"
+        f"Couldn't add suffixes: {[s.id_ for s in suffixes]} to \"{root}\" "
+        f"via zemberek's own method. Deploying work around"
     )
     
     morphotactics = get_morphotactics()
@@ -95,6 +95,11 @@ def force_suffixes_on_word(root: str, is_named_entity: bool, suffixes: List[Morp
     apostrophe_added = False
     
     for suffix in suffixes:
+
+        if suffix.id_=="Rel":
+            current_surface+="ki"
+            continue
+
         possible_pos = get_primary_pos_for_suffix(suffix)
         
         success = False
