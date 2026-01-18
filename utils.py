@@ -80,7 +80,7 @@ def generate_word(root: str, primary_pos: Literal["Noun", "Verb", "NamedEntity"]
                 return root + "'" + generated_surface[len(root):]
         return generated_surface
 
-    return root
+    return force_suffixes_on_word(root, primary_pos=="NamedEntity", suffix_objs)
 
 def force_suffixes_on_word(root: str, is_named_entity: bool, suffixes: List[Morpheme]) -> str:
     logging.warning(
@@ -136,8 +136,6 @@ def force_suffixes_on_word(root: str, is_named_entity: bool, suffixes: List[Morp
         if not success:
             # If even the reset fails, we might just have to skip or append literally
             logging.error(f"Could not generate suffix {suffix.id_} for {current_surface}")
-            # As a last resort to "fulfill" the request, we could append the suffix name
-            # but usually resetting the state is enough.
             
     return current_surface
 
@@ -145,7 +143,7 @@ def get_primary_pos_for_suffix(morpheme: Morpheme) -> List[PrimaryPos]:
 
     m_id = morpheme.id_
     
-    # Strictly Noun-targeting suffixes: Case, Possession, and Nominal Derivations
+    # Noun-targeting suffixes: Case, Possession, and Nominal Derivations
     noun_suffixes = {
         "Pnon", "P1sg", "P2sg", "P3sg", "P1pl", "P2pl", "P3pl",
         "Nom", "Dat", "Acc", "Abl", "Loc", "Ins", "Gen", "Equ",
@@ -156,7 +154,7 @@ def get_primary_pos_for_suffix(morpheme: Morpheme) -> List[PrimaryPos]:
         "Noun"
     }
     
-    # Strictly Verb-targeting suffixes: Voice, Aspect, and Verbal Derivations
+    # Verb-targeting suffixes: Voice, Aspect, and Verbal Derivations
     verb_suffixes = {
         "Caus", "Recip", "Reflex", "Able", "Pass", "Neg",
         "Unable", "Pres", "Prog1", "Prog2", "Aor", "Fut", "Imp", "Opt", "Desr", "Neces",
@@ -174,24 +172,6 @@ def get_primary_pos_for_suffix(morpheme: Morpheme) -> List[PrimaryPos]:
     if m_id in noun_suffixes: results.append(PrimaryPos.Noun)
     if m_id in verb_suffixes: results.append(PrimaryPos.Verb)
     
-    if results:
-        return results
+    if results: return results
 
-    # If the morpheme is a POS marker itself, return that POS
-    pos_map = {
-        "Noun": PrimaryPos.Noun,
-        "Adj": PrimaryPos.Adjective,
-        "Verb": PrimaryPos.Verb,
-        "Pron": PrimaryPos.Pronoun,
-        "Adv": PrimaryPos.Adverb,
-        "Conj": PrimaryPos.Conjunction,
-        "Punc": PrimaryPos.Punctuation,
-        "Ques": PrimaryPos.Question,
-        "Postp": PrimaryPos.PostPositive,
-        "Det": PrimaryPos.Determiner,
-    }
-    
-    if m_id in pos_map:
-        return [pos_map[m_id]]
-        
     return [PrimaryPos.Unknown]

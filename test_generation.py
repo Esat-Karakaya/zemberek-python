@@ -22,7 +22,7 @@ if __name__ == "__main__":
     
     # Verb Cases (Dictionary Match)
     test_generation("gel", "Verb", ["Prog1", "A1sg"], "geliyorum")
-    test_generation("gel", "Verb", ["Past", "A1sg"], "geldim")
+    test_generation("koş", "Verb", ["Aor", "A1pl"], "koşarız")
     
     # POS Inference
     test_generation("at", "Noun", ["Dat"], "ata") 
@@ -46,5 +46,6 @@ if __name__ == "__main__":
 
     # Broken Generation
     test_generation("kap", "Noun", ["Prog1", "Dim", "A3pl"], "kapıyorcuklar")
+    test_generation("kitap", "Noun", ["Aor", "Almost"], "kitapırayaz")
 
     print("\nAll tests passed!")
