@@ -87,3 +87,6 @@ def force_suffixes_on_word(root: str, is_named_entity: bool, suffixes: List[Morp
         f"Warning\n adding suffixes: {[s.id_ for s in suffixes]} to the stem: {root} "
         f"was not possible with zemberek's built in method. Deploying work around"
         )
+
+    """@utils.py#L85-86 
+complete this function so that even completely broken word generation requests can be fulfilled."""
