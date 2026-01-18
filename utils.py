@@ -7,6 +7,7 @@ from zemberek.morphology.morphotactics.stem_transition import StemTransition
 from zemberek.morphology.analysis.attributes_helper import AttributesHelper
 from zemberek.morphology.generator.word_generator import WordGenerator
 from dictionary import morpheme_map
+import logging
 
 _morphotactics = None
 
@@ -82,4 +83,7 @@ def generate_word(root: str, primary_pos: Literal["Noun", "Verb", "NamedEntity"]
     return root
 
 def force_suffixes_on_word(root: str, is_named_entity: bool, suffixes: List[Morpheme]) -> str:
-    pass
+    logging.warning(
+        f"Warning\n adding suffixes: {[s.id_ for s in suffixes]} to the stem: {root} "
+        f"was not possible with zemberek's built in method. Deploying work around"
+        )
