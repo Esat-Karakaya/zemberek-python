@@ -1,0 +1,1 @@
+run python files with ./.venv/bin/python instead of python3
