@@ -140,7 +140,6 @@ def force_suffixes_on_word(root: str, is_named_entity: bool, suffixes: List[Morp
     return current_surface
 
 def get_primary_pos_for_suffix(morpheme: Morpheme) -> List[PrimaryPos]:
-
     m_id = morpheme.id_
     
     # Noun-targeting suffixes: Case, Possession, and Nominal Derivations
@@ -175,3 +174,9 @@ def get_primary_pos_for_suffix(morpheme: Morpheme) -> List[PrimaryPos]:
     if results: return results
 
     return [PrimaryPos.Unknown]
+
+def is_single_syllable(word: str) -> bool:
+    from zemberek.core.turkish.turkish_alphabet import TurkishAlphabet
+    vowel_count = sum(1 for char in word if TurkishAlphabet.INSTANCE.is_vowel(char))
+    return vowel_count == 1
+
