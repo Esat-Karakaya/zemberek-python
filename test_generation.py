@@ -21,8 +21,9 @@ if __name__ == "__main__":
     test_generation("burun", "Noun", ["Gen"], "burnun")
     
     # Verb Cases (Dictionary Match)
-    test_generation("gel", "Verb", ["Prog1", "A1sg"], "geliyorum")
+    test_generation("kaç", "Verb", ["Prog1", "A1sg"], "kaçıyorum")
     test_generation("koş", "Verb", ["Aor", "A1pl"], "koşarız")
+    test_generation("gel", "Verb", ["AorPart"], "gelir")
     
     # POS Inference
     test_generation("at", "Noun", ["Dat"], "ata") 

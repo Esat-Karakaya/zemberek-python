@@ -7,6 +7,8 @@ from zemberek.morphology.morphotactics.stem_transition import StemTransition
 from zemberek.morphology.analysis.attributes_helper import AttributesHelper
 from zemberek.morphology.generator.word_generator import WordGenerator
 from dictionary import morpheme_map
+from zemberek.core.turkish.root_attribute import RootAttribute
+from zemberek.core.turkish.turkish_alphabet import TurkishAlphabet
 import logging
 
 _morphotactics = None
@@ -43,7 +45,11 @@ def generate_word(root: str, primary_pos: Literal["Noun", "Verb", "NamedEntity"]
     candidates = []
     
     # 1. Look in Lexicon
-    matching_items = [item for item in lexicon.item_map.get(root, []) if item.primary_pos == p_pos]
+
+    lex_key = root
+    if primary_pos == "Verb":
+        lex_key = add_Inf1_suffix(root)
+    matching_items = [item for item in lexicon.item_map.get(lex_key, []) if item.primary_pos == p_pos]
     if primary_pos == "NamedEntity":
         # Prefer ProperNoun entries if they exist
         proper_items = [item for item in matching_items if item.secondary_pos == SecondaryPos.ProperNoun]
@@ -63,10 +69,8 @@ def generate_word(root: str, primary_pos: Literal["Noun", "Verb", "NamedEntity"]
 
     # 2. If no candidates found, or for generic unknown words, create synthetic transition
     if not candidates:
-        dummy_item = DictionaryItem(root, root, p_pos, s_pos)
-        start_state = morphotactics.verbRoot_S if p_pos == PrimaryPos.Verb else morphotactics.noun_S
-        phonetic_attrs = AttributesHelper.get_morphemic_attributes(root)
-        candidates.append(StemTransition(root, dummy_item, phonetic_attrs, start_state))
+        new_stem_transition = create_stem_transition(root, p_pos, s_pos)
+        candidates.append(new_stem_transition)
 
     # Generate
     results = generator.generate(morphemes=tuple(suffix_objs), candidates=tuple(candidates))
@@ -108,11 +112,7 @@ def force_suffixes_on_word(root: str, is_named_entity: bool, suffixes: List[Morp
             # We treat the current surface as a new "stem" to bypass morphotactic restrictions
             s_pos = SecondaryPos.ProperNoun if is_named_entity and not apostrophe_added else SecondaryPos.None_
             
-            dummy_item = DictionaryItem(current_surface, current_surface, p_pos, s_pos)
-            start_state = morphotactics.verbRoot_S if p_pos == PrimaryPos.Verb else morphotactics.noun_S
-            phonetic_attrs = AttributesHelper.get_morphemic_attributes(current_surface)
-            
-            candidate = StemTransition(current_surface, dummy_item, phonetic_attrs, start_state)
+            candidate = create_stem_transition(current_surface, p_pos, s_pos)
             
             results = generator.generate(morphemes=(suffix,), candidates=(candidate,))
             if results:
@@ -179,4 +179,26 @@ def is_single_syllable(word: str) -> bool:
     from zemberek.core.turkish.turkish_alphabet import TurkishAlphabet
     vowel_count = sum(1 for char in word if TurkishAlphabet.INSTANCE.is_vowel(char))
     return vowel_count == 1
+
+def add_Inf1_suffix(verb: str) -> str:
+    alphabet =TurkishAlphabet()
+    is_frontal = alphabet.get_last_vowel(verb).is_frontal()
+    sfx = "mek" if is_frontal else "mak"
+    return verb+sfx
+
+def create_stem_transition(root: str, p_pos: PrimaryPos, s_pos: SecondaryPos = SecondaryPos.None_) -> StemTransition:
+    attributes = set()
+    if p_pos == PrimaryPos.Verb:
+        if is_single_syllable(root):
+            attributes.add(RootAttribute.Aorist_A)
+        else:
+            attributes.add(RootAttribute.Aorist_I)
+    
+    morphotactics = get_morphotactics()
+
+    dummy_item = DictionaryItem(root, root, p_pos, s_pos, attributes=attributes)
+    start_state = morphotactics.verbRoot_S if p_pos == PrimaryPos.Verb else morphotactics.noun_S
+    phonetic_attrs = AttributesHelper.get_morphemic_attributes(root)
+    res = StemTransition(root, dummy_item, phonetic_attrs, start_state)
+    return res
 
