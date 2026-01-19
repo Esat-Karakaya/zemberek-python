@@ -4,6 +4,7 @@ from zemberek.morphology.lexicon.dictionary_item import DictionaryItem
 from zemberek.morphology.analysis.attributes_helper import AttributesHelper
 from zemberek.core.turkish.primary_pos import PrimaryPos
 from zemberek.core.turkish.secondary_pos import SecondaryPos
+from zemberek.core.turkish.root_attribute import RootAttribute
 from zemberek.morphology.morphotactics.stem_transition import StemTransition
 from dictionary import morpheme_map
 
@@ -12,17 +13,18 @@ generator = WordGenerator(morphotactics)
 
 root = "koş"
 
-p_pos=PrimaryPos.Verb
+p_pos = PrimaryPos.Verb
 s_pos = SecondaryPos.None_
-dummy_item = DictionaryItem(root, root, p_pos, s_pos)
-start_state = morphotactics.verbRoot_S if p_pos == PrimaryPos.Verb else morphotactics.noun_S
+# Add Aorist_A attribute to allow Aorist generation for single-syllable verb
+dummy_item = DictionaryItem(root, root, p_pos, s_pos, attributes={RootAttribute.Aorist_A})
+start_state = morphotactics.verbRoot_S
 phonetic_attrs = AttributesHelper.get_morphemic_attributes(root)
 candidate = StemTransition(root, dummy_item, phonetic_attrs, start_state)
 
 # Test Past
-res_past = generator.generate(morphemes=tuple([morpheme_map["Past"], morpheme_map["A3sg"]]), candidates=tuple([candidate]))
-print(f"Past (A3sg): {res_past[0].surface if len(res_past)>0 else res_past}")
+res_past = generator.generate(morphemes=tuple([morpheme_map["Past"]]), candidates=tuple([candidate]))
+print(f"Past: {[w.surface for w in res_past]}")
 
 # Test Aorist
-res_aor = generator.generate(morphemes=tuple([morpheme_map["Aor"], morpheme_map["A1pl"]]), candidates=tuple([candidate]))
-print(f"Aorist (A1pl): {res_aor[0].surface if len(res_aor)>0 else res_aor}")
+res_aor = generator.generate(morphemes=tuple([morpheme_map["Aor"]]), candidates=tuple([candidate]))
+print(f"Aorist: {[w.surface for w in res_aor]}")
