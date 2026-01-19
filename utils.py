@@ -86,6 +86,7 @@ def generate_word(root: str, primary_pos: Literal["Noun", "Verb", "NamedEntity"]
 
     return force_suffixes_on_word(root, primary_pos=="NamedEntity", suffix_objs)
 
+# ask gemini to tweak this function so that it won't generate new stemtransition if not needed
 def force_suffixes_on_word(root: str, is_named_entity: bool, suffixes: List[Morpheme]) -> str:
     logging.warning(
         f"Couldn't add suffixes: {[s.id_ for s in suffixes]} to \"{root}\" "

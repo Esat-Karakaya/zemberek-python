@@ -24,6 +24,7 @@ if __name__ == "__main__":
     test_generation("kaç", "Verb", ["Prog1", "A1sg"], "kaçıyorum")
     test_generation("koş", "Verb", ["Aor", "A1pl"], "koşarız")
     test_generation("gel", "Verb", ["AorPart"], "gelir")
+    test_generation("seyret", "Verb", ["Aor", "AsIf"], "seyredercesine")
     
     # POS Inference
     test_generation("at", "Noun", ["Dat"], "ata") 
