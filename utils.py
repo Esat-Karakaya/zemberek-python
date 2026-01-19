@@ -143,29 +143,18 @@ def force_suffixes_on_word(root: str, is_named_entity: bool, suffixes: List[Morp
 def get_primary_pos_for_suffix(morpheme: Morpheme) -> List[PrimaryPos]:
     m_id = morpheme.id_
     
-    # Noun-targeting suffixes: Case, Possession, and Nominal Derivations
     noun_suffixes = {
-        "Pnon", "P1sg", "P2sg", "P3sg", "P1pl", "P2pl", "P3pl",
-        "Nom", "Dat", "Acc", "Abl", "Loc", "Ins", "Gen", "Equ",
-        "Dim", "Ness", "With", "Without", "Related", "JustLike", "Rel", "Agt",
-        "Become", "Acquire", "Ly", "Zero", "Root",
-        "A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl",
-        "Past", "Narr", "Cond", "Cop",
-        "Noun"
+        "Pnon", "P1sg", "P2sg", "P3sg", "P1pl", "P2pl", "P3pl", "Nom", "Dat", "Acc", "Abl", "Loc", "Ins", "Gen", "Equ",
+        "Dim", "Ness", "With", "Without", "Related", "JustLike", "Rel", "Agt", "Become", "Acquire", "Ly", "Zero", "Root",
+        "A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl", "Past", "Narr", "Cond", "Cop", "Noun"
     }
     
-    # Verb-targeting suffixes: Voice, Aspect, and Verbal Derivations
     verb_suffixes = {
-        "Caus", "Recip", "Reflex", "Able", "Pass", "Neg",
-        "Unable", "Pres", "Prog1", "Prog2", "Aor", "Fut", "Imp", "Opt", "Desr", "Neces",
-        "Inf1", "Inf2", "Inf3", "ActOf",
-        "PastPart", "NarrPart", "FutPart", "PresPart", "AorPart",
-        "NotState", "FeelLike", "EverSince", "Repeat", "Almost", "Hastily", "Stay", "Start",
-        "AsIf", "While", "When", "SinceDoingSo", "AsLongAs", "ByDoingSo",
-        "Adamantly", "AfterDoingSo", "WithoutHavingDoneSo", "WithoutBeingAbleToHaveDoneSo",
-        "A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl",
-        "Past", "Narr", "Cond", "Cop",
-        "Verb"
+        "Caus", "Recip", "Reflex", "Able", "Pass", "Neg", "Unable", "Pres", "Prog1", "Prog2", "Aor", "Fut", "Imp",
+        "Opt", "Desr", "Neces", "Inf1", "Inf2", "Inf3", "ActOf", "PastPart", "NarrPart", "FutPart", "PresPart", "AorPart",
+        "NotState", "FeelLike", "EverSince", "Repeat", "Almost", "Hastily", "Stay", "Start", "AsIf", "While",
+        "When", "SinceDoingSo", "AsLongAs", "ByDoingSo", "Adamantly", "AfterDoingSo", "WithoutHavingDoneSo",
+        "WithoutBeingAbleToHaveDoneSo", "A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl", "Past", "Narr", "Cond", "Cop", "Verb"
     }
 
     results = []
