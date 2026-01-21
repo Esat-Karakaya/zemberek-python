@@ -214,8 +214,9 @@ def match_capitilization(ref: str, target: str) -> str:
         return first + target[1:]
 
 def is_morph_analysis_ok(word: str) -> bool:
-    trailing = word[1:].split("'")[-1]
-    if len(trailing) > 2:
+    parts = word[1:].split("'")
+    trailing = parts[-1]
+    if len(parts) > 2:
         return False
     for c in trailing:
         if c.isupper():

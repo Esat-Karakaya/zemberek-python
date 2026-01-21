@@ -1,11 +1,5 @@
 from typing import List
-from zemberek import (
-    TurkishSpellChecker,
-    TurkishSentenceNormalizer,
-    TurkishSentenceExtractor,
-    TurkishMorphology,
-    TurkishTokenizer
-)
+from zemberek.morphology.analysis.sentence_analysis import SentenceAnalysis
 from utils import get_morphology, match_capitilization, is_morph_analysis_ok
 
 class MorphTokenizer:
@@ -37,3 +31,23 @@ class MorphTokenizer:
                     tokens.append(self.tk_start + m_data.morpheme.id_ + self.tk_end)
             sentence.append(tokens)
         return sentence
+    
+    def __collect_whitespaces(self, sentence: str, disambiguated_analysis: SentenceAnalysis) -> List[str]:
+        whitespaces = []
+        current_pos = 0
+        
+        for swa in disambiguated_analysis:
+            original_surface = swa.word_analysis.inp
+            # Find the start of this word in the original sentence
+            start_idx = sentence.find(original_surface, current_pos)
+            
+            # The gap before this word
+            whitespaces.append(sentence[current_pos:start_idx])
+            
+            # Move current_pos past the word
+            current_pos = start_idx + len(original_surface)
+            
+        # Add the trailing characters (if any)
+        whitespaces.append(sentence[current_pos:])
+        
+        return whitespaces
