@@ -12,13 +12,15 @@ class MorphTokenizer:
         analysis = self.morphology.analyze_sentence(sentence)
         after = self.morphology.disambiguate(sentence, analysis)
 
-        sentence = []
+        whitespaces = self.__collect_whitespaces(sentence, after)
+
+        words = []
         for sentence_word_analysis in after:
             best = sentence_word_analysis.best_analysis
             item = best.item
             original_surface = sentence_word_analysis.word_analysis.inp
             if not is_morph_analysis_ok(original_surface):
-                sentence.append([original_surface]) # declare word as unknown
+                words.append([original_surface]) # declare word as unknown
                 continue
             tokens = []
             for i, m_data in enumerate(best.morpheme_data_list):
@@ -29,7 +31,13 @@ class MorphTokenizer:
                     tokens.append(match_capitilization(original_surface, stem))
                 elif len(m_data.surface) > 0:
                     tokens.append(self.tk_start + m_data.morpheme.id_ + self.tk_end)
-            sentence.append(tokens)
+            words.append(tokens)
+        sentence = []
+        for i in range(len(words)+ len(whitespaces)-1):
+            if i%2 == 1:
+                sentence.append(words[i//2])
+            elif len(whitespaces[i//2]) > 0:
+                sentence.append([whitespaces[i//2]])
         return sentence
     
     def __collect_whitespaces(self, sentence: str, disambiguated_analysis: SentenceAnalysis) -> List[str]:

@@ -14,7 +14,7 @@ if __name__ == "__main__":
     print_test("Yerisimi'ye gelirmiş.", tokenizer)
 
     print_test("AYŞE'Yİ eVe çağırDI", tokenizer)
-    print_test("TDK'ye, UNKNOWN'a ve TÜİK'e\ngöre\tolan hjKŞFh şeyler", tokenizer)
+    print_test("TDK'ye, UNKNOWN'a ve TÜİK'e göre olan hjKŞFh şeyler", tokenizer)
 
     # loss of info: where and what were the whitespaces?
     print_test("Annem, babam ve   kardeşlerime\ngöre\tdoğru olandır. ", tokenizer)
