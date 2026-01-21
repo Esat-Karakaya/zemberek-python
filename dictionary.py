@@ -109,3 +109,20 @@ morpheme_id2idx = {
 idx2morpheme = {
     idx: morpheme_map[morpheme_id] for idx, morpheme_id in enumerate(idx2morpheme_id)
 }
+
+wordPos_ids = {
+    "Root",
+    "Noun",
+    "Adj",
+    "Verb",
+    "Pron",
+    "Adv",
+    "Conj",
+    "Punc",
+    "Ques",
+    "Postp",
+    "Det",
+    "Num",
+    "Dup",
+    "Interj",
+}

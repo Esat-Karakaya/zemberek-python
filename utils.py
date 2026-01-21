@@ -3,6 +3,7 @@ from zemberek.core.turkish.primary_pos import PrimaryPos
 from zemberek.core.turkish.secondary_pos import SecondaryPos
 from zemberek.morphology.morphotactics.morpheme import Morpheme
 from zemberek.morphology.lexicon.dictionary_item import DictionaryItem
+from zemberek import TurkishMorphology
 from zemberek.morphology.morphotactics.stem_transition import StemTransition
 from zemberek.morphology.analysis.attributes_helper import AttributesHelper
 from zemberek.morphology.generator.word_generator import WordGenerator
@@ -12,6 +13,7 @@ from zemberek.core.turkish.turkish_alphabet import TurkishAlphabet
 import logging
 
 _morphotactics = None
+_morphology = None
 
 def get_morphotactics():
     global _morphotactics
@@ -21,6 +23,12 @@ def get_morphotactics():
         lexicon = RootLexicon.get_default()
         _morphotactics = TurkishMorphotactics(lexicon)
     return _morphotactics
+
+def get_morphology():
+    global _morphology
+    if _morphology is None:
+        _morphology = TurkishMorphology.create_with_defaults()
+    return _morphology
 
 def generate_word(root: str, primary_pos: Literal["Noun", "Verb", "NamedEntity"], suffixes: Union[List[Morpheme], List[str]]) -> str:
     """Generate a word form using Zemberek's WordGenerator.
@@ -191,3 +199,16 @@ def create_stem_transition(root: str, p_pos: PrimaryPos, s_pos: SecondaryPos = S
     res = StemTransition(root, dummy_item, phonetic_attrs, start_state)
     return res
 
+def match_capitilization(ref: str, target: str) -> str:
+    if not ref or not target:
+        return target
+    
+    alphabet = TurkishAlphabet.INSTANCE
+    if ref[0].isupper():
+        # Turkish-aware uppercase for first character
+        first = target[0].translate(alphabet.upper_map).upper()
+        return first + target[1:]
+    else:
+        # Turkish-aware lowercase for first character
+        first = target[0].translate(alphabet.lower_map).lower()
+        return first + target[1:]

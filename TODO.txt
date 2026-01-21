@@ -1,0 +1,4 @@
+run tokenizer through tinystories and other corpus to make sure tokenization is good
+    - encode str
+    - decode str
+    - compare result with original
