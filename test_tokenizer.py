@@ -14,8 +14,6 @@ if __name__ == "__main__":
     print_test("Yerisimi'ye gelirmiş.", tokenizer)
 
     print_test("AYŞE'Yİ eVe çağırDI", tokenizer)
-    print_test("TDK'ye göre olan şeyler", tokenizer)
-    print_test("TÜİK'e göre olan şeyler", tokenizer)
-    print_test("UNKNOWN'a göre olan şeyler", tokenizer)
-    # output tokens: [['Ayşe', '<|Acc|>'], ['ev', '<|Dat|>'], ['çağır', '<|Past|>']]
-    # should've created three tokens with PrimaryPosition Unknown
+
+    # loss of info: where and what were the whitespaces?
+    print_test("TDK'ye, UNKNOWN'a ve TÜİK'e\ngöre\tolan hjKŞFh şeyler", tokenizer)

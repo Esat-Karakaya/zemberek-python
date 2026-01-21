@@ -212,3 +212,12 @@ def match_capitilization(ref: str, target: str) -> str:
         # Turkish-aware lowercase for first character
         first = target[0].translate(alphabet.lower_map).lower()
         return first + target[1:]
+
+def is_morph_analysis_ok(word: str) -> bool:
+    trailing = word[1:].split("'")[-1]
+    if len(trailing) > 2:
+        return False
+    for c in trailing:
+        if c.isupper():
+            return False
+    return True

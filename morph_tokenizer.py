@@ -6,7 +6,7 @@ from zemberek import (
     TurkishMorphology,
     TurkishTokenizer
 )
-from utils import get_morphology, match_capitilization
+from utils import get_morphology, match_capitilization, is_morph_analysis_ok
 
 class MorphTokenizer:
     def __init__(self, tk_start, tk_end):
@@ -23,12 +23,15 @@ class MorphTokenizer:
             best = sentence_word_analysis.best_analysis
             item = best.item
             original_surface = sentence_word_analysis.word_analysis.inp
+            if not is_morph_analysis_ok(original_surface):
+                sentence.append([original_surface]) # declare word as unknown
+                continue
             tokens = []
             for i, m_data in enumerate(best.morpheme_data_list):
                 if i == 0:
                     stem = item.normalized_lemma() if not item.is_unknown() else m_data.surface
-                    if "'" in stem:
-                        stem = stem.split("'")[0]
+                    if "'" in original_surface and not item.is_unknown():
+                        stem = original_surface.split("'")[0]
                     tokens.append(match_capitilization(original_surface, stem))
                 elif len(m_data.surface) > 0:
                     tokens.append(self.tk_start + m_data.morpheme.id_ + self.tk_end)

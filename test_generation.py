@@ -17,6 +17,7 @@ if __name__ == "__main__":
     # Noun Cases (Dictionary Match)
     test_generation("elma", "Noun", ["A3pl", "Dat"], "elmalara")
     test_generation("Burun", "Noun", ["A3sg", "P1pl"], "Burnumuz") # should be "Burnumuz"
+    test_generation("buRun", "Noun", ["A3sg", "P1pl"], "buRunumuz")
     test_generation("hak", "Noun", ["Dat"], "hakka")
     test_generation("burun", "Noun", ["Gen"], "burnun")
     
