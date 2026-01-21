@@ -18,11 +18,12 @@ class MorphTokenizer:
         analysis = self.morphology.analyze_sentence(sentence)
         after = self.morphology.disambiguate(sentence, analysis)
 
-        tokens = []
+        sentence = []
         for sentence_word_analysis in after:
             best = sentence_word_analysis.best_analysis
             item = best.item
             original_surface = sentence_word_analysis.word_analysis.inp
+            tokens = []
             for i, m_data in enumerate(best.morpheme_data_list):
                 if i == 0:
                     stem = item.normalized_lemma() if not item.is_unknown() else m_data.surface
@@ -31,4 +32,5 @@ class MorphTokenizer:
                     tokens.append(match_capitilization(original_surface, stem))
                 elif len(m_data.surface) > 0:
                     tokens.append(self.tk_start + m_data.morpheme.id_ + self.tk_end)
-        return tokens
+            sentence.append(tokens)
+        return sentence
