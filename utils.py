@@ -58,6 +58,14 @@ def generate_word(root: str, primary_pos: Literal["Noun", "Verb", "NamedEntity"]
     if primary_pos == "Verb":
         lex_key = add_Inf1_suffix(root)
     matching_items = [item for item in lexicon.item_map.get(lex_key, []) if item.primary_pos == p_pos]
+    
+    # If no match and capitalization is standard (Title or Upper), try lowercase lookup
+    if not matching_items and (root.istitle() or root.isupper()):
+        alphabet = TurkishAlphabet.INSTANCE
+        alt_lex_key = root.translate(alphabet.lower_map).lower()
+        if primary_pos == "Verb":
+            alt_lex_key = add_Inf1_suffix(alt_lex_key)
+        matching_items = [item for item in lexicon.item_map.get(alt_lex_key, []) if item.primary_pos == p_pos]
     if primary_pos == "NamedEntity":
         # Prefer ProperNoun entries if they exist
         proper_items = [item for item in matching_items if item.secondary_pos == SecondaryPos.ProperNoun]
@@ -90,9 +98,10 @@ def generate_word(root: str, primary_pos: Literal["Noun", "Verb", "NamedEntity"]
             # We assume the generator kept the root intact because we suppressed stem changes
             if generated_surface.startswith(root):
                 return root + "'" + generated_surface[len(root):]
-        return generated_surface
+        return match_capitilization(root, generated_surface)
 
-    return force_suffixes_on_word(root, primary_pos=="NamedEntity", suffix_objs)
+    forced_result = force_suffixes_on_word(root, primary_pos=="NamedEntity", suffix_objs)
+    return match_capitilization(root, forced_result)
 
 def force_suffixes_on_word(root: str, is_named_entity: bool, suffixes: List[Morpheme]) -> str:
     logging.warning(
@@ -204,21 +213,20 @@ def match_capitilization(ref: str, target: str) -> str:
         return target
     
     alphabet = TurkishAlphabet.INSTANCE
+    
+    if ref.isupper() and len(ref) > 1:
+        return target.translate(alphabet.upper_map).upper()
+        
     if ref[0].isupper():
-        # Turkish-aware uppercase for first character
-        first = target[0].translate(alphabet.upper_map).upper()
-        return first + target[1:]
-    else:
-        # Turkish-aware lowercase for first character
-        first = target[0].translate(alphabet.lower_map).lower()
-        return first + target[1:]
+        return target[0].translate(alphabet.upper_map).upper() + target[1:]
+
+    return target[0].translate(alphabet.lower_map).lower() + target[1:]
 
 def is_morph_analysis_ok(word: str) -> bool:
     parts = word[1:].split("'")
     trailing = parts[-1]
-    if len(parts) > 2:
-        return False
+    if len(parts) > 2: return False
+    if word.isupper(): return len(parts) == 1
     for c in trailing:
-        if c.isupper():
-            return False
+        if c.isupper(): return False
     return True

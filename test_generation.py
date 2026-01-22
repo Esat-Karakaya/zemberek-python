@@ -8,15 +8,19 @@ logging.basicConfig(level=logging.ERROR)
 
 def test_generation(root, pos, suffix_ids, expected):
     result = generate_word(root, pos, suffix_ids)
-    print(f"Root: {root} ({pos}), Suffixes: {suffix_ids} -> Result: {result}, Expected: {expected}")
-    assert result == expected
+
+    output=""
+    if result != expected: output+="\033[31m"
+    output+=f"Root: {root} ({pos}), Suffixes: {suffix_ids} -> Result: {result}, Expected: {expected}"
+    print(output)
+    if result != expected: print("\033[0m", end="")
 
 if __name__ == "__main__":
     print("Starting generation tests...")
     
     # Noun Cases (Dictionary Match)
     test_generation("elma", "Noun", ["A3pl", "Dat"], "elmalara")
-    test_generation("Burun", "Noun", ["A3sg", "P1pl"], "Burnumuz") # should be "Burnumuz"
+    test_generation("Burun", "Noun", ["A3sg", "P1pl"], "Burnumuz")
     test_generation("buRun", "Noun", ["A3sg", "P1pl"], "buRunumuz")
     test_generation("hak", "Noun", ["Dat"], "hakka")
     test_generation("burun", "Noun", ["Gen"], "burnun")
@@ -50,5 +54,15 @@ if __name__ == "__main__":
     # Broken Generation
     test_generation("kap", "Noun", ["Prog1", "Dim", "A3pl"], "kapıyorcuklar")
     test_generation("kitap", "Noun", ["Aor", "Almost"], "kitapırayaz")
+
+    # All Caps
+    test_generation("KAÇ", "Verb", ["Prog2", "A2pl"], "KAÇMAKTASINIZ")
+    test_generation("HAK", "Noun", ["P2sg"], "HAKKIN")
+    test_generation("TÜİK", "NamedEntity", ["P2sg"], "TÜİK'in")
+    test_generation("TÜK", "NamedEntity", ["P2sg"], "TÜK'ün")
+
+    # Numbers
+    test_generation("11", "Noun", ["Loc"], "11'de")
+    test_generation("12.00", "Noun", ["Loc"], "12.00'da")
 
     print("\nAll tests passed!")

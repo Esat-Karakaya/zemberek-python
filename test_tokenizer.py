@@ -9,12 +9,12 @@ if __name__ == "__main__":
     tokenizer = MorphTokenizer("<|", "|>")
     print_test("Ayşe'yi eve çağırdı.", tokenizer)
     print_test("kitapçı eve gelirmiş.", tokenizer)
-    print_test("Burnu havadadır onun.", tokenizer)
-    print_test("burnu havadadır onun.", tokenizer)
+    print_test("Burnu burnu havadadır onun.", tokenizer)
     print_test("Yerisimi'ye gelirmiş.", tokenizer)
 
-    print_test("AYŞE'Yİ eVe çağırDI", tokenizer)
-    print_test("TDK'ye, UNKNOWN'a ve TÜİK'e göre olan hjKŞFh şeyler", tokenizer)
+    print_test("AYŞE'Yİ ve ANNEM'i eVe çağırDI", tokenizer)
+    print_test("TDK'ye, UNKNOWN'a, TÜİK'e ve ALİ'ye göre olan hjKŞFh şeyler", tokenizer)
+    print_test("Annem, BABAM ve   kardeşlerime\ngöre\tdoğru olandır. ", tokenizer)
 
-    # loss of info: where and what were the whitespaces?
-    print_test("Annem, babam ve   kardeşlerime\ngöre\tdoğru olandır. ", tokenizer)
+    print_test("Annem 12.00'da burada olur.", tokenizer)
+    print_test("Annem 12'de burada olur.", tokenizer)
