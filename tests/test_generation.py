@@ -70,5 +70,6 @@ if __name__ == "__main__":
     test_generation("11", "Noun", ["Loc"], "11'de")
     test_generation("12.00", "Noun", ["Loc"], "12.00'da")
     test_generation("örnek2", "Noun", ["Gen"], "örnek2'nin") # Not supported by zemberek analyzer
+    test_generation("3/4", "Noun", ["Gen"], "3/4'ün") # Not supported by zemberek analyzer
 
     print("\nAll tests passed!")
