@@ -20,5 +20,5 @@ if __name__ == "__main__":
     print_test("TDK'ye, UNKNOWN'a, TÜİK'e ve ALİ'ye göre olan hjKŞFh şeyler", tokenizer)
     print_test("Annem, BABAM ve   kardeşlerime\ngöre\tdoğru olandır. ", tokenizer)
 
-    print_test("Annem 12.00'da burada olur.", tokenizer)
-    print_test("Annem 12'de burada olur.", tokenizer)
+    print_test("Annem 11'de veya 12.00'da burada olur.", tokenizer)
+    print_test("Örnek2'nin 3/4'ü oldu.", tokenizer) # unsupported

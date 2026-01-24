@@ -3,17 +3,21 @@ from zemberek.morphology.morphotactics.morpheme import Morpheme
 from zemberek.morphology.lexicon.dictionary_item import DictionaryItem
 from zemberek.morphology.morphotactics.stem_transition import StemTransition
 from zemberek.core.turkish.root_attribute import RootAttribute
+from zemberek.core.turkish import PhoneticAttribute
 from zemberek.morphology.analysis.attributes_helper import AttributesHelper
 from zemberek.core.turkish.primary_pos import PrimaryPos
 from zemberek.core.turkish.secondary_pos import SecondaryPos
 from zemberek.core.turkish.turkish_alphabet import TurkishAlphabet
 from zemberek.morphology.generator.word_generator import WordGenerator
 from dictionary import morpheme_map
+from zemberek.morphology.analysis.tr.pronunciation_guesser import PronunciationGuesser
 import logging
+from typing import List, Union, Literal, Set
 
 class CustomWordGenerator:
     def __init__(self):
-        pass
+        self.guesser = PronunciationGuesser()
+        self.alphabet = TurkishAlphabet.INSTANCE
 
     def generate_word(self, root: str, primary_pos: Literal["Noun", "Verb", "NamedEntity"], suffixes: Union[List[Morpheme], List[str]]) -> str:
         """Generate a word form using Zemberek's WordGenerator.
@@ -58,12 +62,12 @@ class CustomWordGenerator:
                 matching_items = proper_items
 
         for item in matching_items:
-            # For NamedEntity, we want to ensure no stem changes even if lexicon says otherwise
             if primary_pos == "NamedEntity":
+                # For NamedEntity, we want to ensure no stem changes even if lexicon says otherwise
                 # Create a synthetic candidate based on this item but with no modifying attributes
                 # and surface strictly equal to root
                 start_state = morphotactics.noun_S
-                phonetic_attrs = AttributesHelper.get_morphemic_attributes(root)
+                phonetic_attrs = self._get_phonetic_attributes(root)
                 candidates.append(StemTransition(root, item, phonetic_attrs, start_state))
             else:
                 candidates.extend(morphotactics.stem_transitions.get_transitions_for_item(item))
@@ -78,8 +82,10 @@ class CustomWordGenerator:
         
         if results:
             generated_surface = results[0].surface
-            # 3. Post-process NamedEntity: add apostrophe
-            if primary_pos == "NamedEntity" and generated_surface != root:
+            # 3. Post-process NamedEntity or Number: add apostrophe
+            is_named_entity = primary_pos == "NamedEntity"
+            is_number = self.alphabet.contains_digit(root)
+            if (is_named_entity or is_number) and generated_surface != root:
                 # We assume the generator kept the root intact because we suppressed stem changes
                 if generated_surface.startswith(root):
                     return root + "'" + generated_surface[len(root):]
@@ -191,6 +197,16 @@ class CustomWordGenerator:
 
         dummy_item = DictionaryItem(root, root, p_pos, s_pos, attributes=attributes)
         start_state = morphotactics.verbRoot_S if p_pos == PrimaryPos.Verb else morphotactics.noun_S
-        phonetic_attrs = AttributesHelper.get_morphemic_attributes(root)
+        phonetic_attrs = self._get_phonetic_attributes(root)
         res = StemTransition(root, dummy_item, phonetic_attrs, start_state)
         return res
+
+    def _get_phonetic_attributes(self, root: str) -> Set[PhoneticAttribute]:
+        """Get phonetic attributes for a root string.
+        
+        If the root contains digits, uses its pronunciation to derive correct attributes.
+        """
+        if self.alphabet.contains_digit(root):
+            pronunciation = self.guesser.to_turkish_letter_pronunciation_with_digit(root)
+            return AttributesHelper.get_morphemic_attributes(pronunciation)
+        return AttributesHelper.get_morphemic_attributes(root)
