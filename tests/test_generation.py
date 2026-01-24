@@ -1,13 +1,18 @@
-from utils import generate_word, get_morphotactics
-from zemberek.core.turkish.primary_pos import PrimaryPos
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).parent.parent))
+
+from utils import get_morphotactics
+from word_generator import CustomWordGenerator
 from zemberek.morphology.morphotactics.turkish_morphotactics import get_morpheme_map
 import logging
 
 # Configure logging to show errors but avoid noise
 logging.basicConfig(level=logging.ERROR)
+generator = CustomWordGenerator()
 
 def test_generation(root, pos, suffix_ids, expected):
-    result = generate_word(root, pos, suffix_ids)
+    result = generator.generate_word(root, pos, suffix_ids)
 
     output=""
     if result != expected: output+="\033[31m"

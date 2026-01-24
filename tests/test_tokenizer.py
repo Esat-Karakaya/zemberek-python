@@ -1,3 +1,7 @@
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).parent.parent))
+
 from morph_tokenizer import MorphTokenizer
 
 def print_test(sentence: str, tokenizer: MorphTokenizer):
