@@ -59,7 +59,7 @@ if __name__ == "__main__":
 
     # Broken Generation
     test_generation("kap", "Noun", ["Prog1", "Dim", "A3pl"], "kapıyorcuklar")
-    test_generation("kitap", "Noun", ["Aor", "Almost"], "kitapırayaz")
+    test_generation("kitap", "Noun", ["Loc", "Rel", "Gen", "Aor", "Almost"], "kitaptakininireyaz")
 
     # All Caps
     test_generation("KAÇ", "Verb", ["Prog2", "A2pl"], "KAÇMAKTASINIZ")

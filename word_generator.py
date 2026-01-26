@@ -100,50 +100,45 @@ class CustomWordGenerator:
         )
         
         generator = WordGenerator(self.morphotactics)
-        
         current_surface = root
         apostrophe_added = False
         
         for suffix in suffixes:
-
-            if suffix.id_=="Rel":
-                current_surface+="ki"
+            if suffix.id_ == "Rel":
+                current_surface += "ki"
                 continue
 
-            possible_pos = self.get_primary_pos_for_suffix(suffix)
+            generated_surface = self._try_force_generate_suffix(
+                current_surface, suffix, is_named_entity, apostrophe_added, generator
+            )
             
-            success = False
-            # Try each possible PrimaryPos until one works
-            for p_pos in possible_pos:
-                # We treat the current surface as a new "stem" to bypass morphotactic restrictions
-                s_pos = SecondaryPos.ProperNoun if is_named_entity and not apostrophe_added else SecondaryPos.None_
-                
-                candidate = self.create_stem_transition(current_surface, p_pos, s_pos)
-                
-                results = generator.generate(morphemes=(suffix,), candidates=(candidate,))
-                if results:
-                    generated_surface = results[0].surface
-                    
-                    # Handle NamedEntity apostrophe
-                    if is_named_entity and not apostrophe_added and generated_surface != current_surface:
-                        if generated_surface.startswith(current_surface):
-                            suffix_surface = generated_surface[len(current_surface):]
-                            current_surface = f"{current_surface}'{suffix_surface}"
-                            apostrophe_added = True
-                        else:
-                            # Fallback if it doesn't start with root for some reason (e.g. softening)
-                            current_surface = generated_surface
-                    else:
-                        current_surface = generated_surface
-                    
-                    success = True
-                    break
-            
-            if not success:
-                # If even the reset fails, we might just have to skip or append literally
+            if generated_surface:
+                current_surface, apostrophe_added = self._update_forced_surface(
+                    current_surface, generated_surface, is_named_entity, apostrophe_added
+                )
+            else:
                 logging.error(f"Could not generate suffix {suffix.id_} for {current_surface}")
                 
         return current_surface
+
+    def _try_force_generate_suffix(self, current_surface: str, suffix: Morpheme, is_named_entity: bool, apostrophe_added: bool, generator: WordGenerator) -> Union[str, None]:
+        possible_pos = self.get_primary_pos_for_suffix(suffix)
+        for p_pos in possible_pos:
+            s_pos = SecondaryPos.ProperNoun if is_named_entity and not apostrophe_added else SecondaryPos.None_
+            candidate = self.create_stem_transition(current_surface, p_pos, s_pos)
+            results = generator.generate(morphemes=(suffix,), candidates=(candidate,))
+            if results:
+                return results[0].surface
+        return None
+
+    def _update_forced_surface(self, current_surface: str, generated_surface: str, is_named_entity: bool, apostrophe_added: bool) -> tuple[str, bool]:
+        if is_named_entity and not apostrophe_added and generated_surface != current_surface:
+            if generated_surface.startswith(current_surface):
+                suffix_surface = generated_surface[len(current_surface):]
+                return f"{current_surface}'{suffix_surface}", True
+            else:
+                return generated_surface, False
+        return generated_surface, apostrophe_added
     
     def get_primary_pos_for_suffix(self, morpheme: Morpheme) -> List[PrimaryPos]:
         m_id = morpheme.id_
