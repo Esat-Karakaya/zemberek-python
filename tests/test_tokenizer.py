@@ -22,3 +22,4 @@ if __name__ == "__main__":
 
     print_test("Annem 11'de veya 12.00'da burada olur.", tokenizer)
     print_test("Örnek2'nin 3/4'ü oldu.", tokenizer) # unsupported
+    print_test("Annem geldi", tokenizer) # unsupported

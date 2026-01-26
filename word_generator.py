@@ -18,6 +18,7 @@ class CustomWordGenerator:
     def __init__(self):
         self.guesser = PronunciationGuesser()
         self.alphabet = TurkishAlphabet.INSTANCE
+        self.morphotactics = get_morphotactics()
 
     def generate_word(self, root: str, primary_pos: Literal["Noun", "Verb", "NamedEntity"], suffixes: Union[List[Morpheme], List[str]]) -> str:
         """Generate a word form using Zemberek's WordGenerator.
@@ -30,9 +31,8 @@ class CustomWordGenerator:
         # Convert suffix identifiers to Morpheme objects
         suffix_objs = [s if isinstance(s, Morpheme) else morpheme_map[s] for s in suffixes]
 
-        morphotactics = get_morphotactics()
-        generator = WordGenerator(morphotactics)
-        lexicon = morphotactics.get_root_lexicon()
+        generator = WordGenerator(self.morphotactics)
+        lexicon = self.morphotactics.get_root_lexicon()
 
         # Map input POS to internal Enums
         p_pos = PrimaryPos.Noun if primary_pos in ["Noun", "NamedEntity"] else PrimaryPos.Verb
@@ -66,11 +66,11 @@ class CustomWordGenerator:
                 # For NamedEntity, we want to ensure no stem changes even if lexicon says otherwise
                 # Create a synthetic candidate based on this item but with no modifying attributes
                 # and surface strictly equal to root
-                start_state = morphotactics.noun_S
+                start_state = self.morphotactics.noun_S
                 phonetic_attrs = self._get_phonetic_attributes(root)
                 candidates.append(StemTransition(root, item, phonetic_attrs, start_state))
             else:
-                candidates.extend(morphotactics.stem_transitions.get_transitions_for_item(item))
+                candidates.extend(self.morphotactics.stem_transitions.get_transitions_for_item(item))
 
         # 2. If no candidates found, or for generic unknown words, create synthetic transition
         if not candidates:
@@ -100,8 +100,7 @@ class CustomWordGenerator:
             f"via zemberek's own method. Deploying work around"
         )
         
-        morphotactics = get_morphotactics()
-        generator = WordGenerator(morphotactics)
+        generator = WordGenerator(self.morphotactics)
         
         current_surface = root
         apostrophe_added = False
@@ -147,7 +146,6 @@ class CustomWordGenerator:
                 
         return current_surface
     
-
     def get_primary_pos_for_suffix(self, morpheme: Morpheme) -> List[PrimaryPos]:
         m_id = morpheme.id_
         
@@ -173,7 +171,6 @@ class CustomWordGenerator:
 
         return [PrimaryPos.Unknown]
 
-
     def is_single_syllable(self, word: str) -> bool:
         from zemberek.core.turkish.turkish_alphabet import TurkishAlphabet
         vowel_count = sum(1 for char in word if TurkishAlphabet.INSTANCE.is_vowel(char))
@@ -193,10 +190,8 @@ class CustomWordGenerator:
             else:
                 attributes.add(RootAttribute.Aorist_I)
         
-        morphotactics = get_morphotactics()
-
         dummy_item = DictionaryItem(root, root, p_pos, s_pos, attributes=attributes)
-        start_state = morphotactics.verbRoot_S if p_pos == PrimaryPos.Verb else morphotactics.noun_S
+        start_state = self.morphotactics.verbRoot_S if p_pos == PrimaryPos.Verb else self.morphotactics.noun_S
         phonetic_attrs = self._get_phonetic_attributes(root)
         res = StemTransition(root, dummy_item, phonetic_attrs, start_state)
         return res
