@@ -52,14 +52,14 @@ class CustomWordGenerator:
     def _find_lexicon_items(self, root: str, word_type: str, p_pos: PrimaryPos, lexicon) -> List[DictionaryItem]:
         lex_key = root
         if word_type == "Verb":
-            lex_key = self.add_Inf1_suffix(root)
+            lex_key = self._add_Inf1_suffix(root)
         
         items = [item for item in lexicon.item_map.get(lex_key, []) if item.primary_pos == p_pos]
         
         if not items and (root.istitle() or root.isupper()):
             alt_lex_key = root.translate(self.alphabet.lower_map).lower()
             if word_type == "Verb":
-                alt_lex_key = self.add_Inf1_suffix(alt_lex_key)
+                alt_lex_key = self._add_Inf1_suffix(alt_lex_key)
             items = [item for item in lexicon.item_map.get(alt_lex_key, []) if item.primary_pos == p_pos]
 
         if word_type == "NamedEntity":
@@ -79,7 +79,7 @@ class CustomWordGenerator:
                 candidates.extend(self.morphotactics.stem_transitions.get_transitions_for_item(item))
 
         if not candidates:
-            candidates.append(self.create_stem_transition(root, p_pos, s_pos))
+            candidates.append(self._create_stem_transition(root, p_pos, s_pos))
         return candidates
 
     def _apply_post_processing(self, root: str, generated_surface: str, word_type: str) -> str:
@@ -122,10 +122,10 @@ class CustomWordGenerator:
         return current_surface
 
     def _try_force_generate_suffix(self, current_surface: str, suffix: Morpheme, is_named_entity: bool, apostrophe_added: bool, generator: WordGenerator) -> Union[str, None]:
-        possible_pos = self.get_primary_pos_for_suffix(suffix)
+        possible_pos = self._get_primary_pos_for_suffix(suffix)
         for p_pos in possible_pos:
             s_pos = SecondaryPos.ProperNoun if is_named_entity and not apostrophe_added else SecondaryPos.None_
-            candidate = self.create_stem_transition(current_surface, p_pos, s_pos)
+            candidate = self._create_stem_transition(current_surface, p_pos, s_pos)
             results = generator.generate(morphemes=(suffix,), candidates=(candidate,))
             if results:
                 return results[0].surface
@@ -140,7 +140,7 @@ class CustomWordGenerator:
                 return generated_surface, False
         return generated_surface, apostrophe_added
     
-    def get_primary_pos_for_suffix(self, morpheme: Morpheme) -> List[PrimaryPos]:
+    def _get_primary_pos_for_suffix(self, morpheme: Morpheme) -> List[PrimaryPos]:
         m_id = morpheme.id_
         
         noun_suffixes = {
@@ -165,21 +165,21 @@ class CustomWordGenerator:
 
         return [PrimaryPos.Unknown]
 
-    def is_single_syllable(self, word: str) -> bool:
+    def _is_single_syllable(self, word: str) -> bool:
         from zemberek.core.turkish.turkish_alphabet import TurkishAlphabet
         vowel_count = sum(1 for char in word if TurkishAlphabet.INSTANCE.is_vowel(char))
         return vowel_count == 1
 
-    def add_Inf1_suffix(self, verb: str) -> str:
+    def _add_Inf1_suffix(self, verb: str) -> str:
         alphabet =TurkishAlphabet()
         is_frontal = alphabet.get_last_vowel(verb).is_frontal()
         sfx = "mek" if is_frontal else "mak"
         return verb+sfx
 
-    def create_stem_transition(self, root: str, p_pos: PrimaryPos, s_pos: SecondaryPos = SecondaryPos.None_) -> StemTransition:
+    def _create_stem_transition(self, root: str, p_pos: PrimaryPos, s_pos: SecondaryPos = SecondaryPos.None_) -> StemTransition:
         attributes = set()
         if p_pos == PrimaryPos.Verb:
-            if self.is_single_syllable(root):
+            if self._is_single_syllable(root):
                 attributes.add(RootAttribute.Aorist_A)
             else:
                 attributes.add(RootAttribute.Aorist_I)
@@ -191,10 +191,6 @@ class CustomWordGenerator:
         return res
 
     def _get_phonetic_attributes(self, root: str) -> Set[PhoneticAttribute]:
-        """Get phonetic attributes for a root string.
-        
-        If the root contains digits, uses its pronunciation to derive correct attributes.
-        """
         if self.alphabet.contains_digit(root):
             pronunciation = self.guesser.to_turkish_letter_pronunciation_with_digit(root)
             return AttributesHelper.get_morphemic_attributes(pronunciation)
