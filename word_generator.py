@@ -20,7 +20,7 @@ class CustomWordGenerator:
         self.alphabet = TurkishAlphabet.INSTANCE
         self.morphotactics = get_morphotactics()
 
-    def generate_word(self, root: str, primary_pos: Literal["Noun", "Verb", "NamedEntity"], suffixes: Union[List[Morpheme], List[str]]) -> str:
+    def generate_word(self, root: str, word_type: Literal["Noun", "Verb", "NamedEntity"], suffixes: Union[List[Morpheme], List[str]]) -> str:
         """Generate a word form using Zemberek's WordGenerator.
         
         Handles dictionary items, unknown words, and NamedEntity special logic.
@@ -28,71 +28,69 @@ class CustomWordGenerator:
         if not suffixes:
             return root
 
-        # Convert suffix identifiers to Morpheme objects
         suffix_objs = [s if isinstance(s, Morpheme) else morpheme_map[s] for s in suffixes]
+        p_pos, s_pos = self._get_pos_enums(word_type)
+        
+        lexicon = self.morphotactics.get_root_lexicon()
+        matching_items = self._find_lexicon_items(root, word_type, p_pos, lexicon)
+        candidates = self._get_stem_candidates(root, matching_items, word_type, p_pos, s_pos)
 
         generator = WordGenerator(self.morphotactics)
-        lexicon = self.morphotactics.get_root_lexicon()
-
-        # Map input POS to internal Enums
-        p_pos = PrimaryPos.Noun if primary_pos in ["Noun", "NamedEntity"] else PrimaryPos.Verb
-        s_pos = SecondaryPos.ProperNoun if primary_pos == "NamedEntity" else SecondaryPos.None_
-
-        # Find candidate StemTransitions
-        candidates = []
+        results = generator.generate(morphemes=tuple(suffix_objs), candidates=tuple(candidates))
         
-        # 1. Look in Lexicon
+        if results:
+            return self._apply_post_processing(root, results[0].surface, word_type)
 
+        forced_result = self.force_suffixes_on_word(root, word_type == "NamedEntity", suffix_objs)
+        return match_capitilization(root, forced_result)
+
+    def _get_pos_enums(self, word_type: str) -> tuple[PrimaryPos, SecondaryPos]:
+        p_pos = PrimaryPos.Noun if word_type in ["Noun", "NamedEntity"] else PrimaryPos.Verb
+        s_pos = SecondaryPos.ProperNoun if word_type == "NamedEntity" else SecondaryPos.None_
+        return p_pos, s_pos
+
+    def _find_lexicon_items(self, root: str, word_type: str, p_pos: PrimaryPos, lexicon) -> List[DictionaryItem]:
         lex_key = root
-        if primary_pos == "Verb":
+        if word_type == "Verb":
             lex_key = self.add_Inf1_suffix(root)
-        matching_items = [item for item in lexicon.item_map.get(lex_key, []) if item.primary_pos == p_pos]
         
-        # If no match and capitalization is standard (Title or Upper), try lowercase lookup
-        if not matching_items and (root.istitle() or root.isupper()):
-            alphabet = TurkishAlphabet.INSTANCE
-            alt_lex_key = root.translate(alphabet.lower_map).lower()
-            if primary_pos == "Verb":
+        items = [item for item in lexicon.item_map.get(lex_key, []) if item.primary_pos == p_pos]
+        
+        if not items and (root.istitle() or root.isupper()):
+            alt_lex_key = root.translate(self.alphabet.lower_map).lower()
+            if word_type == "Verb":
                 alt_lex_key = self.add_Inf1_suffix(alt_lex_key)
-            matching_items = [item for item in lexicon.item_map.get(alt_lex_key, []) if item.primary_pos == p_pos]
-        if primary_pos == "NamedEntity":
-            # Prefer ProperNoun entries if they exist
-            proper_items = [item for item in matching_items if item.secondary_pos == SecondaryPos.ProperNoun]
-            if proper_items:
-                matching_items = proper_items
+            items = [item for item in lexicon.item_map.get(alt_lex_key, []) if item.primary_pos == p_pos]
 
-        for item in matching_items:
-            if primary_pos == "NamedEntity":
-                # For NamedEntity, we want to ensure no stem changes even if lexicon says otherwise
-                # Create a synthetic candidate based on this item but with no modifying attributes
-                # and surface strictly equal to root
+        if word_type == "NamedEntity":
+            proper_items = [item for item in items if item.secondary_pos == SecondaryPos.ProperNoun]
+            if proper_items:
+                items = proper_items
+        return items
+
+    def _get_stem_candidates(self, root: str, items: List[DictionaryItem], word_type: str, p_pos: PrimaryPos, s_pos: SecondaryPos) -> List[StemTransition]:
+        candidates = []
+        for item in items:
+            if word_type == "NamedEntity":
                 start_state = self.morphotactics.noun_S
                 phonetic_attrs = self._get_phonetic_attributes(root)
                 candidates.append(StemTransition(root, item, phonetic_attrs, start_state))
             else:
                 candidates.extend(self.morphotactics.stem_transitions.get_transitions_for_item(item))
 
-        # 2. If no candidates found, or for generic unknown words, create synthetic transition
         if not candidates:
-            new_stem_transition = self.create_stem_transition(root, p_pos, s_pos)
-            candidates.append(new_stem_transition)
+            candidates.append(self.create_stem_transition(root, p_pos, s_pos))
+        return candidates
 
-        # Generate
-        results = generator.generate(morphemes=tuple(suffix_objs), candidates=tuple(candidates))
+    def _apply_post_processing(self, root: str, generated_surface: str, word_type: str) -> str:
+        is_named_entity = word_type == "NamedEntity"
+        is_number = self.alphabet.contains_digit(root)
         
-        if results:
-            generated_surface = results[0].surface
-            # 3. Post-process NamedEntity or Number: add apostrophe
-            is_named_entity = primary_pos == "NamedEntity"
-            is_number = self.alphabet.contains_digit(root)
-            if (is_named_entity or is_number) and generated_surface != root:
-                # We assume the generator kept the root intact because we suppressed stem changes
-                if generated_surface.startswith(root):
-                    return root + "'" + generated_surface[len(root):]
-            return match_capitilization(root, generated_surface)
-
-        forced_result = self.force_suffixes_on_word(root, primary_pos=="NamedEntity", suffix_objs)
-        return match_capitilization(root, forced_result)
+        if (is_named_entity or is_number) and generated_surface != root:
+            if generated_surface.startswith(root):
+                return match_capitilization(root, root + "'" + generated_surface[len(root):])
+        
+        return match_capitilization(root, generated_surface)
 
     def force_suffixes_on_word(self, root: str, is_named_entity: bool, suffixes: List[Morpheme]) -> str:
         logging.warning(

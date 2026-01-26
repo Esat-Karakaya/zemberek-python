@@ -51,6 +51,7 @@ if __name__ == "__main__":
     test_generation("Çıtçıt", "NamedEntity", ["Dat"], "Çıtçıt'a")
     test_generation("Bürokratistan", "NamedEntity", ["Loc", "Rel", "A3pl", "Gen"], "Bürokratistan'dakilerin")
     test_generation("Ahmet", "NamedEntity", ["Dat"], "Ahmet'e")
+    test_generation("Tüik", "NamedEntity", ["Dat"], "Tüik'e")
 
     # Unknown Root
     test_generation("bloop", "Noun", ["Dat"], "bloopa")
@@ -72,4 +73,4 @@ if __name__ == "__main__":
     test_generation("örnek2", "Noun", ["Gen"], "örnek2'nin") # Not supported by zemberek analyzer
     test_generation("3/4", "Noun", ["Gen"], "3/4'ün") # Not supported by zemberek analyzer
 
-    print("\nAll tests passed!")
+    print("\nAll tests completed!")
