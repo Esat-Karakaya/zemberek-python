@@ -86,9 +86,10 @@ class CustomWordGenerator:
         is_named_entity = word_type == "NamedEntity"
         is_number = self.alphabet.contains_digit(root)
         
-        if (is_named_entity or is_number) and generated_surface != root:
-            if generated_surface.startswith(root):
-                return match_capitilization(root, root + "'" + generated_surface[len(root):])
+        if (is_named_entity or is_number) and generated_surface.lower() != root.lower():
+            if generated_surface.lower().startswith(root.lower()):
+                suffix = generated_surface[len(root):].lower()
+                return root + "'" + suffix
         
         return match_capitilization(root, generated_surface)
 
