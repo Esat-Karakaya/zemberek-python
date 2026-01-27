@@ -48958,7 +48958,7 @@ ala_Adj	ala	ala	Adj	None	ala	0	null	0
 ala_Noun	ala	ala	Noun	None	ala	0	null	0
 Karakucak_Noun_Prop	Karakucak	karakucak	Noun	Prop	karakucak	0	null	 PronunciationGuessed
 alg_Noun	alg	alg	Noun	None	alg	0	null	 NoVoicing InverseHarmony
-ali_Adj	ali	ali	Adj	None	ali	0	null	0
+Ali_Noun_Prop	Ali	ali	Noun	Prop	ali	0	null	 PronunciationGuessed
 değirmentaşı_Noun	değirmentaşı	değirmentaşı	Noun	None	değirmentaşı	0	null	 CompoundP3sg Ext
 Doğanköy_Noun_Prop	Doğanköy	doğanköy	Noun	Prop	doğanköy	0	null	 PronunciationGuessed
 Dicky_Noun_Prop	Dicky	dicky	Noun	Prop	dicky	0	null	 NoVoicing PronunciationGuessed

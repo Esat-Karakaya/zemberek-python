@@ -1,0 +1,11 @@
+- NamedEntity is actually everything with an apostrophe
+including:
+    nouns with aphastrophies (kg'lik, Veli'yi)
+    unkowns with aphastrophies (unkown'a)
+    abbreviations (TÜİK'in)
+    Foreign Words (link'e)
+    Lowercase Letters (a'dan z'ye)
+    words that need numbers (kullanıcı ismim sufx6'ydı)
+but NOT:
+    Completely unkown words (ni'ldu)
+    hours and other numeric words (11:00'ın, 1.5'in, 5'in)

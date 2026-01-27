@@ -11,7 +11,7 @@ def print_test(sentence: str, tokenizer: MorphTokenizer):
 
 if __name__ == "__main__":
     tokenizer = MorphTokenizer("<|", "|>")
-    print_test("Ayşe'yi eve çağırdı.", tokenizer)
+    print_test("Ayşe'yi, Veli'yi ve ghim'i eve çağırdı.", tokenizer)
     print_test("kitapçı eve gelirmiş.", tokenizer)
     print_test("Burnu burnu havadadır onun.", tokenizer)
     print_test("Yerisimi'ye gelirmiş.", tokenizer)
