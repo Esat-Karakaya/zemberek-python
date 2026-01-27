@@ -76,6 +76,8 @@ if __name__ == "__main__":
 
     # Abbreviations without vowels
     test_generation("kg", "NamedEntity", ["Ness"], "kg'lik")
-    test_generation("Tr", "NamedEntity", ["With"], "Tr'li")
+    test_generation("TDK", "NamedEntity", ["Acc"], "TDK'yı")
+    test_generation("TMNB", "NamedEntity", ["Acc"], "TMNB'yi")
+    test_generation("z", "NamedEntity", ["Acc"], "z'yi")
 
     print("\nAll tests completed!")

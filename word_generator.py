@@ -70,8 +70,11 @@ class CustomWordGenerator:
 
     def _get_stem_candidates(self, root: str, items: List[DictionaryItem], word_type: str, p_pos: PrimaryPos, s_pos: SecondaryPos) -> List[StemTransition]:
         candidates = []
+        has_vowel = any(self.alphabet.is_vowel(c) for c in root)
         for item in items:
-            if word_type == "NamedEntity":
+            if word_type == "NamedEntity" and not has_vowel:
+                # For vowel-less NamedEntities (abbreviations), ensure they have phonetic attributes
+                # even if using a dictionary item, as some dictionary entries might be missing them.
                 start_state = self.morphotactics.noun_S
                 phonetic_attrs = self._get_phonetic_attributes(root)
                 candidates.append(StemTransition(root, item, phonetic_attrs, start_state))
@@ -191,7 +194,17 @@ class CustomWordGenerator:
         return res
 
     def _get_phonetic_attributes(self, root: str) -> Set[PhoneticAttribute]:
+        has_vowel = any(self.alphabet.is_vowel(c) for c in root)
+        
+        if not has_vowel and len(root) > 0:
+            # Letter names are usually defined for lowercase letters in the guesser
+            normalized_root = root.translate(self.alphabet.lower_map).lower()
+            pronunciation = self.guesser.to_turkish_letter_pronunciations(normalized_root)
+            if pronunciation:
+                return AttributesHelper.get_morphemic_attributes(pronunciation)
+        
         if self.alphabet.contains_digit(root):
             pronunciation = self.guesser.to_turkish_letter_pronunciation_with_digit(root)
             return AttributesHelper.get_morphemic_attributes(pronunciation)
+            
         return AttributesHelper.get_morphemic_attributes(root)
