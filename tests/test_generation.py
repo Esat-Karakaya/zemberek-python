@@ -51,6 +51,7 @@ if __name__ == "__main__":
     test_generation("Çıtçıt", "NamedEntity", ["Dat"], "Çıtçıt'a")
     test_generation("Bürokratistan", "NamedEntity", ["Loc", "Rel", "A3pl", "Gen"], "Bürokratistan'dakilerin")
     test_generation("Ahmet", "NamedEntity", ["Dat"], "Ahmet'e")
+    test_generation("Ayşe", "Noun", ["Gen"], "Ayşenin")
     test_generation("Tüik", "NamedEntity", ["Dat"], "Tüik'e")
 
     # Unknown Root

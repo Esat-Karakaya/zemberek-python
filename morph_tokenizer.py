@@ -22,12 +22,24 @@ class MorphTokenizer:
             
         return self.__reconstruct_sentence(words, whitespaces)
 
-    def __get_word_type(self, item) -> str:
+    def __get_word_type(self, item, original_surface: str) -> str:
         if item.primary_pos == PrimaryPos.Verb:
             return "Verb"
-        elif item.secondary_pos in [SecondaryPos.Abbreviation, SecondaryPos.ProperNoun]:
+
+        # Check for numeric words recognized by Zemberek
+        numeric_secondary_pos = {
+            SecondaryPos.Cardinal, SecondaryPos.Clock, SecondaryPos.Date,
+            SecondaryPos.Ordinal, SecondaryPos.Percentage, SecondaryPos.Ratio,
+            SecondaryPos.Real, SecondaryPos.Distribution, SecondaryPos.Range
+        }
+        if item.secondary_pos in numeric_secondary_pos:
+            return "Noun"
+
+        # NamedEntity is anything with an apostrophe (that isn't a verb or numeric)
+        if "'" in original_surface:
             return "NamedEntity"
-        elif item.primary_pos not in [PrimaryPos.Unknown, PrimaryPos.Punctuation]:
+            
+        if item.primary_pos not in [PrimaryPos.Unknown, PrimaryPos.Punctuation]:
             return "Noun"
         return None
 
@@ -39,7 +51,7 @@ class MorphTokenizer:
         if not is_morph_analysis_ok(original_surface):
             return [original_surface] # declare word as unknown
             
-        word_type = self.__get_word_type(item)
+        word_type = self.__get_word_type(item, original_surface)
         
         tokens = []
         suffixes = []
