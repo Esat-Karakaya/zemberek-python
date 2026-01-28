@@ -74,10 +74,12 @@ if __name__ == "__main__":
     test_generation("örnek2", "Noun", ["Gen"], "örnek2'nin") # Not supported by zemberek analyzer
     test_generation("3/4", "Noun", ["Gen"], "3/4'ün") # Not supported by zemberek analyzer
 
-    # Abbreviations without vowels
+    # No vowels
     test_generation("kg", "NamedEntity", ["Ness"], "kg'lik")
     test_generation("TDK", "NamedEntity", ["Acc"], "TDK'yı")
     test_generation("TMNB", "NamedEntity", ["Acc"], "TMNB'yi")
     test_generation("z", "NamedEntity", ["Acc"], "z'yi")
+    test_generation("z", "Noun", ["Acc"], "zyi")
+    test_generation("k", "Verb", ["Fut"], "kyacak")
 
     print("\nAll tests completed!")

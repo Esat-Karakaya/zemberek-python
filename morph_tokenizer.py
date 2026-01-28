@@ -20,7 +20,8 @@ class MorphTokenizer:
             tokens = self.__get_word_tokens(sentence_word_analysis)
             words.append(tokens)
             
-        return self.__reconstruct_sentence(words, whitespaces)
+        split_by_words = self.__reconstruct_sentence(words, whitespaces)
+        return [token for word in split_by_words for token in word]
 
     def __get_word_type(self, item, original_surface: str) -> str:
         if item.primary_pos == PrimaryPos.Verb:
@@ -49,7 +50,7 @@ class MorphTokenizer:
         original_surface = sentence_word_analysis.word_analysis.inp
         
         if not is_morph_analysis_ok(original_surface):
-            return [original_surface] # declare word as unknown
+            return list(original_surface) # declare word as unknown
             
         word_type = self.__get_word_type(item, original_surface)
         
@@ -60,7 +61,7 @@ class MorphTokenizer:
                 stem = item.normalized_lemma() if not item.is_unknown() else m_data.surface
                 if "'" in original_surface and not item.is_unknown():
                     stem = original_surface.split("'")[0]
-                tokens.append(match_capitilization(original_surface, stem))
+                tokens.extend(list(match_capitilization(original_surface, stem)))
             elif len(m_data.surface) > 0:
                 suffixes.append(self.special_token(m_data.morpheme.id_))
         
@@ -70,13 +71,15 @@ class MorphTokenizer:
             tokens.extend(suffixes)
         return tokens
 
-    def __reconstruct_sentence(self, words: List[List[str]], whitespaces: List[str]) -> List[str]:
+    def __reconstruct_sentence(self, words: List[List[str]], whitespaces: List[str]) -> List[List[str]]:
         sentence = []
-        for i in range(len(words) + len(whitespaces) - 1):
+        for i in range(len(words) + len(whitespaces)):
             if i % 2 == 1:
-                sentence.append(words[i // 2])
-            elif len(whitespaces[i // 2]) > 0:
-                sentence.append([whitespaces[i // 2]])
+                if i // 2 < len(words):
+                    sentence.append(words[i // 2])
+            else:
+                if i // 2 < len(whitespaces) and len(whitespaces[i // 2]) > 0:
+                    sentence.append(list(whitespaces[i // 2]))
         return sentence
     
     def __collect_whitespaces(self, sentence: str, disambiguated_analysis: SentenceAnalysis) -> List[str]:
