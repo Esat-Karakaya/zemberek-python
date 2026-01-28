@@ -1,5 +1,6 @@
 from typing import List
 from zemberek.morphology.analysis.sentence_analysis import SentenceAnalysis
+from zemberek import TurkishSentenceExtractor
 from utils import get_morphology, match_capitilization, is_morph_analysis_ok
 
 from zemberek.core.turkish import PrimaryPos, SecondaryPos
@@ -7,7 +8,33 @@ from zemberek.core.turkish import PrimaryPos, SecondaryPos
 class MorphTokenizer:
     def __init__(self, tk_start, tk_end):
         self.morphology = get_morphology()
+        self.extractor = TurkishSentenceExtractor()
         self.special_token = lambda s: tk_start + s + tk_end
+
+    def tokenize(self, text: str) -> List[str]:
+        sentences = self.extractor.from_paragraph(text)
+        
+        all_tokens = []
+        current_pos = 0
+        
+        for i, sentence_text in enumerate(sentences):
+            # Find the sentence in the original text to capture preceding whitespace/newlines
+            start_idx = text.find(sentence_text, current_pos)
+            prefix = text[current_pos:start_idx]
+            if prefix:
+                all_tokens.extend(list(prefix))
+            
+            # Tokenize the sentence itself
+            all_tokens.extend(self.__tokenize_sentence(sentence_text))
+            
+            current_pos = start_idx + len(sentence_text)
+            
+        # Add any trailing whitespace after the last sentence
+        trailing = text[current_pos:]
+        if trailing:
+            all_tokens.extend(list(trailing))
+            
+        return all_tokens
     
     def __tokenize_sentence(self, sentence: str) -> List[str]:
         analysis = self.morphology.analyze_sentence(sentence)

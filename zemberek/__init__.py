@@ -1,6 +1,10 @@
 from .morphology import TurkishMorphology
 from .normalization import TurkishSentenceNormalizer, TurkishSpellChecker
 from .tokenization import TurkishSentenceExtractor, TurkishTokenizer
+import warnings
+
+# Suppress the pkg_resources deprecation warning from zemberek dependencies
+warnings.filterwarnings("ignore", category=UserWarning, module="pkg_resources")
 
 import logging
 import sys
