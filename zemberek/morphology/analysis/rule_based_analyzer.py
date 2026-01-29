@@ -40,26 +40,24 @@ class RuleBasedAnalyzer:
         if self.debug_mode:
             raise NotImplementedError("Debug mode is not implemented")
 
-        candidates = self.stem_transitions.get_prefix_matches(inp, self.ascii_tolerant)
-        
-        # Group candidates by surface length to prioritize longer stems
-        candidates_by_len: Dict[int, List[SearchPath]] = {}
-        for candidate in candidates:
-            length = len(candidate.surface)
-            if length not in candidates_by_len:
-                candidates_by_len[length] = []
-            tail = inp[length:]
-            candidates_by_len[length].append(SearchPath.initial_path(candidate, tail))
+        for length in range(len(inp), 0, -1):
+            prefix = inp[:length]
+            candidates = self.stem_transitions.get_transitions_ascii_tolerant(prefix) if self.ascii_tolerant else \
+                self.get_candidates(prefix)
 
-        # Try lengths in descending order
-        sorted_lengths = sorted(candidates_by_len.keys(), reverse=True)
-
-        for length in sorted_lengths:
-            result_paths = self.search(candidates_by_len[length])
-            if result_paths:
-                return tuple(SingleAnalysis.from_search_path(path) for path in result_paths)
+            if candidates:
+                tail = inp[length:]
+                paths = [SearchPath.initial_path(c, tail) for c in candidates]
+                result_paths = self.search(paths)
+                if result_paths:
+                    return tuple(SingleAnalysis.from_search_path(path) for path in result_paths)
 
         return ()
+
+    def get_candidates(self, stem: str):
+        # Wrapper to handle the union return type of get_transitions
+        res = self.stem_transitions.get_transitions(stem)
+        return res if res else ()
 
     def analyze_with_exact_stem(self, stem: str, tail: str) -> Tuple[SingleAnalysis, ...]:
         if self.ascii_tolerant:
@@ -126,7 +124,7 @@ class RuleBasedAnalyzer:
                             tail_equals_surface = TurkishAlphabet.INSTANCE.equals_ignore_diacritics(path.tail, surface)\
                                 if self.ascii_tolerant else path.tail == surface
 
-                            attributes = deepcopy(path.phonetic_attributes) if tail_equals_surface else \
+                            attributes = path.phonetic_attributes.copy() if tail_equals_surface else \
                                 AttributesHelper.get_morphemic_attributes(surface, path.phonetic_attributes)
                             attributes.discard(PhoneticAttribute.CannotTerminate)
                             last_token = suffix_transition.get_last_template_token()

@@ -16,26 +16,22 @@ Bu Python portu da orijinal Zemberek kütüphanesinin yeteneklerini Python ekosi
 Hız ve doğruluk arasındaki dengeyi en iyi şekilde kurmaya çalışır. 
 Ayrıca, zengin bir sözlük yapısına ve gelişmiş bir kural sistemine sahiptir. 
 Gelecekte daha fazla özellik eklenmesi planlanmaktadır.
+Jazz bir kediydi. Arkadaşları vardı: Pamuk, Minnoş ve Tekir. Onlar dans etmeyi çok severdi. Bir gün, zor bir dans öğrendiler. Her gün dans ettiler. Sabah, öğle ve akşam.\n\nİlk başlarda çok zorlandılar. Ayakları karıştı, düştüler ve güldüler. Ama pes etmediler. Her gün daha iyi oldular. Jazz, Pamuk, Minnoş ve Tekir birlikte çalıştılar.\n\nSonunda, dansı öğrendiler! Çok mutluydular. Şimdi dans etmeyi biliyorlardı. Dans ederken zıpladılar, döndüler ve kahkaha attılar.\n\nArtık her zaman dans ediyorlardı. Parkta, bahçede ve evde. Jazz ve arkadaşları dans etmeyi çok seviyorlardı!
 """
 
-# Extract sentences first
-sentences = extractor.from_paragraph(paragraph)
 
-print(f"Starting benchmark for morphology.analyze_sentence on {len(sentences)} sentences...")
+print(f"Starting benchmark for morphology.analyze_sentence on paragraph...")
 start_time = time.perf_counter()
 
 total_words = 0
-for sentence in sentences:
-    # Benchmark target: analyze_sentence
-    results = morphology.analyze_sentence(sentence)
-    total_words += len(results)
+results = morphology.analyze_sentence(paragraph)
+total_words += len(results)
 
 end_time = time.perf_counter()
 duration = end_time - start_time
 
 print("-" * 30)
 print(f"Total time: {duration:.4f} seconds")
-print(f"Total sentences analyzed: {len(sentences)}")
 print(f"Total words analyzed: {total_words}")
 if duration > 0:
     print(f"Speed: {total_words / duration:.2f} words/second")

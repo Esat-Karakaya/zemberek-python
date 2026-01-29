@@ -16,6 +16,7 @@ Bu Python portu da orijinal Zemberek kütüphanesinin yeteneklerini Python ekosi
 Hız ve doğruluk arasındaki dengeyi en iyi şekilde kurmaya çalışır. 
 Ayrıca, zengin bir sözlük yapısına ve gelişmiş bir kural sistemine sahiptir. 
 Gelecekte daha fazla özellik eklenmesi planlanmaktadır.
+Jazz bir kediydi. Arkadaşları vardı: Pamuk, Minnoş ve Tekir. Onlar dans etmeyi çok severdi. Bir gün, zor bir dans öğrendiler. Her gün dans ettiler. Sabah, öğle ve akşam.\n\nİlk başlarda çok zorlandılar. Ayakları karıştı, düştüler ve güldüler. Ama pes etmediler. Her gün daha iyi oldular. Jazz, Pamuk, Minnoş ve Tekir birlikte çalıştılar.\n\nSonunda, dansı öğrendiler! Çok mutluydular. Şimdi dans etmeyi biliyorlardı. Dans ederken zıpladılar, döndüler ve kahkaha attılar.\n\nArtık her zaman dans ediyorlardı. Parkta, bahçede ve evde. Jazz ve arkadaşları dans etmeyi çok seviyorlardı!
 """
 
 # Tokenize paragraph into words first to isolate the analysis benchmark

@@ -65,7 +65,7 @@ class SearchPath:
         morphemes: List[SurfaceTransition] = []
         root = SurfaceTransition(stem_transition.surface, stem_transition)
         morphemes.append(root)
-        return SearchPath(tail, stem_transition.to, morphemes, deepcopy(stem_transition.phonetic_attributes),
+        return SearchPath(tail, stem_transition.to, morphemes, set(stem_transition.phonetic_attributes),
                           stem_transition.to.terminal_)
 
     def __str__(self):
