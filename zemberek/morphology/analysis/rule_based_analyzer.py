@@ -40,28 +40,40 @@ class RuleBasedAnalyzer:
         if self.debug_mode:
             raise NotImplementedError("Debug mode is not implemented")
 
-        candidates = list(self.stem_transitions.get_prefix_matches(inp, self.ascii_tolerant))
-        # Sort candidates by length in descending order to prioritize longer stems
-        candidates.sort(key=lambda x: len(x.surface), reverse=True)
-
-        result: List[SingleAnalysis] = []
-
+        candidates = self.stem_transitions.get_prefix_matches(inp, self.ascii_tolerant)
+        
+        # Group candidates by surface length to prioritize longer stems
+        candidates_by_len: Dict[int, List[SearchPath]] = {}
         for candidate in candidates:
             length = len(candidate.surface)
+            if length not in candidates_by_len:
+                candidates_by_len[length] = []
             tail = inp[length:]
-            initial_path = SearchPath.initial_path(candidate, tail)
-            
-            result_paths = self.search([initial_path], stop_at_first=True)
-            
-            if result_paths:
-                for path in result_paths:
-                    analysis = SingleAnalysis.from_search_path(path)
-                    result.append(analysis)
-                
-                # If we found at least one result for this stem, we stop (requested behavior)
-                break
+            candidates_by_len[length].append(SearchPath.initial_path(candidate, tail))
 
-        return tuple(result)
+        # Try lengths in descending order
+        sorted_lengths = sorted(candidates_by_len.keys(), reverse=True)
+
+        for length in sorted_lengths:
+            result_paths = self.search(candidates_by_len[length])
+            if result_paths:
+                return tuple(SingleAnalysis.from_search_path(path) for path in result_paths)
+
+        return ()
+
+    def analyze_with_exact_stem(self, stem: str, tail: str) -> Tuple[SingleAnalysis, ...]:
+        if self.ascii_tolerant:
+            candidates = self.stem_transitions.get_transitions_ascii_tolerant(stem)
+        else:
+            candidates = self.stem_transitions.get_transitions(stem)
+        
+        paths = []
+        for candidate in candidates:
+            paths.append(SearchPath.initial_path(candidate, tail))
+            
+        result_paths = self.search(paths)
+        
+        return tuple(SingleAnalysis.from_search_path(path) for path in result_paths)
 
     def search(self, current_paths: List[SearchPath], stop_at_first: bool = False) -> Tuple[SearchPath, ...]:
         if len(current_paths) > 30:
@@ -75,8 +87,6 @@ class RuleBasedAnalyzer:
                 if len(path.tail) == 0:
                     if path.terminal and PhoneticAttribute.CannotTerminate not in path.phonetic_attributes:
                         result.append(path)
-                        if stop_at_first:
-                            return tuple(result)
                         continue
                     if self.debug_mode:
                         raise NotImplementedError

@@ -122,11 +122,14 @@ class TurkishMorphology:
         if index > 0 and index != len(word) - 1:
             se = StemAndEnding(word[0:index], word[index + 1:])
             stem = TurkishAlphabet.INSTANCE.normalize(se.stem)
-            without_quote = word.replace("'", "")
-            no_quotes_parses = self.analyzer.analyze(without_quote)
-            return () if len(no_quotes_parses) == 0 else \
-                tuple(p for p in no_quotes_parses if p.item.primary_pos == PrimaryPos.Noun and
-                      (p.contains_morpheme(TurkishMorphotactics.p3sg) or p.get_stem() == stem))
+            ending = TurkishAlphabet.INSTANCE.normalize(se.ending)
+            
+            # Use exact stem analysis which bypasses the general "longest stem" optimization
+            # effectively forcing the stem to be what's before the apostrophe
+            parses = self.analyzer.analyze_with_exact_stem(stem, ending)
+            
+            return () if len(parses) == 0 else \
+                tuple(p for p in parses if p.item.primary_pos == PrimaryPos.Noun)
         else:
             return ()
 

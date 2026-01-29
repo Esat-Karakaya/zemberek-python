@@ -80,12 +80,11 @@ class UnidentifiedTokenAnalyzer:
                 lemma = self.numeral_ending_machine.find(str(decimal))
 
             results: List[SingleAnalysis] = []
+            stem_surface = lemma
             if len(se.ending) > 0 and lemma == "dört" and self.ALPHABET.is_vowel(se.ending[0]):
-                to_parse = "dörd" + se.ending
-            else:
-                to_parse = lemma + se.ending
+                stem_surface = "dörd"
 
-            res = self.analyzer.analyze(to_parse)
+            res = self.analyzer.analyze_with_exact_stem(stem_surface, se.ending)
             for re_ in res:
                 if re_.item.primary_pos == PrimaryPos.Numeral:
                     run_time_item = DictionaryItem(se.stem, se.stem, PrimaryPos.Numeral, SecondaryPos.RomanNumeral,
@@ -183,12 +182,11 @@ class UnidentifiedTokenAnalyzer:
         for numerals in UnidentifiedTokenAnalyzer.Numerals:
             m = numerals.pattern.search(se.stem)
             if m:
+                stem_surface = lemma
                 if len(se.ending) > 0 and lemma == "dört" and self.ALPHABET.is_vowel(se.ending[0]):
-                    to_parse = "dört" + se.ending
-                else:
-                    to_parse = lemma + se.ending
+                    stem_surface = "dörd"
 
-                res: Tuple[SingleAnalysis] = self.analyzer.analyze(to_parse)
+                res: Tuple[SingleAnalysis] = self.analyzer.analyze_with_exact_stem(stem_surface, se.ending)
                 for re_ in res:
                     if re_.item.primary_pos == PrimaryPos.Numeral:
                         run_time_item = DictionaryItem(se.stem, se.stem, pronunciation=s + lemma,
