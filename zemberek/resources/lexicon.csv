@@ -3800,8 +3800,6 @@ oluk_Noun	oluk	oluk	Noun	None	oluk	0	null	 Voicing
 Atreides_Noun_Prop	Atreides	atreides	Noun	Prop	atreides	0	null	 PronunciationGuessed
 Dengiz_Noun_Prop	Dengiz	dengiz	Noun	Prop	dengiz	0	null	 PronunciationGuessed
 mnemotekni_Noun	mnemotekni	mnemotekni	Noun	None	mnemotekni	0	null	0
-olur_Adj	olur	olur	Adj	None	olur	0	null	0
-olur_Noun	olur	olur	Noun	None	olur	0	null	0
 Dengir_Noun_Prop	Dengir	dengir	Noun	Prop	dengir	0	null	 PronunciationGuessed
 kuşbilimci_Noun	kuşbilimci	kuşbilimci	Noun	None	kuşbilimci	0	null	 Ext
 halkavî_Noun	halkavî	halkavi	Noun	None	halkavi	0	null	0
@@ -18252,7 +18250,6 @@ Cityscape_Noun_Prop	Cityscape	cityscape	Noun	Prop	cityscape	0	null	 Pronunciatio
 mütevazin_Adj	mütevazin	mütevazin	Adj	None	mütevazin	0	null	0
 zaparta_Noun	zaparta	zaparta	Noun	None	zaparta	0	null	0
 asaleten_Adv	asaleten	asaleten	Adv	None	asaleten	0	null	0
-Koşar_Noun_Prop	Koşar	koşar	Noun	Prop	koşar	0	null	 PronunciationGuessed
 Paktika_Noun_Prop	Paktika	paktika	Noun	Prop	paktika	0	null	 PronunciationGuessed
 cırdaval_Noun	cırdaval	cırdaval	Noun	None	cırdaval	0	null	0
 dikim_Noun	dikim	dikim	Noun	None	dikim	0	null	0

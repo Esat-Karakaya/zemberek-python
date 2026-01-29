@@ -40,25 +40,30 @@ class RuleBasedAnalyzer:
         if self.debug_mode:
             raise NotImplementedError("Debug mode is not implemented")
 
-        candidates = self.stem_transitions.get_prefix_matches(inp, self.ascii_tolerant)
+        candidates = list(self.stem_transitions.get_prefix_matches(inp, self.ascii_tolerant))
+        # Sort candidates by length in descending order to prioritize longer stems
+        candidates.sort(key=lambda x: len(x.surface), reverse=True)
 
-        paths: List[SearchPath] = []
+        result: List[SingleAnalysis] = []
 
         for candidate in candidates:
             length = len(candidate.surface)
             tail = inp[length:]
-            paths.append(SearchPath.initial_path(candidate, tail))
-
-        result_paths: Tuple[SearchPath] = self.search(paths)
-        result: List[SingleAnalysis] = []
-
-        for path in result_paths:
-            analysis: SingleAnalysis = SingleAnalysis.from_search_path(path)
-            result.append(analysis)
+            initial_path = SearchPath.initial_path(candidate, tail)
+            
+            result_paths = self.search([initial_path], stop_at_first=True)
+            
+            if result_paths:
+                for path in result_paths:
+                    analysis = SingleAnalysis.from_search_path(path)
+                    result.append(analysis)
+                
+                # If we found at least one result for this stem, we stop (requested behavior)
+                break
 
         return tuple(result)
 
-    def search(self, current_paths: List[SearchPath]) -> Tuple[SearchPath, ...]:
+    def search(self, current_paths: List[SearchPath], stop_at_first: bool = False) -> Tuple[SearchPath, ...]:
         if len(current_paths) > 30:
             current_paths = self.prune_cyclic_paths(current_paths)
         result = []
@@ -70,6 +75,8 @@ class RuleBasedAnalyzer:
                 if len(path.tail) == 0:
                     if path.terminal and PhoneticAttribute.CannotTerminate not in path.phonetic_attributes:
                         result.append(path)
+                        if stop_at_first:
+                            return tuple(result)
                         continue
                     if self.debug_mode:
                         raise NotImplementedError

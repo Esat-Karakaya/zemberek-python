@@ -29,6 +29,9 @@ if __name__ == "__main__":
     test_generation("Annem, BABAM ve   kardeşlerime\ngöre\tdoğru olandır. ", tokenizer, ['A', 'n', 'n', 'e', '<|Noun|>', '<|P1sg|>', ',', ' ', 'B', 'A', 'B', 'A', '<|Noun|>', '<|P1sg|>', ' ', 'v', 'e', ' ', ' ', ' ', 'k', 'a', 'r', 'd', 'e', 'ş', '<|Noun|>', '<|A3pl|>', '<|P1sg|>', '<|Dat|>', '\n', 'g', 'ö', 'r', 'e', '\t', 'd', 'o', 'ğ', 'r', 'u', ' ', 'o', 'l', '<|Verb|>', '<|PresPart|>', '<|Cop|>', '.', ' '])
     test_generation("Annem 11'de veya 12.00'da burada olur.", tokenizer, ['A', 'n', 'n', 'e', '<|Noun|>', '<|P1sg|>', ' ', '1', '1', '<|Noun|>', '<|Loc|>', ' ', 'v', 'e', 'y', 'a', ' ', '1', '2', '.', '0', '0', '<|Noun|>', '<|Loc|>', ' ', 'b', 'u', 'r', 'a', '<|Noun|>', '<|Loc|>', ' ', 'o', 'l', '<|Verb|>', '<|Aor|>', '.'])
     
+    test_generation("11'de", tokenizer, ['1', '1', '<|Noun|>', '<|Loc|>'])
+    # prints ['1', '1', "'", 'd', 'e']
+
     # unsupported 👇
     test_generation("Örnek2'nin 3/4'ü oldu.", tokenizer, ['Ö', 'r', 'n', 'e', 'k', '2', '\'', 'n', 'i', 'n', ' ', '3', '/', '4', '\'', 'ü', ' ', 'o', 'l', '<|Verb|>', '<|Past|>', '.'])
     print("All tests completed!")
