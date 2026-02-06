@@ -1,0 +1,5 @@
+/home/esat/Desktop/zemberek-python/TurkishMorphologicalAnalysis-CPP-master/build/CMakeFiles/MorphologicalAnalysis.dir
+/home/esat/Desktop/zemberek-python/TurkishMorphologicalAnalysis-CPP-master/build/CMakeFiles/Test.dir
+/home/esat/Desktop/zemberek-python/TurkishMorphologicalAnalysis-CPP-master/build/CMakeFiles/AnalyzeWord.dir
+/home/esat/Desktop/zemberek-python/TurkishMorphologicalAnalysis-CPP-master/build/CMakeFiles/edit_cache.dir
+/home/esat/Desktop/zemberek-python/TurkishMorphologicalAnalysis-CPP-master/build/CMakeFiles/rebuild_cache.dir

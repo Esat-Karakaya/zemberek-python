@@ -1,0 +1,1 @@
+. "/home/esat/Desktop/zemberek-python/TurkishMorphologicalAnalysis-CPP-master/build/Release/generators/conanbuildenv-release-x86_64.sh"
