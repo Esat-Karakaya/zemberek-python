@@ -71,7 +71,7 @@ const string FsmParseList::longestRootExceptions[231] = {
  */
 FsmParseList::FsmParseList(vector<FsmParse> fsmParses) {
     if (!fsmParses.empty()){
-        ranges::stable_sort(fsmParses, fsmParseComparator());
+        std::stable_sort(fsmParses.begin(), fsmParses.end(), fsmParseComparator());
         for (int i = 0; i < fsmParses.size() - 1; i++) {
             if (fsmParses.at(i).transitionlist() == fsmParses.at(i + 1).transitionlist()) {
                 fsmParses.erase(fsmParses.begin() + i + 1);

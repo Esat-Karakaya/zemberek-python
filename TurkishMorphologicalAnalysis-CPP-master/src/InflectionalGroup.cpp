@@ -71,12 +71,12 @@ const MorphologicalTag InflectionalGroup::morphoTags[TAG_SIZE] = {MorphologicalT
  */
 MorphologicalTag InflectionalGroup::getMorphologicalTag(const string& tag) {
     string _tag = tag;
-    ranges::transform(_tag,
+    std::transform(_tag.begin(), _tag.end(),
                       _tag.begin(),
                       ::toupper);
     for (int j = 0; j < TAG_SIZE; j++) {
         string upperCase = tags[j];
-        ranges::transform(upperCase,
+        std::transform(upperCase.begin(), upperCase.end(),
                           upperCase.begin(),
                           ::toupper);
         if (_tag == upperCase) {
@@ -96,7 +96,7 @@ string InflectionalGroup::getTag(MorphologicalTag tag) {
     for (int j = 0; j < TAG_SIZE; j++) {
         if (tag == morphoTags[j]) {
             string result = tags[j];
-            ranges::transform(result,
+            std::transform(result.begin(), result.end(),
                               result.begin(),
                               ::toupper);
             return result;

@@ -699,7 +699,7 @@ vector<FsmParse> FsmMorphologicalAnalyzer::parseWord(vector<FsmParse> fsmParse, 
         currentSurfaceForm = currentFsmParse.getSurfaceForm();
         if (currentState.isEndState() && Word::size(currentSurfaceForm) <= maxLength) {
             currentTransitionList = currentSurfaceForm + " " + currentFsmParse.transitionlist();
-            if (ranges::find(resultTransitionList, currentTransitionList) == resultTransitionList.end()) {
+            if (std::find(resultTransitionList.begin(), resultTransitionList.end(), currentTransitionList) == resultTransitionList.end()) {
                 currentFsmParse.constructInflectionalGroups();
                 result.push_back(currentFsmParse);
                 resultTransitionList.push_back(currentTransitionList);
@@ -735,7 +735,7 @@ vector<FsmParse> FsmMorphologicalAnalyzer::parseWord(vector<FsmParse> fsmParse, 
         currentSurfaceForm = currentFsmParse.getSurfaceForm();
         if (currentState.isEndState() && currentSurfaceForm == surfaceForm) {
             currentTransitionList = currentFsmParse.transitionlist();
-            if (ranges::find(resultTransitionList, currentTransitionList) == resultTransitionList.end()) {
+            if (std::find(resultTransitionList.begin(), resultTransitionList.end(), currentTransitionList) == resultTransitionList.end()) {
                 currentFsmParse.constructInflectionalGroups();
                 result.push_back(currentFsmParse);
                 resultTransitionList.push_back(currentTransitionList);
