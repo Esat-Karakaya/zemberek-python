@@ -65,6 +65,7 @@ public:
     FsmParseList* morphologicalAnalysis(const Sentence& sentence);
     FsmParseList* robustMorphologicalAnalysis(const Sentence& sentence);
     FsmParseList morphologicalAnalysis(const string& surfaceForm);
+    FsmParseList morphologicalAnalysisGreedy(const string& surfaceForm);
     bool morphologicalAnalysisExists(TxtWord* rootWord, const string& surfaceForm);
 };
 

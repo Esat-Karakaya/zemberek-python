@@ -1393,3 +1393,59 @@ FsmParseList FsmMorphologicalAnalyzer::morphologicalAnalysis(const string& surfa
     }
     return fsmParseList;
 }
+
+FsmParseList FsmMorphologicalAnalyzer::morphologicalAnalysisGreedy(const string& surfaceForm) {
+    if (cache.getCacheSize() > 0 && cache.contains(surfaceForm)) {
+        return cache.get(surfaceForm);
+    }
+
+    string lowerCased = Word::toLowerCase(surfaceForm);
+    bool isProper = isProperNoun(surfaceForm);
+
+    // Simple types - delegate to standard analysis
+    if (Word::isPunctuation(surfaceForm) || isNumber(surfaceForm) || isDate(surfaceForm) || 
+        isPercent(surfaceForm) || isTime(surfaceForm) || isRange(surfaceForm) || 
+        StringUtils::startsWith(surfaceForm, "#") || surfaceForm.find('@') != string::npos ||
+        patternMatches("\\d+/\\d+", surfaceForm) || patternMatches(R"(\d+\\/\d+)", surfaceForm)) {
+        
+        vector<FsmParse> fsmParses = analysis(lowerCased, isProper);
+        if (!fsmParses.empty()) {
+             FsmParseList result(fsmParses);
+             if (cache.getCacheSize() > 0) cache.add(surfaceForm, result);
+             return result;
+        }
+        return FsmParseList(vector<FsmParse>());
+    }
+
+    // Greedy strategy: Try longest roots first
+    unordered_set<Word*> words = dictionaryTrie->getWordsWithPrefix(lowerCased);
+    vector<TxtWord*> sortedRoots;
+    for (Word* w : words) sortedRoots.push_back((TxtWord*)w);
+
+    std::sort(sortedRoots.begin(), sortedRoots.end(), [](TxtWord* a, TxtWord* b){
+        return a->getName().length() > b->getName().length();
+    });
+
+    for (TxtWord* root : sortedRoots) {
+        vector<FsmParse> initialParses;
+        initializeParseListFromRoot(initialParses, root, isProper);
+        
+        // parseWord extends the partial parses
+        vector<FsmParse> results = parseWord(initialParses, lowerCased);
+        
+        if (!results.empty()) {
+            // Found a valid parse!
+            FsmParseList result(results);
+            if (cache.getCacheSize() > 0) cache.add(surfaceForm, result);
+            return result;
+        }
+    }
+
+    // Fallback if greedy fails (e.g. root replacement logic in standard analysis)
+    vector<FsmParse> fallback = analysis(lowerCased, isProper);
+    FsmParseList finalResult(fallback);
+    if (cache.getCacheSize() > 0 && finalResult.size() > 0) {
+        cache.add(surfaceForm, finalResult);
+    }
+    return finalResult;
+}
