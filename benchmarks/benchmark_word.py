@@ -26,7 +26,6 @@ Jazz bir kediydi. Arkadaşları vardı: Pamuk, Minnoş ve Tekir. Onlar dans etme
 print(f"Starting benchmark for morphology.analyze on each word individually...")
 start_time = time.perf_counter()
 
-# Tokenize paragraph into words first to isolate the analysis benchmark
 tokens = tokenizer.tokenize(paragraph)
 words = [t.content for t in tokens]
 
