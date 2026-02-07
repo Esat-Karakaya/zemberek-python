@@ -1,1 +1,0 @@
-. "/home/esat/Desktop/zemberek-python/TurkishMorphologicalAnalysis-CPP-master/build/Release/generators/deactivate_conanrunenv-release-x86_64.sh"
