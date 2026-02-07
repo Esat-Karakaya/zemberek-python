@@ -1,3 +1,9 @@
+import sys
+from pathlib import Path
+
+# Add the parent directory to sys.path to allow importing from the root
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
 import time
 from zemberek import TurkishMorphology, TurkishSentenceExtractor
 
