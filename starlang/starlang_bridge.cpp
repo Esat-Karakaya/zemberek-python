@@ -128,7 +128,7 @@ std::string analyze_text(const std::string& text) {
     std::string result;
     
     for (const auto& token : tokens) {
-        FsmParseList parses = analyzer->morphologicalAnalysisGreedy(token);
+        FsmParseList parses = analyzer->morphologicalAnalysis(token);
         if (parses.size() > 0) {
             FsmParse best = parses.getParseWithLongestRootWord();
             result += token + "|" + best.transitionlist();
