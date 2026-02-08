@@ -5,14 +5,12 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 import time
-from zemberek import TurkishMorphology, TurkishSentenceExtractor
+from morph_tokenizer import MorphTokenizer
 
-# Initialize morphology and extractor
+# Initialize MorphTokenizer
 # This part is excluded from benchmark timing as it involves loading resources
-print("Initializing Zemberek...")
-morphology = TurkishMorphology.create_with_defaults()
-extractor = TurkishSentenceExtractor()
-
+print("Initializing MorphTokenizer...")
+tokenizer = MorphTokenizer("<|", "|>")
 
 paragraph = """
 Zemberek, Türk dili için geliştirilmiş en popüler doğal dil işleme kütüphanelerinden biridir. 
@@ -25,20 +23,17 @@ Gelecekte daha fazla özellik eklenmesi planlanmaktadır.
 Jazz bir kediydi. Arkadaşları vardı: Pamuk, Minnoş ve Tekir. Onlar dans etmeyi çok severdi. Bir gün, zor bir dans öğrendiler. Her gün dans ettiler. Sabah, öğle ve akşam.\n\nİlk başlarda çok zorlandılar. Ayakları karıştı, düştüler ve güldüler. Ama pes etmediler. Her gün daha iyi oldular. Jazz, Pamuk, Minnoş ve Tekir birlikte çalıştılar.\n\nSonunda, dansı öğrendiler! Çok mutluydular. Şimdi dans etmeyi biliyorlardı. Dans ederken zıpladılar, döndüler ve kahkaha attılar.\n\nArtık her zaman dans ediyorlardı. Parkta, bahçede ve evde. Jazz ve arkadaşları dans etmeyi çok seviyorlardı!
 """
 
-
-print(f"Starting benchmark for morphology.analyze_sentence on paragraph...")
+print(f"Starting benchmark for MorphTokenizer.tokenize on {len(paragraph)} characters...")
 start_time = time.perf_counter()
 
-total_words = 0
-results = morphology.analyze_sentence(paragraph)
-total_words += len(results)
+tokens = tokenizer.tokenize(paragraph)
 
 end_time = time.perf_counter()
 duration = end_time - start_time
 
 print("-" * 30)
 print(f"Total time: {duration:.4f} seconds")
-print(f"Total words analyzed: {total_words}")
+print(f"Total tokens produced: {len(tokens)}")
 if duration > 0:
-    print(f"Speed: {total_words / duration:.2f} words/second")
+    print(f"Speed: {207 / duration:.2f} words/second")
 print("-" * 30)

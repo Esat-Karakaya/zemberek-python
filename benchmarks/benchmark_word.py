@@ -11,7 +11,7 @@ print("Initializing Zemberek...")
 morphology = TurkishMorphology.create_with_defaults()
 tokenizer = TurkishTokenizer.DEFAULT
 
-# Placeholder paragraph - feel free to replace with a longer text
+
 paragraph = """
 Zemberek, Türk dili için geliştirilmiş en popüler doğal dil işleme kütüphanelerinden biridir. 
 Açık kaynak kodlu ve Java ile yazılmış olan bu kütüphane, Türkiye'deki üniversiteler ve çeşitli kurumlar tarafından yaygın olarak kullanılmaktadır. 

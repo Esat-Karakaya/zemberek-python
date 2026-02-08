@@ -1,5 +1,5 @@
 from typing import List
-from zemberek.morphology.analysis.sentence_analysis import SentenceAnalysis
+from zemberek.morphology.analysis.word_analysis import WordAnalysis
 from zemberek import TurkishSentenceExtractor
 from utils import get_morphology, match_capitilization, is_morph_analysis_ok
 
@@ -37,14 +37,13 @@ class MorphTokenizer:
         return all_tokens
     
     def __tokenize_sentence(self, sentence: str) -> List[str]:
-        analysis = self.morphology.analyze_sentence(sentence)
-        after = self.morphology.disambiguate(sentence, analysis)
+        after = self.morphology.analyze_sentence(sentence)
 
         whitespaces = self.__collect_whitespaces(sentence, after)
 
         words = []
-        for sentence_word_analysis in after:
-            tokens = self.__get_word_tokens(sentence_word_analysis)
+        for word_analysis in after:
+            tokens = self.__get_word_tokens(word_analysis)
             words.append(tokens)
             
         split_by_words = self.__reconstruct_sentence(words, whitespaces)
@@ -71,13 +70,14 @@ class MorphTokenizer:
             return "Noun"
         return None
 
-    def __get_word_tokens(self, sentence_word_analysis) -> List[str]:
-        best = sentence_word_analysis.best_analysis
-        item = best.item
-        original_surface = sentence_word_analysis.word_analysis.inp
+    def __get_word_tokens(self, word_analysis: WordAnalysis) -> List[str]:
+        original_surface = word_analysis.inp
         
-        if not is_morph_analysis_ok(original_surface):
+        if not is_morph_analysis_ok(original_surface) or not word_analysis.analysis_results:
             return list(original_surface) # declare word as unknown
+            
+        best = word_analysis.analysis_results[0]
+        item = best.item
             
         word_type = self.__get_word_type(item, original_surface)
         
@@ -109,12 +109,12 @@ class MorphTokenizer:
                     sentence.append(list(whitespaces[i // 2]))
         return sentence
     
-    def __collect_whitespaces(self, sentence: str, disambiguated_analysis: SentenceAnalysis) -> List[str]:
+    def __collect_whitespaces(self, sentence: str, analyses: List[WordAnalysis]) -> List[str]:
         whitespaces = []
         current_pos = 0
         
-        for swa in disambiguated_analysis:
-            original_surface = swa.word_analysis.inp
+        for wa in analyses:
+            original_surface = wa.inp
             # Find the start of this word in the original sentence
             start_idx = sentence.find(original_surface, current_pos)
             
