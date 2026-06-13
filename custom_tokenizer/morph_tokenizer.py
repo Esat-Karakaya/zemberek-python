@@ -1,12 +1,20 @@
+import sys
+from pathlib import Path
+# Add the parent directory to sys.path to allow importing from the root
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
 from typing import List
 from zemberek.morphology.analysis.word_analysis import WordAnalysis
 from zemberek import TurkishSentenceExtractor
 from utils import get_morphology, match_capitilization, is_morph_analysis_ok
 
 from zemberek.core.turkish import PrimaryPos, SecondaryPos
+from custom_tokenizer.detokenizer import MorphDetokenizer
 
 class MorphTokenizer:
     def __init__(self, tk_start, tk_end):
+        self.tk_start = tk_start
+        self.tk_end = tk_end
         self.morphology = get_morphology()
         self.extractor = TurkishSentenceExtractor()
         self.special_token = lambda s: tk_start + s + tk_end
@@ -35,6 +43,10 @@ class MorphTokenizer:
             all_tokens.extend(list(trailing))
             
         return all_tokens
+    
+    def detokenize(self, tokens: List[str]) -> str:
+        detokenizer = MorphDetokenizer(tk_start=self.tk_start, tk_end=self.tk_end)
+        return detokenizer.detokenize(tokens)
     
     def __tokenize_sentence(self, sentence: str) -> List[str]:
         after = self.morphology.analyze_sentence(sentence)
@@ -96,6 +108,8 @@ class MorphTokenizer:
             if word_type:
                 tokens.append(self.special_token(word_type))
             tokens.extend(suffixes)
+        else:
+            return list(original_surface)
         return tokens
 
     def __reconstruct_sentence(self, words: List[List[str]], whitespaces: List[str]) -> List[List[str]]:

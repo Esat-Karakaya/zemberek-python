@@ -5,7 +5,7 @@ from typing import List
 sys.path.append(str(Path(__file__).parent.parent))
 import time
 
-from morph_tokenizer import MorphTokenizer
+from custom_tokenizer.morph_tokenizer import MorphTokenizer
 
 logging.basicConfig(level=logging.ERROR)
 
@@ -17,7 +17,15 @@ def test_generation(string: str, tokenizer: MorphTokenizer, expected: List[str])
     output="COMPLETED IN " + str(t1-t0) + " SECONDS\n"
     if tokens != expected:
         output+="\033[31m"
-        output+=f"String: {string} ->\n Result: {tokens}\n Expected: {expected}\033[0m"
+        output+=f"String: {string} ->\n Result: {tokens}\n Expected: {expected}\033[0m\n"
+    
+    # Test detokenization
+    detokenized = tokenizer.detokenize(tokens)
+    if detokenized != string:
+        output+="\033[31m"
+        output+=f"Detokenization failed!\nOriginal: {repr(string)}\nDetokenized: {repr(detokenized)}\033[0m\n"
+    else:
+        output+="\033[32mDetokenization successful matches original string!\033[0m\n"
     print(output)
 
 if __name__ == "__main__":
@@ -45,4 +53,7 @@ if __name__ == "__main__":
     test_generation(paragraph, tokenizer, expected)
 
     test_generation("Jazz bir kediydi. Arkadaşları vardı: Pamuk, Minnoş ve Tekir. Onlar dans etmeyi çok severdi. Bir gün, zor bir dans öğrendiler. Her gün dans ettiler. Sabah, öğle ve akşam.\n\nİlk başlarda çok zorlandılar. Ayakları karıştı, düştüler ve güldüler. Ama pes etmediler. Her gün daha iyi oldular. Jazz, Pamuk, Minnoş ve Tekir birlikte çalıştılar.\n\nSonunda, dansı öğrendiler! Çok mutluydular. Şimdi dans etmeyi biliyorlardı. Dans ederken zıpladılar, döndüler ve kahkaha attılar.\n\nArtık her zaman dans ediyorlardı. Parkta, bahçede ve evde. Jazz ve arkadaşları dans etmeyi çok seviyorlardı!\n", tokenizer, [])
+
+    test_generation("Geldiler. Ama pes etmediler.", tokenizer, ['G', 'e', 'l', '<|Verb|>', '<|Past|>', '<|A3pl|>', '.', ' ', 'A', 'm', 'a', ' ', 'p', 'e', 's', ' ', 'e', 't', '<|Verb|>', '<|Neg|>', '<|Past|>', '<|A3pl|>', '.'])
+    test_generation(".burnumuzun ", tokenizer, [])
     print("All tests completed!")
