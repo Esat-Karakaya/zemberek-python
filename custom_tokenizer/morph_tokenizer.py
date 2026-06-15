@@ -97,7 +97,8 @@ class MorphTokenizer:
         suffixes = []
         for i, m_data in enumerate(best.morpheme_data_list):
             if i == 0:
-                stem = item.normalized_lemma() if not item.is_unknown() else m_data.surface
+                # Use the actual stem surface from morphological analysis instead of lemma
+                stem = m_data.surface
                 if "'" in original_surface and not item.is_unknown():
                     stem = original_surface.split("'")[0]
                 tokens.extend(list(match_capitilization(original_surface, stem)))
