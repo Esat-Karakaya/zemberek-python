@@ -53,7 +53,8 @@ if __name__ == "__main__":
     test_generation(paragraph, tokenizer, expected)
 
     test_generation("Jazz bir kediydi. Arkadaşları vardı: Pamuk, Minnoş ve Tekir. Onlar dans etmeyi çok severdi. Bir gün, zor bir dans öğrendiler. Her gün dans ettiler. Sabah, öğle ve akşam.\n\nİlk başlarda çok zorlandılar. Ayakları karıştı, düştüler ve güldüler. Ama pes etmediler. Her gün daha iyi oldular. Jazz, Pamuk, Minnoş ve Tekir birlikte çalıştılar.\n\nSonunda, dansı öğrendiler! Çok mutluydular. Şimdi dans etmeyi biliyorlardı. Dans ederken zıpladılar, döndüler ve kahkaha attılar.\n\nArtık her zaman dans ediyorlardı. Parkta, bahçede ve evde. Jazz ve arkadaşları dans etmeyi çok seviyorlardı!\n", tokenizer, [])
+    test_generation("haftasonu vakti", tokenizer, ['h',  'a',  'f',  't',  'a',  's',  'o',  'n',  '<|Noun|>',  '<|Acc|>',  ' ',  'v',  'a',  'k',  'i', 't', '<|Noun|>',  '<|Acc|>'])
 
     test_generation("Geldiler. Ama pes etmediler.", tokenizer, ['G', 'e', 'l', '<|Verb|>', '<|Past|>', '<|A3pl|>', '.', ' ', 'A', 'm', 'a', ' ', 'p', 'e', 's', ' ', 'e', 't', '<|Verb|>', '<|Neg|>', '<|Past|>', '<|A3pl|>', '.'])
-    test_generation(".burnumuzun ", tokenizer, [])
+    test_generation(".burnumuzun ", tokenizer, ['.', 'b', 'u', 'r', 'u', 'n', '<|Noun|>', '<|P1pl|>', '<|Gen|>', ' '])
     print("All tests completed!")

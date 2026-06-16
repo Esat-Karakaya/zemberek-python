@@ -10,6 +10,7 @@ from utils import get_morphology, match_capitilization, is_morph_analysis_ok
 
 from zemberek.core.turkish import PrimaryPos, SecondaryPos
 from custom_tokenizer.detokenizer import MorphDetokenizer
+from zemberek.core.turkish.root_attribute import RootAttribute
 
 class MorphTokenizer:
     def __init__(self, tk_start, tk_end):
@@ -97,8 +98,11 @@ class MorphTokenizer:
         suffixes = []
         for i, m_data in enumerate(best.morpheme_data_list):
             if i == 0:
-                # Use the actual stem surface from morphological analysis instead of lemma
-                stem = m_data.surface
+                # Use the lemma/root form for the stem rather than the surface allomorph
+                if (not item.is_unknown()) and (not RootAttribute.CompoundP3sg in item.attributes):
+                    stem = item.normalized_lemma()
+                else:
+                    stem = m_data.surface
                 if "'" in original_surface and not item.is_unknown():
                     stem = original_surface.split("'")[0]
                 tokens.extend(list(match_capitilization(original_surface, stem)))

@@ -45,7 +45,13 @@ class CustomWordGenerator:
         return match_capitilization(root, forced_result)
 
     def _get_pos_enums(self, word_type: str) -> tuple[PrimaryPos, SecondaryPos]:
-        p_pos = PrimaryPos.Noun if word_type in ["Noun", "NamedEntity"] else PrimaryPos.Verb
+        if word_type in ["Noun", "NamedEntity"]:
+            p_pos = PrimaryPos.Noun
+        elif word_type == "Adj":
+            p_pos = PrimaryPos.Adjective
+        else:  # Verb and others
+            p_pos = PrimaryPos.Verb
+        
         s_pos = SecondaryPos.ProperNoun if word_type == "NamedEntity" else SecondaryPos.None_
         return p_pos, s_pos
 
@@ -148,8 +154,12 @@ class CustomWordGenerator:
         
         noun_suffixes = {
             "Pnon", "P1sg", "P2sg", "P3sg", "P1pl", "P2pl", "P3pl", "Nom", "Dat", "Acc", "Abl", "Loc", "Ins", "Gen", "Equ",
-            "Dim", "Ness", "With", "Without", "Related", "JustLike", "Rel", "Agt", "Become", "Acquire", "Ly", "Zero", "Root",
+            "Dim", "Ness", "With", "Without", "Related", "JustLike", "Rel", "Agt", "Become", "Acquire", "Zero", "Root",
             "A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl", "Past", "Narr", "Cond", "Cop", "Noun"
+        }
+        
+        adjective_suffixes = {
+            "Ly", "AsIf", "Agt", "JustLike", "Become", "Acquire"
         }
         
         verb_suffixes = {
@@ -162,6 +172,7 @@ class CustomWordGenerator:
 
         results = []
         if m_id in noun_suffixes: results.append(PrimaryPos.Noun)
+        if m_id in adjective_suffixes: results.append(PrimaryPos.Adjective)
         if m_id in verb_suffixes: results.append(PrimaryPos.Verb)
         
         if results: return results
@@ -188,10 +199,26 @@ class CustomWordGenerator:
                 attributes.add(RootAttribute.Aorist_I)
         
         dummy_item = DictionaryItem(root, root, p_pos, s_pos, attributes=attributes)
-        start_state = self.morphotactics.verbRoot_S if p_pos == PrimaryPos.Verb else self.morphotactics.noun_S
+        
+        # Determine the appropriate start state based on PrimaryPos
+        if p_pos == PrimaryPos.Verb:
+            start_state = self._get_verb_root_state(root)
+        elif p_pos == PrimaryPos.Adjective:
+            start_state = self.morphotactics.adjectiveRoot_ST
+        else:  # Noun and others
+            start_state = self.morphotactics.noun_S
+        
         phonetic_attrs = self._get_phonetic_attributes(root)
         res = StemTransition(root, dummy_item, phonetic_attrs, start_state)
         return res
+
+    def _get_verb_root_state(self, root: str):
+        root_lower = root.translate(self.alphabet.lower_map).lower()
+        if root_lower in {"di", "yi", "de", "ye"}:
+            return self.morphotactics.vDeYeRoot_S
+        if root and self.alphabet.is_vowel(root[-1]):
+            return self.morphotactics.verbRoot_VowelDrop_S
+        return self.morphotactics.verbRoot_S
 
     def _get_phonetic_attributes(self, root: str) -> Set[PhoneticAttribute]:
         has_vowel = any(self.alphabet.is_vowel(c) for c in root)
