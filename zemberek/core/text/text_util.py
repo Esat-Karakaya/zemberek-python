@@ -10,12 +10,9 @@ class TextUtil:
         :param str inp: text to be processed
         :return: cleaned input string
         """
-        return re.sub(r'[′´`’‘]', "'", inp)
+        return inp
 
     @staticmethod
     def normalize_quotes_hyphens(inp: str) -> str:
-        inp_ = re.sub(r"[“”»«″]|''", "\"", inp)
-        inp_ = re.sub(r"[′´`’‘]", "'", inp_)
-        inp_ = re.sub(r"[–]", "-", inp_)
+        inp_ = re.sub(r"[–—–]", "-", inp)
         return inp_
-

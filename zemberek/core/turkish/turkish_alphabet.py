@@ -30,7 +30,7 @@ class TurkishAlphabet:
         self.circumflex = "âîû"
         self.circumflex_upper = "ÂÎÛ"
         self.circumflexes = set(self.circumflex + self.circumflex_upper)
-        self.apostrophe = set("′´`’‘'")
+        self.apostrophe = set("'")
         self.stop_consonants = "çkptÇKPT"
         self.voiceless_consonants = "çfhkpsştÇFHKPSŞT"
         self.turkish_specific = "çÇğĞıİöÖşŞüÜâîûÂÎÛ"
