@@ -49520,7 +49520,6 @@ muvacehesinde_Adv	muvacehesinde	muvacehesinde	Adv	None	muvacehesinde	0	null	0
 bit_Noun	bit	bit	Noun	None	bit	0	null	 NoVoicing
 Birsen_Noun_Prop	Birsen	birsen	Noun	Prop	birsen	0	null	 PronunciationGuessed
 bis_Adv	bis	bis	Adv	None	bis	0	null	0
-biz_Pron_Pers	biz	biz	Pron	Pers	biz	0	null	0
 biz_Noun	biz	biz	Noun	None	biz	0	null	 NoVoicing
 Birsel_Noun_Prop	Birsel	birsel	Noun	Prop	birsel	0	null	 PronunciationGuessed
 fondöten_Noun	fondöten	fondöten	Noun	None	fondöten	0	null	0
@@ -58585,7 +58584,7 @@ kurtayak_Noun	kurtayak	kurtayak	Noun	None	kurtayak	0	kurtayağı_Noun	 CompoundP
 şefik_Noun	şefik	şefik	Noun	None	şefik	0	null	 NoVoicing
 şefik_Adj	şefik	şefik	Adj	None	şefik	0	null	 Voicing
 Onursan_Noun_Prop	Onursan	onursan	Noun	Prop	onursan	0	null	 PronunciationGuessed
-siz_Pron_Pers	siz	siz	Pron	Pers	siz	0	null	0
+siz_Noun	siz	siz	Noun	None	siz	0	null	 NoVoicing
 Onursal_Noun_Prop	Onursal	onursal	Noun	Prop	onursal	0	null	 PronunciationGuessed
 ortaparmak_Verb_1	ortaparmak	ortaparmak	Verb	None	ortaparmak	1	ortaparmak_Verb	 CompoundP3sgRoot Ext Dummy
 ortaparmak_Verb	ortaparmak	ortapar	Verb	None	ortapar	0	null	 Aorist_I Causative_t CompoundP3sg Ext
