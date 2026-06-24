@@ -68,12 +68,15 @@ class CustomWordGenerator:
                 alt_lex_key = self._add_Inf1_suffix(alt_lex_key)
             items = [item for item in lexicon.item_map.get(alt_lex_key, []) if item.primary_pos == p_pos]
 
-        if not items and word_type == "Noun":
-            # If there is no noun entry for this root, allow adjective entries as a fallback.
-            items = [item for item in lexicon.item_map.get(lex_key, []) if item.primary_pos == PrimaryPos.Adjective]
+        # If still no items found, try any available POS as a fallback
+        # (but exclude Verb to avoid inappropriate morphological rules)
+        if not items:
+            items = [item for item in lexicon.item_map.get(lex_key, []) if item.primary_pos != PrimaryPos.Verb]
             if not items and (root.istitle() or root.isupper()):
                 alt_lex_key = root.translate(self.alphabet.lower_map).lower()
-                items = [item for item in lexicon.item_map.get(alt_lex_key, []) if item.primary_pos == PrimaryPos.Adjective]
+                if word_type == "Verb":
+                    alt_lex_key = self._add_Inf1_suffix(alt_lex_key)
+                items = [item for item in lexicon.item_map.get(alt_lex_key, []) if item.primary_pos != PrimaryPos.Verb]
 
         if word_type == "NamedEntity":
             proper_items = [item for item in items if item.secondary_pos == SecondaryPos.ProperNoun]

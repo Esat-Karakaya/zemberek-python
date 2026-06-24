@@ -14741,8 +14741,7 @@ karnabahar_Noun	karnabahar	karnabahar	Noun	None	karnabahar	0	null	0
 üstüpülemek_Verb	üstüpülemek	üstüpüle	Verb	None	üstüpüle	0	null	 Aorist_I ProgressiveVowelDrop Passive_In Causative_t
 beşparmakot_Noun	beşparmakot	beşparmakot	Noun	None	beşparmakot	0	beşparmakotu_Noun	 NoVoicing CompoundP3sgRoot Ext Dummy
 muhteviyat_Noun	muhteviyat	muhteviyat	Noun	None	muhteviyat	0	null	 NoVoicing ImplicitPlural
-emlak_Noun	emlak	emlak	Noun	None	emlak	0	null	 InverseHarmony
-emlak_Noun_1	emlak	emlak	Noun	None	emlak	1	emlak_Noun	 Voicing Ext
+emlak_Noun	emlak	emlak	Noun	None	emlak	0	null	 Voicing
 sanatkâr_Noun	sanatkâr	sanatkâr	Noun	None	sanatkar	0	null	0
 Winner_Noun_Prop	Winner	winner	Noun	Prop	winner	0	null	 PronunciationGuessed
 teokrasi_Noun	teokrasi	teokrasi	Noun	None	teokrasi	0	null	0
@@ -53106,7 +53105,6 @@ hidrosefal_Noun	hidrosefal	hidrosefal	Noun	None	hidrosefal	0	null	 InverseHarmon
 merek_Noun	merek	merek	Noun	None	merek	0	null	 Voicing
 Silivri_Noun_Prop	Silivri	silivri	Noun	Prop	silivri	0	null	 PronunciationGuessed
 Roswell_Noun_Prop	Roswell	roswell	Noun	Prop	roswell	0	null	 PronunciationGuessed
-hâl_Noun	hâl	hâl	Noun	None	hal	0	null	 NoVoicing InverseHarmony
 solucan_Noun	solucan	solucan	Noun	None	solucan	0	null	0
 Keys_Noun_Prop	Keys	keys	Noun	Prop	keys	0	null	 NoVoicing PronunciationGuessed
 eren_Noun	eren	eren	Noun	None	eren	0	null	0
