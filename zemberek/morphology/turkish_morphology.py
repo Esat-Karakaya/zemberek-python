@@ -70,7 +70,6 @@ class TurkishMorphology:
     @staticmethod
     def normalize_for_analysis(word: str) -> str:
         s = word.translate(TurkishAlphabet.INSTANCE.lower_map).lower()
-        s = TurkishAlphabet.INSTANCE.normalize_circumflex(s)
         no_dot = s.replace(".", "")
         if len(no_dot) == 0:
             no_dot = s
