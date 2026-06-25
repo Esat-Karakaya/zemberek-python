@@ -92,9 +92,6 @@ polijini_Noun	polijini	polijini	Noun	None	polijini	0	null	0
 meşkûr_Adj	meşkûr	meşkûr	Adj	None	meşkur	0	null	0
 muktezi_Adj	muktezi	muktezi	Adj	None	muktezi	0	null	0
 o_Pron_Pers	o	o	Pron	Pers	o	0	null	0
-o_Pron_Demons_1	o	o	Pron	Demons	o	1	null	0
-o_Det	o	o	Det	None	o	0	null	0
-o_Interj	o	o	Interj	None	o	0	null	0
 o_Adj	o	o	Adj	None	o	0	null	 NoVoicing
 avare_Adj	avare	avare	Adj	None	avare	0	null	0
 şebeke_Noun	şebeke	şebeke	Noun	None	şebeke	0	null	0
@@ -958,7 +955,6 @@ Vefakar_Noun_Prop	Vefakar	vefakar	Noun	Prop	vefakar	0	null	 PronunciationGuessed
 Gürs_Noun_Prop	Gürs	gürs	Noun	Prop	gürs	0	null	 NoVoicing PronunciationGuessed
 Lars_Noun_Prop	Lars	lars	Noun	Prop	lars	0	null	 NoVoicing PronunciationGuessed
 Vitaly_Noun_Prop	Vitaly	vitaly	Noun	Prop	vitaly	0	null	 PronunciationGuessed
-âşık_Noun_1	âşık	âşık	Noun	None	aşık	1	null	 NoVoicing
 âşık_Noun	âşık	âşık	Noun	None	aşık	0	null	 Voicing
 cuppadak_Noun	cuppadak	cuppadak	Noun	None	cuppadak	0	null	 NoVoicing NoSuffix
 Utaka_Noun_Prop	Utaka	utaka	Noun	Prop	utaka	0	null	 PronunciationGuessed
@@ -22974,6 +22970,7 @@ Katya_Noun_Prop	Katya	katya	Noun	Prop	katya	0	null	 PronunciationGuessed
 Makbul_Noun_Prop	Makbul	makbul	Noun	Prop	makbul	0	null	 PronunciationGuessed
 Touran_Noun_Prop	Touran	touran	Noun	Prop	touran	0	null	 PronunciationGuessed
 oğul_Noun	oğul	oğul	Noun	None	oğul	0	null	 LastVowelDrop
+olum_Interj	olum	olum	Interj	None	olum	0	null	0
 Bubba_Noun_Prop	Bubba	bubba	Noun	Prop	bubba	0	null	 PronunciationGuessed
 Fisker_Noun_Prop	Fisker	fisker	Noun	Prop	fisker	0	null	 PronunciationGuessed
 bulunmak_Verb	bulunmak	bulun	Verb	None	bulun	0	null	 Aorist_I
