@@ -1,10 +1,10 @@
 ================================================================================
-ENCODE-DECODE ROUND-TRIP TEST LOG - 2026-06-24 19:41:41
+ENCODE-DECODE ROUND-TRIP TEST LOG - 2026-06-25 00:34:30
 ================================================================================
 Total tweets processed:  3999
-Successful round-trips:  3933
-Failed round-trips:      66
-Success Rate:            98.35%
+Successful round-trips:  3945
+Failed round-trips:      54
+Success Rate:            98.65%
 ================================================================================
 
 DETAILED FAILURES:
@@ -14,327 +14,267 @@ Failure #1 (Excel Row 18):
   Decoded:   'Lan onlum lan ne gerizekalısınız lan yine sinirlendim'
   Tokens:    ['L', 'a', 'n', ' ', 'o', '<|Noun|>', '<|With|>', '<|P1sg|>', ' ', 'l', 'a', 'n', ' ', 'n', 'e', ' ', 'g', 'e', 'r', 'i', 'z', 'e', 'k', 'a', 'l', 'ı', '<|Noun|>', '<|A2pl|>', ' ', 'l', 'a', 'n', ' ', 'y', 'i', 'n', 'e', ' ', 's', 'i', 'n', 'i', 'r', 'l', 'e', 'n', '<|Verb|>', '<|Past|>', '<|A1sg|>']
 --------------------------------------------------------------------------------
-Failure #2 (Excel Row 68):
-  Original:  'Ya koysana şu tolgayı yeter artık çıldıracağım kafayı yiyorum'
-  Decoded:   'Ya koy şu tolgayı yeter artık çıldıracağım kafayı yiyorum'
-  Tokens:    ['Y', 'a', ' ', 'k', 'o', 'y', '<|Verb|>', '<|A2sg|>', ' ', 'ş', 'u', ' ', 't', 'o', 'l', 'g', 'a', 'y', '<|Noun|>', '<|Acc|>', ' ', 'y', 'e', 't', 'e', 'r', ' ', 'a', 'r', 't', 'ı', 'k', ' ', 'ç', 'ı', 'l', 'd', 'ı', 'r', '<|Verb|>', '<|Fut|>', '<|A1sg|>', ' ', 'k', 'a', 'f', 'a', '<|Noun|>', '<|Acc|>', ' ', 'y', 'i', 'y', 'o', 'r', 'u', 'm']
---------------------------------------------------------------------------------
-Failure #3 (Excel Row 143):
-  Original:  'Özür dilenince daha çok sinirleniyorum değiştirmiyor bir şeyi anlasanıza özür dilenecek şeyler yapmayın en basiti'
-  Decoded:   'Özür dilenince daha çok sinirleniyorum değiştirmiyor bir şeyi anlayın özür dilenecek şeyler yapmayın en basiti'
-  Tokens:    ['Ö', 'z', 'ü', 'r', ' ', 'd', 'i', 'l', 'e', 'n', '<|Verb|>', '<|When|>', ' ', 'd', 'a', 'h', 'a', ' ', 'ç', 'o', 'k', ' ', 's', 'i', 'n', 'i', 'r', 'l', 'e', 'n', '<|Verb|>', '<|Prog1|>', '<|A1sg|>', ' ', 'd', 'e', 'ğ', 'i', 'ş', '<|Verb|>', '<|Caus|>', '<|Neg|>', '<|Prog1|>', ' ', 'b', 'i', 'r', ' ', 'ş', 'e', 'y', '<|Noun|>', '<|Acc|>', ' ', 'a', 'n', 'l', 'a', '<|Verb|>', '<|A2pl|>', ' ', 'ö', 'z', 'ü', 'r', ' ', 'd', 'i', 'l', 'e', 'n', '<|Verb|>', '<|Fut|>', ' ', 'ş', 'e', 'y', '<|Noun|>', '<|A3pl|>', ' ', 'y', 'a', 'p', '<|Verb|>', '<|Neg|>', '<|A2pl|>', ' ', 'e', 'n', ' ', 'b', 'a', 's', 'i', 't', '<|Noun|>', '<|Acc|>']
---------------------------------------------------------------------------------
-Failure #4 (Excel Row 158):
-  Original:  'Benimle ilgili yorum yapan saçma sapan insanlara hayatımı açıp baksana sen neresindesin diye göstermek istiyorum.'
-  Decoded:   'Benimle ilgili yorum yapan saçma sapan insanlara hayatımı açıp bak sen neresindesin diye göstermek istiyorum.'
-  Tokens:    ['B', 'e', 'n', '<|Noun|>', '<|P1sg|>', '<|Ins|>', ' ', 'i', 'l', 'g', 'i', 'l', 'i', ' ', 'y', 'o', 'r', 'u', 'm', ' ', 'y', 'a', 'p', '<|Verb|>', '<|PresPart|>', ' ', 's', 'a', 'ç', 'm', 'a', ' ', 's', 'a', 'p', 'a', 'n', ' ', 'i', 'n', 's', 'a', 'n', '<|Noun|>', '<|A3pl|>', '<|Dat|>', ' ', 'h', 'a', 'y', 'a', 't', '<|Noun|>', '<|P1sg|>', '<|Acc|>', ' ', 'a', 'ç', '<|Verb|>', '<|AfterDoingSo|>', ' ', 'b', 'a', 'k', '<|Verb|>', '<|A2sg|>', ' ', 's', 'e', 'n', ' ', 'n', 'e', 'r', 'e', '<|Noun|>', '<|P3sg|>', '<|Loc|>', '<|A2sg|>', ' ', 'd', 'i', 'y', 'e', ' ', 'g', 'ö', 's', 't', 'e', 'r', '<|Verb|>', '<|Inf1|>', ' ', 'i', 's', 't', 'e', '<|Verb|>', '<|Prog1|>', '<|A1sg|>', '.']
---------------------------------------------------------------------------------
-Failure #5 (Excel Row 183):
+Failure #2 (Excel Row 183):
   Original:  'ne olur dışarda tanımadığınız insanlarla senli benli konuşmayın kafayı yiyeceğim böyle ayılıklar görmek istemiyorum artık'
   Decoded:   'ne olur dışarıda tanımadığınız insanlarla senli benli konuşmayın kafayı yiyeceğim böyle ayılıklar görmek istemiyorum artık'
   Tokens:    ['n', 'e', ' ', 'o', 'l', '<|Verb|>', '<|Aor|>', ' ', 'd', 'ı', 'ş', 'a', 'r', 'ı', '<|Noun|>', '<|Loc|>', ' ', 't', 'a', 'n', 'ı', '<|Verb|>', '<|Neg|>', '<|PastPart|>', '<|P2pl|>', ' ', 'i', 'n', 's', 'a', 'n', '<|Noun|>', '<|A3pl|>', '<|Ins|>', ' ', 's', 'e', 'n', '<|Noun|>', '<|With|>', ' ', 'b', 'e', 'n', '<|Noun|>', '<|With|>', ' ', 'k', 'o', 'n', 'u', 'ş', '<|Verb|>', '<|Neg|>', '<|A2pl|>', ' ', 'k', 'a', 'f', 'a', '<|Noun|>', '<|Acc|>', ' ', 'y', 'i', 'y', 'e', 'c', 'e', 'k', '<|Noun|>', '<|P1sg|>', ' ', 'b', 'ö', 'y', 'l', 'e', ' ', 'a', 'y', 'ı', '<|Noun|>', '<|Ness|>', '<|A3pl|>', ' ', 'g', 'ö', 'r', '<|Verb|>', '<|Inf1|>', ' ', 'i', 's', 't', 'e', '<|Verb|>', '<|Neg|>', '<|Prog1|>', '<|A1sg|>', ' ', 'a', 'r', 't', 'ı', 'k']
 --------------------------------------------------------------------------------
-Failure #6 (Excel Row 221):
+Failure #3 (Excel Row 221):
   Original:  'Emeğe saygı göstermek bu kadar zor olmamalı! Paylaşmayın, izle filmini defol git!!'
   Decoded:   'Emeke saygı göstermek bu kadar zor olmamalı! Paylaşmayın, izle filmini defol git!!'
   Tokens:    ['E', 'm', 'e', 'k', '<|Noun|>', '<|Dat|>', ' ', 's', 'a', 'y', 'g', 'ı', ' ', 'g', 'ö', 's', 't', 'e', 'r', '<|Verb|>', '<|Inf1|>', ' ', 'b', 'u', ' ', 'k', 'a', 'd', 'a', 'r', ' ', 'z', 'o', 'r', ' ', 'o', 'l', '<|Verb|>', '<|Neg|>', '<|Neces|>', '!', ' ', 'P', 'a', 'y', 'l', 'a', 'ş', '<|Verb|>', '<|Neg|>', '<|A2pl|>', ',', ' ', 'i', 'z', 'l', 'e', ' ', 'f', 'i', 'l', 'm', '<|Noun|>', '<|P2sg|>', '<|Acc|>', ' ', 'd', 'e', 'f', 'o', 'l', ' ', 'g', 'i', 't', '!', '!']
 --------------------------------------------------------------------------------
-Failure #7 (Excel Row 255):
+Failure #4 (Excel Row 255):
   Original:  'Gecenin saat 3ü sen yüksek seale gazap mı dinliyorsun küfür edeceğim'
   Decoded:   "Gecenin saat 3'ü sen yüksek seale gazap mı dinliyorsun küfür edeceğim"
   Tokens:    ['G', 'e', 'c', 'e', '<|Noun|>', '<|Gen|>', ' ', 's', 'a', 'a', 't', ' ', '3', '<|Noun|>', '<|Acc|>', ' ', 's', 'e', 'n', ' ', 'y', 'ü', 'k', 's', 'e', 'k', ' ', 's', 'e', 'a', 'l', 'e', ' ', 'g', 'a', 'z', 'a', 'p', ' ', 'm', 'ı', ' ', 'd', 'i', 'n', 'l', 'e', '<|Verb|>', '<|Prog1|>', '<|A2sg|>', ' ', 'k', 'ü', 'f', 'ü', 'r', ' ', 'e', 't', '<|Verb|>', '<|Fut|>', '<|A1sg|>']
 --------------------------------------------------------------------------------
-Failure #8 (Excel Row 312):
+Failure #5 (Excel Row 312):
   Original:  'beni seninle muhattap eden hayatın vizyonsuzluğuna da baya bir kızgınım.'
   Decoded:   'beni senle muhattap eden hayatın vizyonsuzluğuna da baya bir kızgınım.'
   Tokens:    ['b', 'e', 'n', '<|Noun|>', '<|Acc|>', ' ', 's', 'e', 'n', '<|Noun|>', '<|Ins|>', ' ', 'm', 'u', 'h', 'a', 't', 't', 'a', 'p', ' ', 'e', 'd', 'e', '<|Noun|>', '<|P2sg|>', ' ', 'h', 'a', 'y', 'a', 't', '<|Noun|>', '<|Gen|>', ' ', 'v', 'i', 'z', 'y', 'o', 'n', '<|Noun|>', '<|Without|>', '<|Ness|>', '<|P2sg|>', '<|Dat|>', ' ', 'd', 'a', ' ', 'b', 'a', 'y', '<|Verb|>', '<|Opt|>', ' ', 'b', 'i', 'r', ' ', 'k', 'ı', 'z', 'g', 'ı', 'n', '<|Noun|>', '<|A1sg|>', '.']
 --------------------------------------------------------------------------------
-Failure #9 (Excel Row 374):
+Failure #6 (Excel Row 374):
   Original:  'medenicinin dersindeki ses kaydını dinliyorum adam o kadar yavaş konuşuyor ki vallahi kafayı koyup uyucam şimdi çok kızgınım'
   Decoded:   'medenicinin dersindeki ses kayıtını dinliyorum adam o kadar yavaş konuşuyor ki vallahi kafayı koyup uyucam şimdi çok kızgınım'
   Tokens:    ['m', 'e', 'd', 'e', 'n', 'i', 'c', 'i', 'n', 'i', 'n', ' ', 'd', 'e', 'r', 's', '<|Noun|>', '<|P2sg|>', '<|Loc|>', '<|Rel|>', ' ', 's', 'e', 's', ' ', 'k', 'a', 'y', 'ı', 't', '<|Noun|>', '<|P2sg|>', '<|Acc|>', ' ', 'd', 'i', 'n', 'l', 'e', '<|Verb|>', '<|Prog1|>', '<|A1sg|>', ' ', 'a', 'd', 'a', 'm', ' ', 'o', ' ', 'k', 'a', 'd', 'a', 'r', ' ', 'y', 'a', 'v', 'a', 'ş', ' ', 'k', 'o', 'n', 'u', 'ş', '<|Verb|>', '<|Prog1|>', ' ', 'k', 'i', ' ', 'v', 'a', 'l', 'l', 'a', 'h', 'i', ' ', 'k', 'a', 'f', 'a', '<|Noun|>', '<|Acc|>', ' ', 'k', 'o', 'y', '<|Verb|>', '<|AfterDoingSo|>', ' ', 'u', 'y', 'u', 'c', 'a', 'm', ' ', 'ş', 'i', 'm', 'd', 'i', ' ', 'ç', 'o', 'k', ' ', 'k', 'ı', 'z', 'g', 'ı', 'n', '<|Noun|>', '<|A1sg|>']
 --------------------------------------------------------------------------------
-Failure #10 (Excel Row 379):
+Failure #7 (Excel Row 379):
   Original:  'Beni seninle muhattap eden hayatın vizyonsuzluğunada baya bir kızgınım.'
   Decoded:   'Beni senle muhattap eden hayatın vizyonsuzluğunada baya bir kızgınım.'
   Tokens:    ['B', 'e', 'n', '<|Noun|>', '<|Acc|>', ' ', 's', 'e', 'n', '<|Noun|>', '<|Ins|>', ' ', 'm', 'u', 'h', 'a', 't', 't', 'a', 'p', ' ', 'e', 'd', 'e', '<|Noun|>', '<|P2sg|>', ' ', 'h', 'a', 'y', 'a', 't', '<|Noun|>', '<|Gen|>', ' ', 'v', 'i', 'z', 'y', 'o', 'n', 's', 'u', 'z', 'l', 'u', 'ğ', 'u', 'n', 'a', 'd', 'a', ' ', 'b', 'a', 'y', '<|Verb|>', '<|Opt|>', ' ', 'b', 'i', 'r', ' ', 'k', 'ı', 'z', 'g', 'ı', 'n', '<|Noun|>', '<|A1sg|>', '.']
 --------------------------------------------------------------------------------
-Failure #11 (Excel Row 429):
+Failure #8 (Excel Row 429):
   Original:  'Seninle yaşamak isteyipte yaşayamadığım her şey için bu hayata ayrı ayrı kızgınım'
   Decoded:   'Senle yaşamak isteyipte yaşayamadığım her şey için bu hayata ayrı ayrı kızgınım'
   Tokens:    ['S', 'e', 'n', '<|Noun|>', '<|Ins|>', ' ', 'y', 'a', 'ş', 'a', '<|Verb|>', '<|Inf1|>', ' ', 'i', 's', 't', 'e', 'y', 'i', 'p', 't', 'e', ' ', 'y', 'a', 'ş', 'a', '<|Verb|>', '<|Unable|>', '<|PastPart|>', '<|P1sg|>', ' ', 'h', 'e', 'r', ' ', 'ş', 'e', 'y', ' ', 'i', 'ç', 'i', 'n', ' ', 'b', 'u', ' ', 'h', 'a', 'y', 'a', 't', '<|Noun|>', '<|Dat|>', ' ', 'a', 'y', 'r', 'ı', ' ', 'a', 'y', 'r', 'ı', ' ', 'k', 'ı', 'z', 'g', 'ı', 'n', '<|Noun|>', '<|A1sg|>']
 --------------------------------------------------------------------------------
-Failure #12 (Excel Row 431):
+Failure #9 (Excel Row 431):
   Original:  'Varlığına çok alıştığım bir yaranın iyileşmesine kızgınım'
   Decoded:   'Varlıkına çok alıştığım bir yaranın iyileşmesine kızgınım'
   Tokens:    ['V', 'a', 'r', 'l', 'ı', 'k', '<|Noun|>', '<|P2sg|>', '<|Dat|>', ' ', 'ç', 'o', 'k', ' ', 'a', 'l', 'ı', 'ş', '<|Verb|>', '<|PastPart|>', '<|P1sg|>', ' ', 'b', 'i', 'r', ' ', 'y', 'a', 'r', 'a', 'n', '<|Verb|>', '<|A2pl|>', ' ', 'i', 'y', 'i', '<|Noun|>', '<|Become|>', '<|Inf2|>', '<|P3sg|>', '<|Dat|>', ' ', 'k', 'ı', 'z', 'g', 'ı', 'n', '<|Noun|>', '<|A1sg|>']
 --------------------------------------------------------------------------------
-Failure #13 (Excel Row 553):
+Failure #10 (Excel Row 553):
   Original:  'Kardeşim 300 liraya nerf almış olum mal mısın ya'
   Decoded:   'Kardeşim 300 liraya nerf almış onlum mal mısın ya'
   Tokens:    ['K', 'a', 'r', 'd', 'e', 'ş', '<|Noun|>', '<|P1sg|>', ' ', '3', '0', '0', ' ', 'l', 'i', 'r', 'a', '<|Noun|>', '<|Dat|>', ' ', 'n', 'e', 'r', 'f', ' ', 'a', 'l', '<|Verb|>', '<|NarrPart|>', ' ', 'o', '<|Noun|>', '<|With|>', '<|P1sg|>', ' ', 'm', 'a', 'l', ' ', 'm', 'ı', '<|Noun|>', '<|A2sg|>', ' ', 'y', 'a']
 --------------------------------------------------------------------------------
-Failure #14 (Excel Row 604):
-  Original:  'Ateş uyusana mal mısın'
-  Decoded:   'Ateş uyu mal mısın'
-  Tokens:    ['A', 't', 'e', 'ş', ' ', 'u', 'y', 'u', '<|Verb|>', '<|A2sg|>', ' ', 'm', 'a', 'l', ' ', 'm', 'ı', '<|Noun|>', '<|A2sg|>']
---------------------------------------------------------------------------------
-Failure #15 (Excel Row 728):
+Failure #11 (Excel Row 728):
   Original:  '18imizi doldurmadık diye insan yerine konmuyoruz çok sinirlendim'
   Decoded:   "18'imizi doldurmadık diye insan yerine konmuyoruz çok sinirlendim"
   Tokens:    ['1', '8', '<|Noun|>', '<|P1pl|>', '<|Acc|>', ' ', 'd', 'o', 'l', 'd', 'u', 'r', '<|Verb|>', '<|Neg|>', '<|Past|>', '<|A1pl|>', ' ', 'd', 'i', 'y', 'e', ' ', 'i', 'n', 's', 'a', 'n', ' ', 'y', 'e', 'r', 'i', 'n', 'e', ' ', 'k', 'o', 'n', '<|Verb|>', '<|Neg|>', '<|Prog1|>', '<|A1pl|>', ' ', 'ç', 'o', 'k', ' ', 's', 'i', 'n', 'i', 'r', 'l', 'e', 'n', '<|Verb|>', '<|Past|>', '<|A1sg|>']
 --------------------------------------------------------------------------------
-Failure #16 (Excel Row 798):
-  Original:  'Beklenen anlardan nefret ediyorum doğaçlama takılsanıza'
-  Decoded:   'Beklenen anlardan nefret ediyorum doğaçlama takılın'
-  Tokens:    ['B', 'e', 'k', 'l', 'e', '<|Verb|>', '<|Pass|>', '<|PresPart|>', ' ', 'a', 'n', '<|Noun|>', '<|A3pl|>', '<|Abl|>', ' ', 'n', 'e', 'f', 'r', 'e', 't', ' ', 'e', 't', '<|Verb|>', '<|Prog1|>', '<|A1sg|>', ' ', 'd', 'o', 'ğ', 'a', 'ç', 'l', 'a', 'm', 'a', ' ', 't', 'a', 'k', 'ı', 'l', '<|Verb|>', '<|A2pl|>']
---------------------------------------------------------------------------------
-Failure #17 (Excel Row 803):
+Failure #12 (Excel Row 803):
   Original:  'Rezil bir rüya gördüm ve bugün 19u. Biraz ürktüm... '
   Decoded:   "Rezil bir rüya gördüm ve bugün 19'u. Biraz ürktüm... "
   Tokens:    ['R', 'e', 'z', 'i', 'l', ' ', 'b', 'i', 'r', ' ', 'r', 'ü', 'y', 'a', ' ', 'g', 'ö', 'r', 'd', 'ü', 'm', ' ', 'v', 'e', ' ', 'b', 'u', 'g', 'ü', 'n', ' ', '1', '9', '<|Noun|>', '<|Acc|>', '.', ' ', 'B', 'i', 'r', 'a', 'z', ' ', 'ü', 'r', 'k', '<|Verb|>', '<|Past|>', '<|A1sg|>', '.', '.', '.', ' ']
 --------------------------------------------------------------------------------
-Failure #18 (Excel Row 816):
+Failure #13 (Excel Row 816):
   Original:  'Temmuz Ayındaki Dolu Yağışında Yolculuk Yapan Uçağın Korku Dolu Anları '
   Decoded:   'Temmuz Ayındaki Dolu Yağışında Yolculuk Yapan Uçakın Korku Dolu Anları '
   Tokens:    ['T', 'e', 'm', 'm', 'u', 'z', ' ', 'A', 'y', 'ı', 'n', '<|Noun|>', '<|Loc|>', '<|Rel|>', ' ', 'D', 'o', 'l', 'u', ' ', 'Y', 'a', 'ğ', '<|Verb|>', '<|Inf3|>', '<|P2sg|>', '<|Loc|>', ' ', 'Y', 'o', 'l', 'c', 'u', '<|Noun|>', '<|Ness|>', ' ', 'Y', 'a', 'p', '<|Verb|>', '<|PresPart|>', ' ', 'U', 'ç', 'a', 'k', '<|Noun|>', '<|Gen|>', ' ', 'K', 'o', 'r', 'k', 'u', ' ', 'D', 'o', 'l', 'u', ' ', 'A', 'n', '<|Noun|>', '<|P3pl|>', ' ']
 --------------------------------------------------------------------------------
-Failure #19 (Excel Row 819):
+Failure #14 (Excel Row 819):
   Original:  'Az önce 60tl harcadım şimdi atmde sıra bekliyorum korkuyorum'
   Decoded:   'Az önce 60tl harcadım şimdi atmda sıra bekliyorum korkuyorum'
   Tokens:    ['A', 'z', ' ', 'ö', 'n', 'c', 'e', ' ', '6', '0', 't', 'l', ' ', 'h', 'a', 'r', 'c', 'a', '<|Verb|>', '<|Past|>', '<|A1sg|>', ' ', 'ş', 'i', 'm', 'd', 'i', ' ', 'a', 't', 'm', '<|Noun|>', '<|Loc|>', ' ', 's', 'ı', 'r', 'a', ' ', 'b', 'e', 'k', 'l', 'e', '<|Verb|>', '<|Prog1|>', '<|A1sg|>', ' ', 'k', 'o', 'r', 'k', '<|Verb|>', '<|Prog1|>', '<|A1sg|>']
 --------------------------------------------------------------------------------
-Failure #20 (Excel Row 869):
-  Original:  'Korkuyorum, belki yarın geç olur? Geleceksen eğer bir gün önce gelsene... '
-  Decoded:   'Korkuyorum, belki yarın geç olur? Geleceksen eğer bir gün önce gel... '
-  Tokens:    ['K', 'o', 'r', 'k', '<|Verb|>', '<|Prog1|>', '<|A1sg|>', ',', ' ', 'b', 'e', 'l', 'k', 'i', ' ', 'y', 'a', 'r', 'ı', 'n', ' ', 'g', 'e', 'ç', ' ', 'o', 'l', '<|Verb|>', '<|Aor|>', '?', ' ', 'G', 'e', 'l', 'e', 'c', 'e', 'k', '<|Noun|>', '<|Cond|>', '<|A2sg|>', ' ', 'e', 'ğ', 'e', 'r', ' ', 'b', 'i', 'r', ' ', 'g', 'ü', 'n', ' ', 'ö', 'n', 'c', 'e', ' ', 'g', 'e', 'l', '<|Verb|>', '<|A2sg|>', '.', '.', '.', ' ']
---------------------------------------------------------------------------------
-Failure #21 (Excel Row 906):
+Failure #15 (Excel Row 906):
   Original:  'Bu vahşet seninle birbirimizden nefret edelim diye Korku aklımızı öfke vicdanımızı körleştirsin diye Bunu ancak biz durdurabiliriz '
   Decoded:   'Bu vahşet senle birbirimizden nefret edelim diye Korku aklımızı öfke vicdanımızı körleştirsin diye Bunu ancak biz durdurabiliriz '
   Tokens:    ['B', 'u', ' ', 'v', 'a', 'h', 'ş', 'e', 't', ' ', 's', 'e', 'n', '<|Noun|>', '<|Ins|>', ' ', 'b', 'i', 'r', 'b', 'i', 'r', 'i', '<|Noun|>', '<|P1pl|>', '<|Abl|>', ' ', 'n', 'e', 'f', 'r', 'e', 't', ' ', 'e', 'd', 'e', '<|Noun|>', '<|With|>', '<|P1sg|>', ' ', 'd', 'i', 'y', 'e', ' ', 'K', 'o', 'r', 'k', 'u', ' ', 'a', 'k', 'ı', 'l', '<|Noun|>', '<|P1pl|>', '<|Acc|>', ' ', 'ö', 'f', 'k', 'e', ' ', 'v', 'i', 'c', 'd', 'a', 'n', '<|Noun|>', '<|P1pl|>', '<|Acc|>', ' ', 'k', 'ö', 'r', '<|Noun|>', '<|Become|>', '<|Caus|>', '<|A3sg|>', ' ', 'd', 'i', 'y', 'e', ' ', 'B', 'u', 'n', '<|Noun|>', '<|Acc|>', ' ', 'a', 'n', 'c', 'a', 'k', ' ', 'b', 'i', 'z', ' ', 'd', 'u', 'r', 'd', 'u', 'r', '<|Verb|>', '<|Able|>', '<|Aor|>', '<|A1pl|>', ' ']
 --------------------------------------------------------------------------------
-Failure #22 (Excel Row 1090):
-  Original:  'Korkunç baksanıza bunlar adamı öper '
-  Decoded:   'Korkunç bakın bunlar adamı öper '
-  Tokens:    ['K', 'o', 'r', 'k', 'u', 'n', 'ç', ' ', 'b', 'a', 'k', '<|Verb|>', '<|A2pl|>', ' ', 'b', 'u', 'n', '<|Noun|>', '<|A3pl|>', ' ', 'a', 'd', 'a', 'm', 'ı', ' ', 'ö', 'p', '<|Verb|>', '<|Aor|>', ' ']
---------------------------------------------------------------------------------
-Failure #23 (Excel Row 1102):
-  Original:  'Düşünsenize üniversiteyi kocaelinde okuyorsunuz ay kabus gibi'
-  Decoded:   'Düşünün üniversiteyi kocaelinde okuyorsunuz ay kabus gibi'
-  Tokens:    ['D', 'ü', 'ş', 'ü', 'n', '<|Verb|>', '<|A2pl|>', ' ', 'ü', 'n', 'i', 'v', 'e', 'r', 's', 'i', 't', 'e', '<|Noun|>', '<|Acc|>', ' ', 'k', 'o', 'c', 'a', 'e', 'l', 'i', '<|Noun|>', '<|P2sg|>', '<|Loc|>', ' ', 'o', 'k', 'u', '<|Verb|>', '<|Prog1|>', '<|A2pl|>', ' ', 'a', 'y', ' ', 'k', 'a', 'b', 'u', 's', ' ', 'g', 'i', 'b', 'i']
---------------------------------------------------------------------------------
-Failure #24 (Excel Row 1114):
-  Original:  'Buradaki korkunç durum şu ki azılı bir kafir dahi mizanda bu sapkın dinin islam olmadığına şehadet edecek Ne rezil bir durum düşünsenize'
-  Decoded:   'Buradaki korkunç durum şu ki azılı bir kafir dahi mizanda bu sapkın dinin islam olmadığına şehadet edecek Ne rezil bir durum düşünün'
-  Tokens:    ['B', 'u', 'r', 'a', '<|Noun|>', '<|Loc|>', '<|Rel|>', ' ', 'k', 'o', 'r', 'k', 'u', 'n', 'ç', ' ', 'd', 'u', 'r', 'u', 'm', ' ', 'ş', 'u', ' ', 'k', 'i', ' ', 'a', 'z', 'ı', '<|Noun|>', '<|With|>', ' ', 'b', 'i', 'r', ' ', 'k', 'a', 'f', 'i', 'r', ' ', 'd', 'a', 'h', 'i', ' ', 'm', 'i', 'z', 'a', 'n', '<|Noun|>', '<|Loc|>', ' ', 'b', 'u', ' ', 's', 'a', 'p', 'k', 'ı', 'n', ' ', 'd', 'i', 'n', '<|Verb|>', '<|A2pl|>', ' ', 'i', 's', 'l', 'a', 'm', ' ', 'o', 'l', 'm', 'a', 'd', 'ı', 'k', '<|Noun|>', '<|P2sg|>', '<|Dat|>', ' ', 'ş', 'e', 'h', 'a', 'd', 'e', 't', ' ', 'e', 't', '<|Verb|>', '<|Fut|>', ' ', 'N', 'e', ' ', 'r', 'e', 'z', 'i', 'l', ' ', 'b', 'i', 'r', ' ', 'd', 'u', 'r', 'u', 'm', ' ', 'd', 'ü', 'ş', 'ü', 'n', '<|Verb|>', '<|A2pl|>']
---------------------------------------------------------------------------------
-Failure #25 (Excel Row 1142):
+Failure #16 (Excel Row 1142):
   Original:  'Şu an dışardan korkutucu sesler geliyor sanki kıyamet'
   Decoded:   'Şu an dışarıdan korkutucu sesler geliyor sanki kıyamet'
   Tokens:    ['Ş', 'u', ' ', 'a', 'n', ' ', 'd', 'ı', 'ş', 'a', 'r', 'ı', '<|Noun|>', '<|Abl|>', ' ', 'k', 'o', 'r', 'k', 'u', 't', '<|Verb|>', '<|Agt|>', ' ', 's', 'e', 's', 'l', 'e', '<|Verb|>', '<|Aor|>', ' ', 'g', 'e', 'l', '<|Verb|>', '<|Prog1|>', ' ', 's', 'a', 'n', 'k', 'i', ' ', 'k', 'ı', 'y', 'a', 'm', 'e', 't']
 --------------------------------------------------------------------------------
-Failure #26 (Excel Row 1219):
+Failure #17 (Excel Row 1219):
   Original:  "birazdan İstanbul'da kıyamet kopacak bu nasıl bir havadır korku filmi gibi"
   Decoded:   'birazdan İstanbulda kıyamet kopacak bu nasıl bir havadır korku filmi gibi'
   Tokens:    ['b', 'i', 'r', 'a', 'z', 'd', 'a', 'n', ' ', 'İ', 's', 't', 'a', 'n', 'b', 'u', 'l', '<|NamedEntity|>', '<|Loc|>', ' ', 'k', 'ı', 'y', 'a', 'm', 'e', 't', ' ', 'k', 'o', 'p', '<|Verb|>', '<|Fut|>', ' ', 'b', 'u', ' ', 'n', 'a', 's', 'ı', 'l', ' ', 'b', 'i', 'r', ' ', 'h', 'a', 'v', 'a', '<|Noun|>', '<|Cop|>', ' ', 'k', 'o', 'r', 'k', 'u', ' ', 'f', 'i', 'l', 'm', '<|Noun|>', '<|Acc|>', ' ', 'g', 'i', 'b', 'i']
 --------------------------------------------------------------------------------
-Failure #27 (Excel Row 1256):
+Failure #18 (Excel Row 1256):
   Original:  "İzmir'de facia; 2 kardeş ölü bulundu "
   Decoded:   'İzmirde facia; 2 kardeş ölü bulundu '
   Tokens:    ['İ', 'z', 'm', 'i', 'r', '<|NamedEntity|>', '<|Loc|>', ' ', 'f', 'a', 'c', 'i', 'a', ';', ' ', '2', ' ', 'k', 'a', 'r', 'd', 'e', 'ş', ' ', 'ö', 'l', 'ü', ' ', 'b', 'u', 'l', 'u', 'n', '<|Verb|>', '<|Past|>', ' ']
 --------------------------------------------------------------------------------
-Failure #28 (Excel Row 1287):
+Failure #19 (Excel Row 1287):
   Original:  'Rezil bir rüya gördüm ve bugün 19u. Biraz ürktüm...'
   Decoded:   "Rezil bir rüya gördüm ve bugün 19'u. Biraz ürktüm..."
   Tokens:    ['R', 'e', 'z', 'i', 'l', ' ', 'b', 'i', 'r', ' ', 'r', 'ü', 'y', 'a', ' ', 'g', 'ö', 'r', 'd', 'ü', 'm', ' ', 'v', 'e', ' ', 'b', 'u', 'g', 'ü', 'n', ' ', '1', '9', '<|Noun|>', '<|Acc|>', '.', ' ', 'B', 'i', 'r', 'a', 'z', ' ', 'ü', 'r', 'k', '<|Verb|>', '<|Past|>', '<|A1sg|>', '.', '.', '.']
 --------------------------------------------------------------------------------
-Failure #29 (Excel Row 1377):
+Failure #20 (Excel Row 1377):
   Original:  "Bunca patlama ve kan revanın ardından böylesi bir yağmurun İstanbul'u yıkaması çok ürkütücü değil mi? Yeryüzü hiç durma ölüyor ve diriliyor."
   Decoded:   'Bunca patlama ve kan revanın ardından böylesi bir yağmurun İstanbulu yıkaması çok ürkütücü değil mi? Yeryüzü hiç durma ölüyor ve diriliyor.'
   Tokens:    ['B', 'u', 'n', 'c', 'a', ' ', 'p', 'a', 't', 'l', 'a', '<|Verb|>', '<|Neg|>', ' ', 'v', 'e', ' ', 'k', 'a', 'n', ' ', 'r', 'e', 'v', 'a', 'n', '<|Noun|>', '<|Gen|>', ' ', 'a', 'r', 'd', 'ı', 'n', 'd', 'a', 'n', ' ', 'b', 'ö', 'y', 'l', 'e', '<|Noun|>', '<|P3sg|>', ' ', 'b', 'i', 'r', ' ', 'y', 'a', 'ğ', 'm', 'u', 'r', '<|Noun|>', '<|Gen|>', ' ', 'İ', 's', 't', 'a', 'n', 'b', 'u', 'l', '<|NamedEntity|>', '<|Acc|>', ' ', 'y', 'ı', 'k', 'a', '<|Verb|>', '<|Inf2|>', '<|P3sg|>', ' ', 'ç', 'o', 'k', ' ', 'ü', 'r', 'k', 'ü', 't', '<|Verb|>', '<|Agt|>', ' ', 'd', 'e', 'ğ', 'i', 'l', ' ', 'm', 'i', '?', ' ', 'Y', 'e', 'r', 'y', 'ü', 'z', 'ü', ' ', 'h', 'i', 'ç', ' ', 'd', 'u', 'r', '<|Verb|>', '<|Neg|>', ' ', 'ö', 'l', '<|Verb|>', '<|Prog1|>', ' ', 'v', 'e', ' ', 'd', 'i', 'r', 'i', 'l', '<|Verb|>', '<|Prog1|>', '.']
 --------------------------------------------------------------------------------
-Failure #30 (Excel Row 1380):
-  Original:  'whatsap konusmalarindan ss aldığında bildirim filan gittiğini düşünsene.. ben bir irkildim.'
-  Decoded:   'whatsap konusmalarindan ss aldığında bildirim filan gittiğini düşün.. ben bir irkildim.'
-  Tokens:    ['w', 'h', 'a', 't', 's', 'a', 'p', ' ', 'k', 'o', 'n', 'u', 's', 'm', 'a', 'l', 'a', 'r', 'i', 'n', 'd', 'a', 'n', ' ', 's', 's', ' ', 'a', 'l', '<|Verb|>', '<|PastPart|>', '<|P2sg|>', '<|Loc|>', ' ', 'b', 'i', 'l', 'd', 'i', 'r', 'i', 'm', ' ', 'f', 'i', 'l', 'a', 'n', ' ', 'g', 'i', 't', '<|Verb|>', '<|PastPart|>', '<|P2sg|>', '<|Acc|>', ' ', 'd', 'ü', 'ş', 'ü', 'n', '<|Verb|>', '<|A2sg|>', '.', '.', ' ', 'b', 'e', 'n', ' ', 'b', 'i', 'r', ' ', 'i', 'r', 'k', 'i', 'l', '<|Verb|>', '<|Past|>', '<|A1sg|>', '.']
---------------------------------------------------------------------------------
-Failure #31 (Excel Row 1498):
+Failure #21 (Excel Row 1498):
   Original:  "Nişantaşı'ndaki yakışıklı cennetinden sonra İstiklal'deki çirkinler, kabus gibi çöktü gözlerime. Bu ne gudubetlik."
   Decoded:   "Nişantaşı'ndaki yakışıklı cennetinden sonra İstiklal'daki çirkinler, kabus gibi çöktü gözlerime. Bu ne gudubetlik."
   Tokens:    ['N', 'i', 'ş', 'a', 'n', 't', 'a', 'ş', 'ı', '<|NamedEntity|>', '<|P2sg|>', '<|Loc|>', '<|Rel|>', ' ', 'y', 'a', 'k', 'ı', 'ş', 'ı', 'k', 'l', 'ı', ' ', 'c', 'e', 'n', 'n', 'e', 't', '<|Noun|>', '<|P2sg|>', '<|Abl|>', ' ', 's', 'o', 'n', 'r', 'a', ' ', 'İ', 's', 't', 'i', 'k', 'l', 'a', 'l', '<|NamedEntity|>', '<|Loc|>', '<|Rel|>', ' ', 'ç', 'i', 'r', 'k', 'i', 'n', '<|Noun|>', '<|A3pl|>', ',', ' ', 'k', 'a', 'b', 'u', 's', ' ', 'g', 'i', 'b', 'i', ' ', 'ç', 'ö', 'k', '<|Verb|>', '<|Past|>', ' ', 'g', 'ö', 'z', '<|Noun|>', '<|A3pl|>', '<|P1sg|>', '<|Dat|>', '.', ' ', 'B', 'u', ' ', 'n', 'e', ' ', 'g', 'u', 'd', 'u', 'b', 'e', 't', '<|Noun|>', '<|Ness|>', '.']
 --------------------------------------------------------------------------------
-Failure #32 (Excel Row 1515):
+Failure #22 (Excel Row 1515):
   Original:  'Konağa gitsin bence artık birşey olacak diye korkuyorum ya'
   Decoded:   'Konaka gitsin bence artık birşey olacak diye korkuyorum ya'
   Tokens:    ['K', 'o', 'n', 'a', 'k', '<|Noun|>', '<|Dat|>', ' ', 'g', 'i', 't', '<|Verb|>', '<|A3sg|>', ' ', 'b', 'e', 'n', 'c', 'e', ' ', 'a', 'r', 't', 'ı', 'k', ' ', 'b', 'i', 'r', 'ş', 'e', 'y', ' ', 'o', 'l', '<|Verb|>', '<|Fut|>', ' ', 'd', 'i', 'y', 'e', ' ', 'k', 'o', 'r', 'k', '<|Verb|>', '<|Prog1|>', '<|A1sg|>', ' ', 'y', 'a']
 --------------------------------------------------------------------------------
-Failure #33 (Excel Row 1521):
+Failure #23 (Excel Row 1521):
   Original:  "İzmir'de okulun kazan dairesinde patlama: 1 ölü"
   Decoded:   'İzmirde okulun kazan dairesinde patlama: 1 ölü'
   Tokens:    ['İ', 'z', 'm', 'i', 'r', '<|NamedEntity|>', '<|Loc|>', ' ', 'o', 'k', 'u', 'l', '<|Noun|>', '<|Gen|>', ' ', 'k', 'a', 'z', 'a', 'n', ' ', 'd', 'a', 'i', 'r', 'e', '<|Noun|>', '<|P3sg|>', '<|Loc|>', ' ', 'p', 'a', 't', 'l', 'a', '<|Verb|>', '<|Neg|>', ':', ' ', '1', ' ', 'ö', 'l', 'ü']
 --------------------------------------------------------------------------------
-Failure #34 (Excel Row 1568):
+Failure #24 (Excel Row 1568):
   Original:  "Bir an da'yı ayıramadın sandım ödüm koptu. Gönlümü aldın ama"
   Decoded:   "Bir an da'yı ayıramadın sandım ödüm koptu. Gönülümü aldın ama"
   Tokens:    ['B', 'i', 'r', ' ', 'a', 'n', ' ', 'd', 'a', "'", 'y', 'ı', ' ', 'a', 'y', 'ı', 'r', '<|Verb|>', '<|Unable|>', '<|Past|>', '<|A2sg|>', ' ', 's', 'a', 'n', 'd', '<|Noun|>', '<|P1sg|>', ' ', 'ö', 'd', '<|Noun|>', '<|P1sg|>', ' ', 'k', 'o', 'p', '<|Verb|>', '<|Past|>', '.', ' ', 'G', 'ö', 'n', 'ü', 'l', '<|Noun|>', '<|P1sg|>', '<|Acc|>', ' ', 'a', 'l', '<|Verb|>', '<|Past|>', '<|A2sg|>', ' ', 'a', 'm', 'a']
 --------------------------------------------------------------------------------
-Failure #35 (Excel Row 1648):
+Failure #25 (Excel Row 1648):
   Original:  'Arif ve 216yı izledim beğendim, snap atmadım, sevinçliyim, gururluyum'
   Decoded:   "Arif ve 216'yı izledim beğendim, snap atmadım, sevinçliyim, gururluyum"
   Tokens:    ['A', 'r', 'i', 'f', ' ', 'v', 'e', ' ', '2', '1', '6', '<|Noun|>', '<|Acc|>', ' ', 'i', 'z', 'l', 'e', '<|Verb|>', '<|Past|>', '<|A1sg|>', ' ', 'b', 'e', 'ğ', 'e', 'n', 'd', 'i', '<|Noun|>', '<|P1sg|>', ',', ' ', 's', 'n', 'a', 'p', ' ', 'a', 't', '<|Verb|>', '<|Neg|>', '<|Past|>', '<|A1sg|>', ',', ' ', 's', 'e', 'v', 'i', 'n', 'ç', '<|Noun|>', '<|With|>', '<|A1sg|>', ',', ' ', 'g', 'u', 'r', 'u', 'r', '<|Noun|>', '<|With|>', '<|A1sg|>']
 --------------------------------------------------------------------------------
-Failure #36 (Excel Row 1673):
+Failure #26 (Excel Row 1673):
   Original:  "twitter'ı çok seviyorum müthiş bir platform "
   Decoded:   "twitter'i çok seviyorum müthiş bir platform "
   Tokens:    ['t', 'w', 'i', 't', 't', 'e', 'r', '<|NamedEntity|>', '<|Acc|>', ' ', 'ç', 'o', 'k', ' ', 's', 'e', 'v', '<|Verb|>', '<|Prog1|>', '<|A1sg|>', ' ', 'm', 'ü', 't', 'h', 'i', 'ş', ' ', 'b', 'i', 'r', ' ', 'p', 'l', 'a', 't', 'f', 'o', 'r', 'm', ' ']
 --------------------------------------------------------------------------------
-Failure #37 (Excel Row 1814):
+Failure #27 (Excel Row 1814):
   Original:  'insanları mutlu etmeye çalışmanın boşa zaman kaybı olduğunu. Seninle mutlu olanları bul :) '
   Decoded:   'insanları mutlu etmeye çalışmanın boşa zaman kaybı olduğunu. Senle mutlu olanları bul :) '
   Tokens:    ['i', 'n', 's', 'a', 'n', '<|Noun|>', '<|P3pl|>', ' ', 'm', 'u', 't', 'l', 'u', ' ', 'e', 't', '<|Verb|>', '<|Neg|>', '<|Opt|>', ' ', 'ç', 'a', 'l', 'ı', 'ş', '<|Verb|>', '<|Inf2|>', '<|Gen|>', ' ', 'b', 'o', 'ş', 'a', ' ', 'z', 'a', 'm', 'a', 'n', ' ', 'k', 'a', 'y', 'ı', 'p', '<|Noun|>', '<|Acc|>', ' ', 'o', 'l', '<|Verb|>', '<|PastPart|>', '<|P2sg|>', '<|Acc|>', '.', ' ', 'S', 'e', 'n', '<|Noun|>', '<|Ins|>', ' ', 'm', 'u', 't', 'l', 'u', ' ', 'o', 'l', '<|Verb|>', '<|PresPart|>', '<|P3pl|>', ' ', 'b', 'u', 'l', ' ', ':', ')', ' ']
 --------------------------------------------------------------------------------
-Failure #38 (Excel Row 1873):
+Failure #28 (Excel Row 1873):
   Original:  'Özellikle şu soğuk havalarda evime aşığım evimin aşkıyım aşkım ev'
   Decoded:   'Özellikle şu soğuk havalarda evime âşıkım evimin aşkıyım aşkım ev'
   Tokens:    ['Ö', 'z', 'e', 'l', 'l', 'i', 'k', 'l', 'e', ' ', 'ş', 'u', ' ', 's', 'o', 'ğ', 'u', 'k', ' ', 'h', 'a', 'v', 'a', '<|Noun|>', '<|A3pl|>', '<|Loc|>', ' ', 'e', 'v', '<|Noun|>', '<|P1sg|>', '<|Dat|>', ' ', 'â', 'ş', 'ı', 'k', '<|Noun|>', '<|P1sg|>', ' ', 'e', 'v', '<|Noun|>', '<|P1sg|>', '<|Gen|>', ' ', 'a', 'ş', 'k', '<|Noun|>', '<|P3sg|>', '<|A1sg|>', ' ', 'a', 'ş', 'k', '<|Noun|>', '<|P1sg|>', ' ', 'e', 'v']
 --------------------------------------------------------------------------------
-Failure #39 (Excel Row 1942):
+Failure #29 (Excel Row 1942):
   Original:  'Pazar günlerinden hoşlanmam fakat bugün çok farklı geçti. Emeği geçen bütün arkadaşlarıma sevgilerimle :) Harika hissediyorum iyi ki varlar'
   Decoded:   'Pazar günlerinden hoşlanmam fakat bugün çok farklı geçti. Emeki geçen bütün arkadaşlarıma sevgilerimle :) Harika hissediyorum iyi ki varlar'
   Tokens:    ['P', 'a', 'z', 'a', 'r', ' ', 'g', 'ü', 'n', '<|Noun|>', '<|P3pl|>', '<|Abl|>', ' ', 'h', 'o', 'ş', 'l', 'a', 'n', '<|Verb|>', '<|Neg|>', '<|A1sg|>', ' ', 'f', 'a', 'k', 'a', 't', ' ', 'b', 'u', 'g', 'ü', 'n', ' ', 'ç', 'o', 'k', ' ', 'f', 'a', 'r', 'k', '<|Noun|>', '<|With|>', ' ', 'g', 'e', 'ç', 't', 'i', '.', ' ', 'E', 'm', 'e', 'k', '<|Noun|>', '<|Acc|>', ' ', 'g', 'e', 'ç', 'e', 'n', ' ', 'b', 'ü', 't', 'ü', 'n', ' ', 'a', 'r', 'k', 'a', 'd', 'a', 'ş', '<|Noun|>', '<|A3pl|>', '<|P1sg|>', '<|Dat|>', ' ', 's', 'e', 'v', 'g', 'i', '<|Noun|>', '<|A3pl|>', '<|P1sg|>', '<|Ins|>', ' ', ':', ')', ' ', 'H', 'a', 'r', 'i', 'k', 'a', ' ', 'h', 'i', 's', 's', 'e', 't', '<|Verb|>', '<|Prog1|>', '<|A1sg|>', ' ', 'i', 'y', 'i', ' ', 'k', 'i', ' ', 'v', 'a', 'r', '<|Noun|>', '<|A3pl|>']
 --------------------------------------------------------------------------------
-Failure #40 (Excel Row 2109):
+Failure #30 (Excel Row 2109):
   Original:  "Bugün çok güzel geçiyor, çok güldüm çok.. Hepinizi seviyorum arkadaşlar, dostlar iyi ki varsınız b'olum, iyi böyle iyi.."
   Decoded:   "Bugün çok güzel geçiyor, çok güldüm çok.. Hepinizi seviyorum arkadaşlar, dostlar iyi ki varsınız b'onlum, iyi böyle iyi.."
   Tokens:    ['B', 'u', 'g', 'ü', 'n', ' ', 'ç', 'o', 'k', ' ', 'g', 'ü', 'z', 'e', 'l', ' ', 'g', 'e', 'ç', '<|Verb|>', '<|Prog1|>', ',', ' ', 'ç', 'o', 'k', ' ', 'g', 'ü', 'l', '<|Verb|>', '<|Past|>', '<|A1sg|>', ' ', 'ç', 'o', 'k', '.', '.', ' ', 'H', 'e', 'p', '<|Noun|>', '<|P2pl|>', '<|Acc|>', ' ', 's', 'e', 'v', '<|Verb|>', '<|Prog1|>', '<|A1sg|>', ' ', 'a', 'r', 'k', 'a', 'd', 'a', 'ş', '<|Noun|>', '<|A3pl|>', ',', ' ', 'd', 'o', 's', 't', '<|Noun|>', '<|A3pl|>', ' ', 'i', 'y', 'i', ' ', 'k', 'i', ' ', 'v', 'a', 'r', '<|Noun|>', '<|A2pl|>', ' ', 'b', "'", 'o', '<|Noun|>', '<|With|>', '<|P1sg|>', ',', ' ', 'i', 'y', 'i', ' ', 'b', 'ö', 'y', 'l', 'e', ' ', 'i', 'y', 'i', '.', '.']
 --------------------------------------------------------------------------------
-Failure #41 (Excel Row 2112):
+Failure #31 (Excel Row 2112):
   Original:  'Güzel bir kız instaya fotoğraf atmış 3 kere gördüm 3ünde de reflexle beğendim'
   Decoded:   "Güzel bir kız instaya fotoğraf atmış 3 kere gördüm 3'ünde de reflexle beğendim"
   Tokens:    ['G', 'ü', 'z', 'e', 'l', ' ', 'b', 'i', 'r', ' ', 'k', 'ı', 'z', ' ', 'i', 'n', 's', 't', 'a', 'y', 'a', ' ', 'f', 'o', 't', 'o', 'ğ', 'r', 'a', 'f', ' ', 'a', 't', '<|Verb|>', '<|NarrPart|>', ' ', '3', ' ', 'k', 'e', 'r', 'e', ' ', 'g', 'ö', 'r', 'd', 'ü', 'm', ' ', '3', '<|Noun|>', '<|P2sg|>', '<|Loc|>', ' ', 'd', 'e', ' ', 'r', 'e', 'f', 'l', 'e', 'x', 'l', 'e', ' ', 'b', 'e', 'ğ', 'e', 'n', 'd', 'i', '<|Noun|>', '<|P1sg|>']
 --------------------------------------------------------------------------------
-Failure #42 (Excel Row 2130):
-  Original:  'Düşünsenize Bangtan buraya konsere geldiğinde hepimiz tanışıcaz cidden harika bir duygu'
-  Decoded:   'Düşünün Bangtan buraya konsere geldiğinde hepimiz tanışıcaz cidden harika bir duygu'
-  Tokens:    ['D', 'ü', 'ş', 'ü', 'n', '<|Verb|>', '<|A2pl|>', ' ', 'B', 'a', 'n', 'g', 't', 'a', 'n', ' ', 'b', 'u', 'r', 'a', '<|Noun|>', '<|Dat|>', ' ', 'k', 'o', 'n', 's', 'e', 'r', '<|Noun|>', '<|Dat|>', ' ', 'g', 'e', 'l', '<|Verb|>', '<|PastPart|>', '<|P2sg|>', '<|Loc|>', ' ', 'h', 'e', 'p', '<|Noun|>', '<|P1pl|>', ' ', 't', 'a', 'n', 'ı', 'ş', 'ı', 'c', 'a', 'z', ' ', 'c', 'i', 'd', 'd', 'e', 'n', ' ', 'h', 'a', 'r', 'i', 'k', 'a', ' ', 'b', 'i', 'r', ' ', 'd', 'u', 'y', 'g', 'u']
---------------------------------------------------------------------------------
-Failure #43 (Excel Row 2216):
+Failure #32 (Excel Row 2216):
   Original:  "İstanbul'a dönüş yapıyorum. İki gün boyunca Trabzon'da çok güldüm çok eğlendim."
   Decoded:   "İstanbula dönüş yapıyorum. İki gün boyunca Trabzon'da çok güldüm çok eğlendim."
   Tokens:    ['İ', 's', 't', 'a', 'n', 'b', 'u', 'l', '<|NamedEntity|>', '<|Dat|>', ' ', 'd', 'ö', 'n', 'ü', 'ş', ' ', 'y', 'a', 'p', '<|Verb|>', '<|Prog1|>', '<|A1sg|>', '.', ' ', 'İ', 'k', 'i', ' ', 'g', 'ü', 'n', ' ', 'b', 'o', 'y', 'u', 'n', 'c', 'a', ' ', 'T', 'r', 'a', 'b', 'z', 'o', 'n', '<|NamedEntity|>', '<|Loc|>', ' ', 'ç', 'o', 'k', ' ', 'g', 'ü', 'l', '<|Verb|>', '<|Past|>', '<|A1sg|>', ' ', 'ç', 'o', 'k', ' ', 'e', 'ğ', 'l', 'e', 'n', '<|Verb|>', '<|Past|>', '<|A1sg|>', '.']
 --------------------------------------------------------------------------------
-Failure #44 (Excel Row 2326):
-  Original:  'Boşversene ben her türlü mutluyum :)'
-  Decoded:   'Boşver ben her türlü mutluyum :)'
-  Tokens:    ['B', 'o', 'ş', 'v', 'e', 'r', '<|Verb|>', '<|A2sg|>', ' ', 'b', 'e', 'n', ' ', 'h', 'e', 'r', ' ', 't', 'ü', 'r', 'l', 'ü', ' ', 'm', 'u', 't', 'l', 'u', '<|Noun|>', '<|A1sg|>', ' ', ':', ')']
---------------------------------------------------------------------------------
-Failure #45 (Excel Row 2341):
+Failure #33 (Excel Row 2341):
   Original:  'Ya bu kısım inanılmaz güzeldi, Namjoon sana aşığım '
   Decoded:   'Ya bu kısım inanılmaz güzeldi, Namjoon sana âşıkım '
   Tokens:    ['Y', 'a', ' ', 'b', 'u', ' ', 'k', 'ı', 's', 'ı', 'm', ' ', 'i', 'n', 'a', 'n', 'ı', 'l', 'm', 'a', 'z', ' ', 'g', 'ü', 'z', 'e', 'l', '<|Noun|>', '<|Past|>', ',', ' ', 'N', 'a', 'm', 'j', 'o', 'o', 'n', ' ', 's', 'a', 'n', 'a', ' ', 'â', 'ş', 'ı', 'k', '<|Noun|>', '<|P1sg|>', ' ']
 --------------------------------------------------------------------------------
-Failure #46 (Excel Row 2359):
+Failure #34 (Excel Row 2359):
   Original:  'Ben İzmir\'in "köy" olmasıyla mutluyum, hala tek hayalim Urla\'da organik zeytin yetiştirmek.'
   Decoded:   'Ben İzmirin "köy" olmasıyla mutluyum, hala tek hayalim Urla\'da organik zeytin yetiştirmek.'
   Tokens:    ['B', 'e', 'n', ' ', 'İ', 'z', 'm', 'i', 'r', '<|NamedEntity|>', '<|Gen|>', ' ', '"', 'k', 'ö', 'y', '"', ' ', 'o', 'l', '<|Verb|>', '<|Inf2|>', '<|P3sg|>', '<|Ins|>', ' ', 'm', 'u', 't', 'l', 'u', '<|Noun|>', '<|A1sg|>', ',', ' ', 'h', 'a', 'l', 'a', ' ', 't', 'e', 'k', ' ', 'h', 'a', 'y', 'a', 'l', 'i', '<|Noun|>', '<|P1sg|>', ' ', 'U', 'r', 'l', 'a', '<|NamedEntity|>', '<|Loc|>', ' ', 'o', 'r', 'g', 'a', 'n', 'i', 'k', ' ', 'z', 'e', 'y', 't', 'i', 'n', ' ', 'y', 'e', 't', 'i', 'ş', '<|Verb|>', '<|Caus|>', '<|Inf1|>', '.']
 --------------------------------------------------------------------------------
-Failure #47 (Excel Row 2422):
+Failure #35 (Excel Row 2422):
   Original:  'Çiçeğe çarpan araba benimdi... oha dedim yani höh '
   Decoded:   'Çiçeke çarpan araba benimdi... oha dedim yani höh '
   Tokens:    ['Ç', 'i', 'ç', 'e', 'k', '<|Noun|>', '<|Dat|>', ' ', 'ç', 'a', 'r', 'p', '<|Verb|>', '<|PresPart|>', ' ', 'a', 'r', 'a', 'b', 'a', ' ', 'b', 'e', 'n', '<|Noun|>', '<|P1sg|>', '<|Past|>', '.', '.', '.', ' ', 'o', 'h', 'a', ' ', 'd', 'e', '<|Verb|>', '<|Past|>', '<|A1sg|>', ' ', 'y', 'a', 'n', 'i', ' ', 'h', 'ö', 'h', ' ']
 --------------------------------------------------------------------------------
-Failure #48 (Excel Row 2500):
+Failure #36 (Excel Row 2500):
   Original:  'Fiilimsiler yapım eki kabul ediliyormuş baya şaşkınlık verici bir bilgi'
   Decoded:   'Fiilsiler yapım eki kabul ediliyormuş baya şaşkınlık verici bir bilgi'
   Tokens:    ['F', 'i', 'i', 'l', '<|Noun|>', '<|JustLike|>', '<|A3pl|>', ' ', 'y', 'a', 'p', 'ı', 'm', ' ', 'e', 'k', '<|Noun|>', '<|Acc|>', ' ', 'k', 'a', 'b', 'u', 'l', ' ', 'e', 't', '<|Verb|>', '<|Pass|>', '<|Prog1|>', '<|Narr|>', ' ', 'b', 'a', 'y', '<|Verb|>', '<|Opt|>', ' ', 'ş', 'a', 'ş', 'k', 'ı', 'n', '<|Noun|>', '<|Ness|>', ' ', 'v', 'e', 'r', 'i', 'c', 'i', ' ', 'b', 'i', 'r', ' ', 'b', 'i', 'l', 'g', 'i']
 --------------------------------------------------------------------------------
-Failure #49 (Excel Row 2501):
+Failure #37 (Excel Row 2501):
   Original:  'Hala yüzünüz kızarmadan gülebiliyorsunuz ya şaşkınlık verici.'
   Decoded:   'Hala yüzün kızarmadan gülebiliyorsunuz ya şaşkınlık verici.'
   Tokens:    ['H', 'a', 'l', 'a', ' ', 'y', 'ü', 'z', '<|Verb|>', '<|A2pl|>', ' ', 'k', 'ı', 'z', 'a', 'r', '<|Verb|>', '<|WithoutHavingDoneSo|>', ' ', 'g', 'ü', 'l', '<|Verb|>', '<|Able|>', '<|Prog1|>', '<|A2pl|>', ' ', 'y', 'a', ' ', 'ş', 'a', 'ş', 'k', 'ı', 'n', '<|Noun|>', '<|Ness|>', ' ', 'v', 'e', 'r', 'i', 'c', 'i', '.']
 --------------------------------------------------------------------------------
-Failure #50 (Excel Row 2598):
+Failure #38 (Excel Row 2598):
   Original:  'O değilde geçen akşam kınada peşimde dört dönen çocuk instagramdan beni bulup takip etmiş. Azme bakın hayret ettim ??'
   Decoded:   'O değilde geçen akşam kınada peşimde dört dönen çocuk instagramdan beni bulup takip etmiş. Azime bakın hayret ettim ??'
   Tokens:    ['O', ' ', 'd', 'e', 'ğ', 'i', 'l', '<|Noun|>', '<|Loc|>', ' ', 'g', 'e', 'ç', 'e', 'n', ' ', 'a', 'k', 'ş', 'a', 'm', ' ', 'k', 'ı', 'n', 'a', '<|Noun|>', '<|Loc|>', ' ', 'p', 'e', 'ş', '<|Noun|>', '<|P1sg|>', '<|Loc|>', ' ', 'd', 'ö', 'r', 't', ' ', 'd', 'ö', 'n', 'e', 'n', ' ', 'ç', 'o', 'c', 'u', 'k', ' ', 'i', 'n', 's', 't', 'a', 'g', 'r', 'a', 'm', '<|Noun|>', '<|Abl|>', ' ', 'b', 'e', 'n', '<|Noun|>', '<|Acc|>', ' ', 'b', 'u', 'l', '<|Verb|>', '<|AfterDoingSo|>', ' ', 't', 'a', 'k', 'i', 'p', ' ', 'e', 't', '<|Verb|>', '<|NarrPart|>', '.', ' ', 'A', 'z', 'i', 'm', '<|Noun|>', '<|Dat|>', ' ', 'b', 'a', 'k', 'ı', 'n', ' ', 'h', 'a', 'y', 'r', 'e', 't', ' ', 'e', 't', '<|Verb|>', '<|Past|>', '<|A1sg|>', ' ', '?', '?']
 --------------------------------------------------------------------------------
-Failure #51 (Excel Row 2635):
+Failure #39 (Excel Row 2635):
   Original:  'Buraya kadar her şey beklediğim gibiydi, fakat lafımı bitirmeye yakın, onun, "ben de sana aşıktım ve hala aşığım" demesiyle şoka uğradım... '
   Decoded:   'Buraya kadar her şey beklediğim gibiydi, fakat lafımı bitirmeye yakın, onun, "ben de sana aşıktım ve hala âşıkım" demesiyle şoka uğradım... '
   Tokens:    ['B', 'u', 'r', 'a', '<|Noun|>', '<|Dat|>', ' ', 'k', 'a', 'd', 'a', 'r', ' ', 'h', 'e', 'r', ' ', 'ş', 'e', 'y', ' ', 'b', 'e', 'k', 'l', 'e', '<|Verb|>', '<|PastPart|>', '<|P1sg|>', ' ', 'g', 'i', 'b', 'i', '<|Noun|>', '<|Past|>', ',', ' ', 'f', 'a', 'k', 'a', 't', ' ', 'l', 'a', 'f', '<|Noun|>', '<|P1sg|>', '<|Acc|>', ' ', 'b', 'i', 't', 'i', 'r', '<|Verb|>', '<|Neg|>', '<|Opt|>', ' ', 'y', 'a', 'k', 'ı', 'n', ',', ' ', 'o', 'n', '<|Verb|>', '<|A2pl|>', ',', ' ', '"', 'b', 'e', 'n', ' ', 'd', 'e', ' ', 's', 'a', 'n', 'a', ' ', 'a', 'ş', 'ı', 'k', '<|Noun|>', '<|Past|>', '<|A1sg|>', ' ', 'v', 'e', ' ', 'h', 'a', 'l', 'a', ' ', 'â', 'ş', 'ı', 'k', '<|Noun|>', '<|P1sg|>', '"', ' ', 'd', 'e', 'm', 'e', '<|Noun|>', '<|P3sg|>', '<|Ins|>', ' ', 'ş', 'o', 'k', '<|Noun|>', '<|Dat|>', ' ', 'u', 'ğ', 'r', 'a', '<|Verb|>', '<|Past|>', '<|A1sg|>', '.', '.', '.', ' ']
 --------------------------------------------------------------------------------
-Failure #52 (Excel Row 2679):
+Failure #40 (Excel Row 2679):
   Original:  'Ses kaydı dinlerken fark ettim sınıftaki bazı insanların nefes alabilmesi bile bir mucize, bu zekayla bu yaşa nasıl gelmiş insan hayret ediyor'
   Decoded:   'Ses kayıtı dinlerken fark ettim sınıftaki bazı insanların nefes alabilmesi bile bir mucize, bu zekayla bu yaşa nasıl gelmiş insan hayret ediyor'
   Tokens:    ['S', 'e', 's', ' ', 'k', 'a', 'y', 'ı', 't', '<|Noun|>', '<|Acc|>', ' ', 'd', 'i', 'n', 'l', 'e', '<|Verb|>', '<|Aor|>', '<|While|>', ' ', 'f', 'a', 'r', 'k', ' ', 'e', 't', '<|Verb|>', '<|Past|>', '<|A1sg|>', ' ', 's', 'ı', 'n', 'ı', 'f', '<|Noun|>', '<|Loc|>', '<|Rel|>', ' ', 'b', 'a', 'z', 'ı', ' ', 'i', 'n', 's', 'a', 'n', '<|Noun|>', '<|A3pl|>', '<|Gen|>', ' ', 'n', 'e', 'f', 'e', 's', ' ', 'a', 'l', '<|Verb|>', '<|Able|>', '<|Inf2|>', '<|P3sg|>', ' ', 'b', 'i', 'l', 'e', ' ', 'b', 'i', 'r', ' ', 'm', 'u', 'c', 'i', 'z', 'e', ',', ' ', 'b', 'u', ' ', 'z', 'e', 'k', 'a', 'y', 'l', 'a', ' ', 'b', 'u', ' ', 'y', 'a', 'ş', 'a', ' ', 'n', 'a', 's', 'ı', 'l', ' ', 'g', 'e', 'l', '<|Verb|>', '<|NarrPart|>', ' ', 'i', 'n', 's', 'a', 'n', ' ', 'h', 'a', 'y', 'r', 'e', 't', ' ', 'e', 't', '<|Verb|>', '<|Prog1|>']
 --------------------------------------------------------------------------------
-Failure #53 (Excel Row 2718):
+Failure #41 (Excel Row 2718):
   Original:  'Oha evde pijamalarla çalışıyodum misafirler geldi pastayla doğum günü sürprizi yapmışlar şoka uğradım gidiyorum 12de iki tane pasta kescem'
   Decoded:   "Oha evde pijamalarla çalışıyodum misafirler geldi pastayla doğum günü sürprizi yapmışlar şoka uğradım gidiyorum 12'de iki tane pasta kescem"
   Tokens:    ['O', 'h', 'a', ' ', 'e', 'v', '<|Noun|>', '<|Loc|>', ' ', 'p', 'i', 'j', 'a', 'm', 'a', '<|Noun|>', '<|A3pl|>', '<|Ins|>', ' ', 'ç', 'a', 'l', 'ı', 'ş', 'ı', 'y', 'o', 'd', 'u', 'm', ' ', 'm', 'i', 's', 'a', 'f', 'i', 'r', '<|Noun|>', '<|A3pl|>', ' ', 'g', 'e', 'l', '<|Verb|>', '<|Past|>', ' ', 'p', 'a', 's', 't', 'a', '<|Noun|>', '<|Ins|>', ' ', 'd', 'o', 'ğ', 'u', 'm', ' ', 'g', 'ü', 'n', 'ü', ' ', 's', 'ü', 'r', 'p', 'r', 'i', 'z', '<|Noun|>', '<|Acc|>', ' ', 'y', 'a', 'p', '<|Verb|>', '<|Narr|>', '<|A3pl|>', ' ', 'ş', 'o', 'k', '<|Noun|>', '<|Dat|>', ' ', 'u', 'ğ', 'r', 'a', '<|Verb|>', '<|Past|>', '<|A1sg|>', ' ', 'g', 'i', 't', '<|Verb|>', '<|Prog1|>', '<|A1sg|>', ' ', '1', '2', '<|Noun|>', '<|Loc|>', ' ', 'i', 'k', 'i', ' ', 't', 'a', 'n', 'e', ' ', 'p', 'a', 's', 't', 'a', ' ', 'k', 'e', 's', 'c', 'e', 'm']
 --------------------------------------------------------------------------------
-Failure #54 (Excel Row 2719):
+Failure #42 (Excel Row 2719):
   Original:  "Bade İşçil'i yeni dizisinde görünce şoka uğradım. Çok beğendiğim bir kadındı. Neden yapmış bunu kendine?"
   Decoded:   'Bade İşçili yeni dizisinde görünce şoka uğradım. Çok beğendiğim bir kadındı. Neden yapmış bunu kendine?'
   Tokens:    ['B', 'a', 'd', 'e', ' ', 'İ', 'ş', 'ç', 'i', 'l', '<|NamedEntity|>', '<|Acc|>', ' ', 'y', 'e', 'n', 'i', ' ', 'd', 'i', 'z', 'i', '<|Noun|>', '<|P3sg|>', '<|Loc|>', ' ', 'g', 'ö', 'r', 'ü', '<|Noun|>', '<|P2sg|>', '<|Equ|>', ' ', 'ş', 'o', 'k', '<|Noun|>', '<|Dat|>', ' ', 'u', 'ğ', 'r', 'a', '<|Verb|>', '<|Past|>', '<|A1sg|>', '.', ' ', 'Ç', 'o', 'k', ' ', 'b', 'e', 'ğ', 'e', 'n', '<|Verb|>', '<|PastPart|>', '<|P1sg|>', ' ', 'b', 'i', 'r', ' ', 'k', 'a', 'd', 'ı', 'n', '<|Noun|>', '<|Past|>', '.', ' ', 'N', 'e', 'd', 'e', 'n', ' ', 'y', 'a', 'p', '<|Verb|>', '<|NarrPart|>', ' ', 'b', 'u', 'n', '<|Noun|>', '<|Acc|>', ' ', 'k', 'e', 'n', 'd', 'i', '<|Noun|>', '<|P2sg|>', '<|Dat|>', '?']
 --------------------------------------------------------------------------------
-Failure #55 (Excel Row 2722):
+Failure #43 (Excel Row 2722):
   Original:  'Buraya kadar her şey beklediğim gibiydi, fakat lafımı bitirmeye yakın, onun, "ben de sana aşıktım ve hala aşığım" demesiyle şoka uğradım... '
   Decoded:   'Buraya kadar her şey beklediğim gibiydi, fakat lafımı bitirmeye yakın, onun, "ben de sana aşıktım ve hala âşıkım" demesiyle şoka uğradım... '
   Tokens:    ['B', 'u', 'r', 'a', '<|Noun|>', '<|Dat|>', ' ', 'k', 'a', 'd', 'a', 'r', ' ', 'h', 'e', 'r', ' ', 'ş', 'e', 'y', ' ', 'b', 'e', 'k', 'l', 'e', '<|Verb|>', '<|PastPart|>', '<|P1sg|>', ' ', 'g', 'i', 'b', 'i', '<|Noun|>', '<|Past|>', ',', ' ', 'f', 'a', 'k', 'a', 't', ' ', 'l', 'a', 'f', '<|Noun|>', '<|P1sg|>', '<|Acc|>', ' ', 'b', 'i', 't', 'i', 'r', '<|Verb|>', '<|Neg|>', '<|Opt|>', ' ', 'y', 'a', 'k', 'ı', 'n', ',', ' ', 'o', 'n', '<|Verb|>', '<|A2pl|>', ',', ' ', '"', 'b', 'e', 'n', ' ', 'd', 'e', ' ', 's', 'a', 'n', 'a', ' ', 'a', 'ş', 'ı', 'k', '<|Noun|>', '<|Past|>', '<|A1sg|>', ' ', 'v', 'e', ' ', 'h', 'a', 'l', 'a', ' ', 'â', 'ş', 'ı', 'k', '<|Noun|>', '<|P1sg|>', '"', ' ', 'd', 'e', 'm', 'e', '<|Noun|>', '<|P3sg|>', '<|Ins|>', ' ', 'ş', 'o', 'k', '<|Noun|>', '<|Dat|>', ' ', 'u', 'ğ', 'r', 'a', '<|Verb|>', '<|Past|>', '<|A1sg|>', '.', '.', '.', ' ']
 --------------------------------------------------------------------------------
-Failure #56 (Excel Row 2924):
+Failure #44 (Excel Row 2924):
   Original:  'M.E. Bakanlığının müfredatından ve oluşturduğu sistemden, pozitif beklentisi olan için icraatları şaşkınlık verici olabilir.'
   Decoded:   'M.E. Bakanlıkının müfredatından ve oluşturduğu sistemden, pozitif beklentisi olan için icraatları şaşkınlık verici olabilir.'
   Tokens:    ['M', '.', 'E', '.', ' ', 'B', 'a', 'k', 'a', 'n', 'l', 'ı', 'k', '<|Noun|>', '<|P2sg|>', '<|Gen|>', ' ', 'm', 'ü', 'f', 'r', 'e', 'd', 'a', 't', '<|Noun|>', '<|P2sg|>', '<|Abl|>', ' ', 'v', 'e', ' ', 'o', 'l', 'u', 'ş', '<|Verb|>', '<|Caus|>', '<|PastPart|>', '<|P3sg|>', ' ', 's', 'i', 's', 't', 'e', 'm', '<|Noun|>', '<|Abl|>', ',', ' ', 'p', 'o', 'z', 'i', 't', 'i', 'f', ' ', 'b', 'e', 'k', 'l', 'e', 'n', 't', 'i', '<|Noun|>', '<|P3sg|>', ' ', 'o', 'l', '<|Verb|>', '<|PresPart|>', ' ', 'i', 'ç', 'i', 'n', ' ', 'i', 'c', 'r', 'a', 'a', 't', 'l', 'a', 'r', 'ı', ' ', 'ş', 'a', 'ş', 'k', 'ı', 'n', '<|Noun|>', '<|Ness|>', ' ', 'v', 'e', 'r', 'i', 'c', 'i', ' ', 'o', 'l', '<|Verb|>', '<|Able|>', '<|Aor|>', '.']
 --------------------------------------------------------------------------------
-Failure #57 (Excel Row 2934):
+Failure #45 (Excel Row 2934):
   Original:  'Yok daha neler. Erkeğe de küpe mi olurmuş. Bunlar ters şeyler. Başka mahalleye lütfen..'
   Decoded:   'Yok daha neler. Erkeke de küpe mi olurmuş. Bunlar ters şeyler. Başka mahalleye lütfen..'
   Tokens:    ['Y', 'o', 'k', ' ', 'd', 'a', 'h', 'a', ' ', 'n', 'e', 'l', 'e', 'r', '.', ' ', 'E', 'r', 'k', 'e', 'k', '<|Noun|>', '<|Dat|>', ' ', 'd', 'e', ' ', 'k', 'ü', 'p', 'e', ' ', 'm', 'i', ' ', 'o', 'l', '<|Verb|>', '<|Aor|>', '<|Narr|>', '.', ' ', 'B', 'u', 'n', '<|Noun|>', '<|A3pl|>', ' ', 't', 'e', 'r', 's', ' ', 'ş', 'e', 'y', '<|Noun|>', '<|A3pl|>', '.', ' ', 'B', 'a', 'ş', 'k', 'a', ' ', 'm', 'a', 'h', 'a', 'l', 'l', 'e', '<|Noun|>', '<|Dat|>', ' ', 'l', 'ü', 't', 'f', 'e', 'n', '.', '.']
 --------------------------------------------------------------------------------
-Failure #58 (Excel Row 3017):
+Failure #46 (Excel Row 3017):
   Original:  "Erikli de İsrail'inmiş. Ne zaman geçti bunların eline? Şaştım kaldım. "
   Decoded:   'Erikli de İsrailinmiş. Ne zaman geçti bunların eline? Şaştım kaldım. '
   Tokens:    ['E', 'r', 'i', 'k', '<|Noun|>', '<|With|>', ' ', 'd', 'e', ' ', 'İ', 's', 'r', 'a', 'i', 'l', '<|NamedEntity|>', '<|Gen|>', '<|Narr|>', '.', ' ', 'N', 'e', ' ', 'z', 'a', 'm', 'a', 'n', ' ', 'g', 'e', 'ç', 't', 'i', ' ', 'b', 'u', 'n', '<|Noun|>', '<|A3pl|>', '<|Gen|>', ' ', 'e', 'l', '<|Noun|>', '<|P2sg|>', '<|Dat|>', '?', ' ', 'Ş', 'a', 'ş', '<|Verb|>', '<|Past|>', '<|A1sg|>', ' ', 'k', 'a', 'l', '<|Verb|>', '<|Past|>', '<|A1sg|>', '.', ' ']
 --------------------------------------------------------------------------------
-Failure #59 (Excel Row 3229):
+Failure #47 (Excel Row 3229):
   Original:  'Yüzünü öyle özledim ki, Seninleyken gözlerimi kırptığım için bile pişmanım... '
   Decoded:   'Yüzünü öyle özledim ki, Senleyken gözlerimi kırptığım için bile pişmanım... '
   Tokens:    ['Y', 'ü', 'z', '<|Noun|>', '<|P2sg|>', '<|Acc|>', ' ', 'ö', 'y', 'l', 'e', ' ', 'ö', 'z', 'l', 'e', '<|Verb|>', '<|Past|>', '<|A1sg|>', ' ', 'k', 'i', ',', ' ', 'S', 'e', 'n', '<|Noun|>', '<|Ins|>', '<|While|>', ' ', 'g', 'ö', 'z', '<|Noun|>', '<|A3pl|>', '<|P1sg|>', '<|Acc|>', ' ', 'k', 'ı', 'r', 'p', '<|Verb|>', '<|PastPart|>', '<|P1sg|>', ' ', 'i', 'ç', 'i', 'n', ' ', 'b', 'i', 'l', 'e', ' ', 'p', 'i', 'ş', 'm', 'a', 'n', '<|Noun|>', '<|A1sg|>', '.', '.', '.', ' ']
 --------------------------------------------------------------------------------
-Failure #60 (Excel Row 3367):
+Failure #48 (Excel Row 3367):
   Original:  'O kadar çok özledim ki şu insanları ordaki hayatımızı. Bazen diyorum ki keşke tıp okusaydık 2 senemiz daha olurdu. '
   Decoded:   'O kadar çok özledim ki şu insanları oradaki hayatımızı. Bazen diyorum ki keşke tıp okusaydık 2 senemiz daha olurdu. '
   Tokens:    ['O', ' ', 'k', 'a', 'd', 'a', 'r', ' ', 'ç', 'o', 'k', ' ', 'ö', 'z', 'l', 'e', '<|Verb|>', '<|Past|>', '<|A1sg|>', ' ', 'k', 'i', ' ', 'ş', 'u', ' ', 'i', 'n', 's', 'a', 'n', '<|Noun|>', '<|P3pl|>', ' ', 'o', 'r', 'a', '<|Noun|>', '<|Loc|>', '<|Rel|>', ' ', 'h', 'a', 'y', 'a', 't', '<|Noun|>', '<|P1pl|>', '<|Acc|>', '.', ' ', 'B', 'a', 'z', 'e', 'n', ' ', 'd', 'e', '<|Verb|>', '<|Prog1|>', '<|A1sg|>', ' ', 'k', 'i', ' ', 'k', 'e', 'ş', 'k', 'e', ' ', 't', 'ı', 'p', ' ', 'o', 'k', 'u', '<|Verb|>', '<|Desr|>', '<|Past|>', '<|A1pl|>', ' ', '2', ' ', 's', 'e', 'n', 'e', '<|Noun|>', '<|P1pl|>', ' ', 'd', 'a', 'h', 'a', ' ', 'o', 'l', '<|Verb|>', '<|Aor|>', '<|Past|>', '.', ' ']
 --------------------------------------------------------------------------------
-Failure #61 (Excel Row 3415):
+Failure #49 (Excel Row 3415):
   Original:  'Böyle sağanak yağmur yağınca arabam dışardaysa çok üzülüyorum ıslanıyor diye '
   Decoded:   'Böyle sağanak yağmur yağınca arabam dışarıdaysa çok üzülüyorum ıslanıyor diye '
   Tokens:    ['B', 'ö', 'y', 'l', 'e', ' ', 's', 'a', 'ğ', 'a', 'n', 'a', 'k', ' ', 'y', 'a', 'ğ', 'm', 'u', 'r', ' ', 'y', 'a', 'ğ', 'ı', 'n', '<|Noun|>', '<|Equ|>', ' ', 'a', 'r', 'a', 'b', 'a', '<|Noun|>', '<|P1sg|>', ' ', 'd', 'ı', 'ş', 'a', 'r', 'ı', '<|Noun|>', '<|Loc|>', '<|Cond|>', ' ', 'ç', 'o', 'k', ' ', 'ü', 'z', 'ü', 'l', '<|Verb|>', '<|Prog1|>', '<|A1sg|>', ' ', 'ı', 's', 'l', 'a', 'n', '<|Verb|>', '<|Prog1|>', ' ', 'd', 'i', 'y', 'e', ' ']
 --------------------------------------------------------------------------------
-Failure #62 (Excel Row 3478):
+Failure #50 (Excel Row 3478):
   Original:  '19 liralık para üstünü bozuk para olarak veren garanti atmye kırgınım'
   Decoded:   '19 liralık para üstünü bozuk para olarak veren garanti atma kırgınım'
   Tokens:    ['1', '9', ' ', 'l', 'i', 'r', 'a', '<|Noun|>', '<|Ness|>', ' ', 'p', 'a', 'r', 'a', ' ', 'ü', 's', 't', 'ü', 'n', '<|Noun|>', '<|Acc|>', ' ', 'b', 'o', 'z', 'u', 'k', ' ', 'p', 'a', 'r', 'a', ' ', 'o', 'l', '<|Verb|>', '<|ByDoingSo|>', ' ', 'v', 'e', 'r', 'e', '<|Noun|>', '<|P2sg|>', ' ', 'g', 'a', 'r', 'a', 'n', 't', 'i', ' ', 'a', 't', 'm', '<|Noun|>', '<|Dat|>', ' ', 'k', 'ı', 'r', 'g', 'ı', 'n', '<|Noun|>', '<|P1sg|>']
 --------------------------------------------------------------------------------
-Failure #63 (Excel Row 3547):
+Failure #51 (Excel Row 3547):
   Original:  'Bildiğim tek şey fazlasıyla yıprandım, fazlasıyla tükendim. senelerce beklemek beni yordu çok yordu. hayal ettiğim o güzel günler gelsin artk'
   Decoded:   'Bildikim tek şey fazlasıyla yıprandım, fazlasıyla tükendim. senelerce beklemek beni yordu çok yordu. hayal ettiğim o güzel günler gelsin artk'
   Tokens:    ['B', 'i', 'l', 'd', 'i', 'k', '<|Noun|>', '<|A1sg|>', ' ', 't', 'e', 'k', ' ', 'ş', 'e', 'y', ' ', 'f', 'a', 'z', 'l', 'a', 's', 'ı', 'y', 'l', 'a', ' ', 'y', 'ı', 'p', 'r', 'a', 'n', '<|Verb|>', '<|Past|>', '<|A1sg|>', ',', ' ', 'f', 'a', 'z', 'l', 'a', 's', 'ı', 'y', 'l', 'a', ' ', 't', 'ü', 'k', 'e', 'n', '<|Verb|>', '<|Past|>', '<|A1sg|>', '.', ' ', 's', 'e', 'n', 'e', '<|Noun|>', '<|A3pl|>', '<|Equ|>', ' ', 'b', 'e', 'k', 'l', 'e', '<|Verb|>', '<|Inf1|>', ' ', 'b', 'e', 'n', '<|Noun|>', '<|Acc|>', ' ', 'y', 'o', 'r', '<|Verb|>', '<|Past|>', ' ', 'ç', 'o', 'k', ' ', 'y', 'o', 'r', '<|Verb|>', '<|Past|>', '.', ' ', 'h', 'a', 'y', 'a', 'l', ' ', 'e', 't', '<|Verb|>', '<|PastPart|>', '<|P1sg|>', ' ', 'o', ' ', 'g', 'ü', 'z', 'e', 'l', ' ', 'g', 'ü', 'n', 'l', 'e', '<|Verb|>', '<|Aor|>', ' ', 'g', 'e', 'l', '<|Verb|>', '<|A3sg|>', ' ', 'a', 'r', 't', 'k']
 --------------------------------------------------------------------------------
-Failure #64 (Excel Row 3697):
+Failure #52 (Excel Row 3697):
   Original:  "Bugün Fatih Istanbul'u fethedemeden bitirdik okulu hala hüzünlüyüm"
   Decoded:   'Bugün Fatih Istanbulu fethedemeden bitirdik okulu hala hüzünlüyüm'
   Tokens:    ['B', 'u', 'g', 'ü', 'n', ' ', 'F', 'a', 't', 'i', 'h', ' ', 'I', 's', 't', 'a', 'n', 'b', 'u', 'l', '<|NamedEntity|>', '<|Acc|>', ' ', 'f', 'e', 't', 'h', 'e', 't', '<|Verb|>', '<|WithoutBeingAbleToHaveDoneSo|>', ' ', 'b', 'i', 't', 'i', 'r', '<|Verb|>', '<|Past|>', '<|A1pl|>', ' ', 'o', 'k', 'u', 'l', '<|Noun|>', '<|Acc|>', ' ', 'h', 'a', 'l', 'a', ' ', 'h', 'ü', 'z', 'ü', 'n', '<|Noun|>', '<|With|>', '<|A1sg|>']
 --------------------------------------------------------------------------------
-Failure #65 (Excel Row 3755):
+Failure #53 (Excel Row 3755):
   Original:  'Biri beni alsın dışarda sıkıldım artık'
   Decoded:   'Biri beni alsın dışarıda sıkıldım artık'
   Tokens:    ['B', 'i', 'r', 'i', ' ', 'b', 'e', 'n', '<|Noun|>', '<|Acc|>', ' ', 'a', 'l', '<|Verb|>', '<|A3sg|>', ' ', 'd', 'ı', 'ş', 'a', 'r', 'ı', '<|Noun|>', '<|Loc|>', ' ', 's', 'ı', 'k', 'ı', 'l', '<|Verb|>', '<|Past|>', '<|A1sg|>', ' ', 'a', 'r', 't', 'ı', 'k']
 --------------------------------------------------------------------------------
-Failure #66 (Excel Row 3985):
+Failure #54 (Excel Row 3985):
   Original:  'Sigaram bitti dışarda fırtınalı yağmur var ve ben kafamı duvara vura vura ağlıyorum.'
   Decoded:   'Sigaram bitti dışarıda fırtınalı yağmur var ve ben kafamı duvara vura vura ağlıyorum.'
   Tokens:    ['S', 'i', 'g', 'a', 'r', 'a', '<|Noun|>', '<|P1sg|>', ' ', 'b', 'i', 't', 't', 'i', ' ', 'd', 'ı', 'ş', 'a', 'r', 'ı', '<|Noun|>', '<|Loc|>', ' ', 'f', 'ı', 'r', 't', 'ı', 'n', 'a', '<|Noun|>', '<|With|>', ' ', 'y', 'a', 'ğ', 'm', 'u', 'r', ' ', 'v', 'a', 'r', ' ', 'v', 'e', ' ', 'b', 'e', 'n', ' ', 'k', 'a', 'f', 'a', '<|Noun|>', '<|P1sg|>', '<|Acc|>', ' ', 'd', 'u', 'v', 'a', 'r', '<|Noun|>', '<|Dat|>', ' ', 'v', 'u', 'r', '<|Verb|>', '<|Opt|>', ' ', 'v', 'u', 'r', '<|Verb|>', '<|Opt|>', ' ', 'a', 'ğ', 'l', 'a', '<|Verb|>', '<|Prog1|>', '<|A1sg|>', '.']

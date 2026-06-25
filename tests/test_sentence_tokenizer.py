@@ -4,7 +4,7 @@ import logging
 from typing import List
 sys.path.append(str(Path(__file__).parent.parent))
 
-from morph_tokenizer import MorphTokenizer
+from custom_tokenizer.morph_tokenizer import MorphTokenizer
 
 logging.basicConfig(level=logging.ERROR)
 

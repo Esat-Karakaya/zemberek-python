@@ -126,6 +126,7 @@ class TurkishMorphotactics:
     opt = add_morpheme(Morpheme.instance("Optative", "Opt"))
     desr = add_morpheme(Morpheme.instance("Desire", "Desr"))
     neces = add_morpheme(Morpheme.instance("Necessity", "Neces"))
+    intrj = add_morpheme(Morpheme.instance("Interjection_", "Intrj"))
 
     morpheme_map = get_morpheme_map()
 
@@ -370,6 +371,7 @@ class TurkishMorphotactics:
         self.vOpt_S = MorphemeState.non_terminal("vOpt_S", self.opt)
         self.vDesr_S = MorphemeState.non_terminal("vDesr_S", self.desr)
         self.vNeces_S = MorphemeState.non_terminal("vNeces_S", self.neces)
+        self.vIntrj_ST = MorphemeState.terminal("vIntrj_ST", self.intrj)
         self.vInf1_S = MorphemeState.non_terminal_derivative("vInf1_S", self.inf1)
         self.vInf2_S = MorphemeState.non_terminal_derivative("vInf2_S", self.inf2)
         self.vInf3_S = MorphemeState.non_terminal_derivative("vInf3_S", self.inf3)
@@ -1015,9 +1017,9 @@ class TurkishMorphotactics:
 
     def connect_verbs(self):
         self.verbRoot_S.add_empty(self.vImp_S)
-        self.vImp_S.add_empty(self.vA2sg_ST).add_(self.vA2sg_ST, "sAnA").add_(self.vA3sg_ST, "sIn").add_(self.vA2pl_ST,
-                                                                                                         "+yIn").add_(
-            self.vA2pl_ST, "+yInIz").add_(self.vA2pl_ST, "sAnIzA").add_(self.vA3pl_ST, "sInlAr")
+        self.vImp_S.add_empty(self.vA2sg_ST).add_(self.vA3sg_ST, "sIn").add_(self.vA2pl_ST,
+                                                                              "+yIn").add_(
+            self.vA2pl_ST, "+yInIz").add_(self.vA3pl_ST, "sInlAr")
         self.verbRoot_S.add_(self.vCausT_S, "t", Conditions.has(r_attribute=RootAttribute.Causative_t).or_(
             Conditions.LastDerivationIs(self.vCausTir_S)).and_not(
             Conditions.LastDerivationIsAny((self.vCausT_S, self.vPass_S, self.vAble_S))))
@@ -1204,8 +1206,8 @@ class TurkishMorphotactics:
                                                                    Conditions.RootSurfaceIs("ye")).add_empty(
             self.vImpYemekYi_S, Conditions.RootSurfaceIs("yi"))
         self.vImpYemekYi_S.add_(self.vA2pl_ST, "yin").add_(self.vA2pl_ST, "yiniz")
-        self.vImpYemekYe_S.add_empty(self.vA2sg_ST).add_(self.vA2sg_ST, "sene").add_(self.vA3sg_ST, "sin").add_(
-            self.vA2pl_ST, "senize").add_(self.vA3pl_ST, "sinler")
+        self.vImpYemekYe_S.add_empty(self.vA2sg_ST).add_(self.vA3sg_ST, "sin").add_(self.vA3pl_ST, "sinler")
+
         self.verbRoot_S.add_(self.vOpt_S, "+yA")
         self.vOpt_S.add_(self.vA1sg_ST, "yIm").add_(self.vA2sg_ST, "sIn").add_empty(self.vA3sg_ST).add_(self.vA1pl_ST,
                                                                                                         "lIm").add_(
@@ -1216,6 +1218,10 @@ class TurkishMorphotactics:
                                                                                                      "k").add_(
             self.vA2pl_ST, "nIz").add_(self.vA3pl_ST, "lAr").add_(self.vPastAfterTense_S, "ydI").add_(
             self.vNarrAfterTense_S, "ymIş")
+        # Intrj suffix: attaches after Desr (bare) or after Desr + personal suffix
+        desrCond = Conditions.ContainsMorpheme((self.desr,))
+        self.vA2sg_ST.add_(self.vIntrj_ST, "A", desrCond)
+        self.vA2pl_ST.add_(self.vIntrj_ST, "A", desrCond)
         self.verbRoot_S.add_(self.vNeces_S, "mAlI")
         self.vNeces_S.add_(self.vA1sg_ST, "yIm").add_(self.vA2sg_ST, "sIn").add_empty(self.vA3sg_ST).add_(self.vA1pl_ST,
                                                                                                           "yIz").add_(

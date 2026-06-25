@@ -2,3 +2,5 @@ run tokenizer through tinystories and other corpus to make sure tokenization is 
     - encode str
     - decode str
     - compare result with original
+
+add a new suffix type for iniz, for example koşunuz

@@ -99,7 +99,8 @@ idx2morpheme_id =[
     "Imp",
     "Opt",
     "Desr",
-    "Neces"
+    "Neces",
+    "Intrj"
 ]
 
 morpheme_id2idx = {
