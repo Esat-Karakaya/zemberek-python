@@ -173,20 +173,27 @@ class UnidentifiedTokenAnalyzer:
         if se.stem.endswith("."):
             ss = se.stem[:-1]
             lemma = self.numeral_ending_machine.find(ss)
+            if not lemma:
+                return ()
             lemma = self.ordinal_map.get(lemma)
+            if not lemma:
+                return ()
         else:
             lemma = self.numeral_ending_machine.find(se.stem)
+            if not lemma:
+                return ()
 
         results: List[SingleAnalysis] = []
+        ending = se.ending if "'" in s else ""
 
         for numerals in UnidentifiedTokenAnalyzer.Numerals:
             m = numerals.pattern.search(se.stem)
             if m:
                 stem_surface = lemma
-                if len(se.ending) > 0 and lemma == "dört" and self.ALPHABET.is_vowel(se.ending[0]):
+                if len(ending) > 0 and lemma == "dört" and self.ALPHABET.is_vowel(ending[0]):
                     stem_surface = "dörd"
 
-                res: Tuple[SingleAnalysis] = self.analyzer.analyze_with_exact_stem(stem_surface, se.ending)
+                res: Tuple[SingleAnalysis] = self.analyzer.analyze_with_exact_stem(stem_surface, ending)
                 for re_ in res:
                     if re_.item.primary_pos == PrimaryPos.Numeral:
                         run_time_item = DictionaryItem(se.stem, se.stem, pronunciation=s + lemma,
@@ -203,16 +210,8 @@ class UnidentifiedTokenAnalyzer:
             j = s.find("'")
             return StemAndEnding(s[0:j], s[j + 1:])
         else:
-            j = 0
-            for cut_point in range(len(s) - 1, -1, -1):
-                c = s[cut_point]
-                k = ord(c) - 48
-                if c == '.' or 0 <= k <= 9:
-                    break
-                j += 1
-
-            cut_point = len(s) - j
-            return StemAndEnding(s[0: cut_point], s[cut_point:])  # BURASI YANLIŞ OLABILIR DIKKAT ET
+            # Suffixes on numerals require an apostrophe (e.g. 3'ü). Forms like 3ü are invalid.
+            return StemAndEnding(s, "")
 
     @staticmethod
     def guess_secondary_pos_type(token: Token) -> SecondaryPos:
