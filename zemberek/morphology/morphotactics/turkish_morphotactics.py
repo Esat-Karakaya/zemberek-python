@@ -823,6 +823,7 @@ class TurkishMorphotactics:
         self.pronDemons_S.add_(self.pA3pl_S, "nlAr")
         birbiri: DictionaryItem = self.lexicon.get_item_by_id("birbiri_Pron_Quant")
         biri: DictionaryItem = self.lexicon.get_item_by_id("biri_Pron_Quant")
+        birisi: DictionaryItem = self.lexicon.get_item_by_id("birisi_Pron_Quant")
         bazi: DictionaryItem = self.lexicon.get_item_by_id("bazı_Pron_Quant")
         bircogu: DictionaryItem = self.lexicon.get_item_by_id("birçoğu_Pron_Quant")
         birkaci: DictionaryItem = self.lexicon.get_item_by_id("birkaçı_Pron_Quant")
@@ -858,7 +859,7 @@ class TurkishMorphotactics:
         self.pronQuantModified_S.add_empty(self.pQuantModA3pl_S)
         self.pQuantModA3pl_S.add_(self.pP3pl_S, "lArI")
         self.pQuantA3sg_S.add_empty(self.pP3sg_S, Conditions.root_is_any(
-            (biri, birbiri, kimi, herbiri, hicbiri, oburu, oburku, beriki)).and_(
+            (biri, birbiri, birisi, kimi, herbiri, hicbiri, oburu, oburku, beriki)).and_(
             Conditions.not_have(p_attribute=PhoneticAttribute.ModifiedPronoun)))
         self.pQuantA3sg_S.add_(self.pP3sg_S, "sI",
                                Conditions.root_is_any((biri, bazi, kimi, birbiri, herbiri, hicbiri, oburku)).and_(
@@ -921,7 +922,7 @@ class TurkishMorphotactics:
                                                                           Conditions.root_is_any((kendi,))).add_(
             self.pIns_ST, "+nlA", conditionP2sg).add_(self.pGen_ST, "+nIn", conditionP2sg)
         p3sgCond: Conditions.Condition = Conditions.root_is_any(
-            (kendi, kim, ne, nere, o, bazi, biri, birbiri, herbiri, hep, kimi, hicbiri))
+            (kendi, kim, ne, nere, o, bazi, biri, birbiri, birisi, herbiri, hep, kimi, hicbiri))
         self.pP3sg_S.add_empty(self.pNom_ST).add_(self.pDat_ST, "+nA", nGroup).add_(self.pAcc_ST, "+nI", nGroup).add_(
             self.pDat_ST, "+yA", yGroup).add_(self.pAcc_ST, "+yI", yGroup).add_(self.pLoc_ST, "+ndA", p3sgCond).add_(
             self.pAbl_ST, "+ndAn", p3sgCond).add_(self.pGen_ST, "+nIn", p3sgCond).add_(self.pEqu_ST, "ncA",
