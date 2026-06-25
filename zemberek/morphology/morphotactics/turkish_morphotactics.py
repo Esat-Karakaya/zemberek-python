@@ -1476,10 +1476,12 @@ class StemTransitionsBase:
         self.modifiers = {RootAttribute.Doubling, RootAttribute.LastVowelDrop, RootAttribute.ProgressiveVowelDrop,
                           RootAttribute.InverseHarmony, RootAttribute.Voicing, RootAttribute.CompoundP3sg,
                           RootAttribute.CompoundP3sgRoot}
-        self.special_roots = {"içeri_Noun", "içeri_Adj", "dışarı_Adj", "şura_Noun", "bura_Noun", "ora_Noun",
-                              "dışarı_Noun", "dışarı_Postp", "yukarı_Noun", "yukarı_Adj", "ileri_Noun", "ben_Pron_Pers",
-                              "sen_Pron_Pers", "demek_Verb", "yemek_Verb", "imek_Verb", "birbiri_Pron_Quant",
-                              "çoğu_Pron_Quant", "öbürü_Pron_Quant", "birçoğu_Pron_Quant"}
+        self.spatial_roots_without_informal_drop = {"içeri_Noun", "içeri_Adj", "dışarı_Adj", "şura_Noun",
+                                                    "bura_Noun", "ora_Noun", "dışarı_Noun", "dışarı_Postp",
+                                                    "yukarı_Noun", "yukarı_Adj", "ileri_Noun"}
+        self.special_roots = self.spatial_roots_without_informal_drop | {
+                              "ben_Pron_Pers", "sen_Pron_Pers", "demek_Verb", "yemek_Verb", "imek_Verb",
+                              "birbiri_Pron_Quant", "çoğu_Pron_Quant", "öbürü_Pron_Quant", "birçoğu_Pron_Quant"}
 
     def generate(self, item: DictionaryItem) -> Tuple[StemTransition, ...]:
         if item.id_ in self.special_roots:
@@ -1588,24 +1590,8 @@ class StemTransitionsBase:
         original_attrs = self.calculate_attributes(item.pronunciation)
         unmodified_root_state = self.morphotactics.get_root_state(item, original_attrs)
 
-        if id_ == "içeri_Noun" or id_ == "içeri_Adj" or id_ == "dışarı_Adj" or id_ == "dışarı_Noun" or \
-                id_ == "dışarı_Postp" or id_ == "yukarı_Noun" or id_ == "ileri_Noun" or id_ == "yukarı_Adj" or \
-                id_ == "şura_Noun" or id_ == "bura_Noun" or id_ == "ora_Noun":
-            original = StemTransition(item.root, item, original_attrs, unmodified_root_state)
-            if item.primary_pos == PrimaryPos.Noun:
-                root_for_modified = self.morphotactics.nounLastVowelDropRoot_S
-            elif item.primary_pos == PrimaryPos.Adjective:
-                root_for_modified = self.morphotactics.adjLastVowelDropRoot_S
-            elif item.primary_pos == PrimaryPos.PostPositive:
-                root_for_modified = self.morphotactics.adjLastVowelDropRoot_S
-            else:
-                raise Exception("No root morpheme state found for " + item.id_)
-
-            m = item.root[:-1]
-            modified = StemTransition(m, item, self.calculate_attributes(m), root_for_modified)
-            modified.phonetic_attributes.add(PhoneticAttribute.ExpectsConsonant)
-            modified.phonetic_attributes.add(PhoneticAttribute.CannotTerminate)
-            return original, modified
+        if id_ in self.spatial_roots_without_informal_drop:
+            return (StemTransition(item.root, item, original_attrs, unmodified_root_state),)
         elif id_ == "ben_Pron_Pers" or id_ == "sen_Pron_Pers":
             original = StemTransition(item.root, item, original_attrs, unmodified_root_state)
             if item.lemma == "ben":
