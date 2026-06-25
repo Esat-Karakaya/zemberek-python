@@ -77,10 +77,8 @@ class TurkishMorphology:
         return TextUtil.normalize_apostrophes(no_dot)
 
     def analyze_sentence(self, sentence: str) -> List[WordAnalysis]:
-
-        normalized = TextUtil.normalize_quotes_hyphens(sentence)
         result = [
-            self.analyze(token=t) for t in self.tokenizer.tokenize(normalized)
+            self.analyze(token=t) for t in self.tokenizer.tokenize(sentence)
         ]
 
         return result

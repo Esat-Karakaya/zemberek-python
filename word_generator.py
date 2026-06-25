@@ -226,8 +226,9 @@ class CustomWordGenerator:
         root_lower = root.translate(self.alphabet.lower_map).lower()
         if root_lower in {"di", "yi", "de", "ye"}:
             return self.morphotactics.vDeYeRoot_S
-        if root and self.alphabet.is_vowel(root[-1]):
-            return self.morphotactics.verbRoot_VowelDrop_S
+        # Unknown verb roots should use the general verb root state.
+        # Vowel-ending stems without dictionary evidence should not be assumed
+        # to be vowel-drop verbs, otherwise suffixes like Fut fail.
         return self.morphotactics.verbRoot_S
 
     def _get_phonetic_attributes(self, root: str) -> Set[PhoneticAttribute]:
