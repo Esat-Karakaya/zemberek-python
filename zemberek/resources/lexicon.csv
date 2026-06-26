@@ -2016,7 +2016,7 @@ konservatif_Noun	konservatif	konservatif	Noun	None	konservatif	0	null	0
 az_Adj	az	az	Adj	None	az	0	null	 NoVoicing
 az_Adv	az	az	Adv	None	az	0	null	0
 az_Postp_PCAbl	az	az	Postp	PCAbl	az	0	null	0
-istiklâl_Noun	istiklâl	istiklâl	Noun	None	istiklal	0	null	 InverseHarmony
+istiklal_Noun	istiklal	istiklal	Noun	None	istiklal	0	null	 InverseHarmony
 be_Interj	be	be	Interj	None	be	0	null	0
 Pops_Noun_Prop	Pops	pops	Noun	Prop	pops	0	null	 NoVoicing PronunciationGuessed
 Kaminski_Noun_Prop	Kaminski	kaminski	Noun	Prop	kaminski	0	null	 PronunciationGuessed
@@ -2452,7 +2452,6 @@ mizana_Noun	mizana	mizana	Noun	None	mizana	0	null	0
 nazil_Adj	nazil	nazil	Adj	None	nazil	0	null	0
 Bayramyeri_Noun_Prop	Bayramyeri	bayramyeri	Noun	Prop	bayramyeri	0	null	 PronunciationGuessed
 canciğer_Adj	canciğer	canciğer	Adj	None	canciğer	0	null	0
-Internet_Noun_Prop	Internet	ınternet	Noun	Prop	ınternet	0	null	 PronunciationGuessed
 vs_Noun	vs	vs	Noun	None	vese	0	null	 Ext
 ağlamak_Verb	ağlamak	ağla	Verb	None	ağla	0	null	 Aorist_I ProgressiveVowelDrop Passive_In Causative_t
 bilinmedik_Adj	bilinmedik	bilinmedik	Adj	None	bilinmedik	0	null	 Voicing
@@ -4881,7 +4880,6 @@ Liga_Noun_Prop	Liga	liga	Noun	Prop	liga	0	null	 PronunciationGuessed
 Falco_Noun_Prop	Falco	falco	Noun	Prop	falco	0	null	 PronunciationGuessed
 Karakoyunlu_Noun_Prop	Karakoyunlu	karakoyunlu	Noun	Prop	karakoyunlu	0	null	 PronunciationGuessed
 Babybjörn_Noun_Prop	Babybjörn	babybjörn	Noun	Prop	babybjörn	0	null	 PronunciationGuessed
-Ligi_Noun_Prop	Ligi	ligi	Noun	Prop	ligi	0	null	 PronunciationGuessed
 Push_Noun_Prop	Push	push	Noun	Prop	push	0	null	 NoVoicing PronunciationGuessed
 arayüz_Noun	arayüz	arayüz	Noun	None	arayüz	0	null	0
 Klerides_Noun_Prop	Klerides	klerides	Noun	Prop	klerides	0	null	 PronunciationGuessed
@@ -13820,7 +13818,6 @@ mürebbi_Noun	mürebbi	mürebbi	Noun	None	mürebbi	0	null	0
 hormonal_Adj	hormonal	hormonal	Adj	None	hormonal	0	null	 InverseHarmony
 arpej_Noun	arpej	arpej	Noun	None	arpej	0	null	0
 karaelmas_Noun	karaelmas	karaelmas	Noun	None	karaelmas	0	null	 Ext
-Twitter_Noun_Prop	Twitter	twitter	Noun	Prop	tıvitır	0	null	0
 çalkantı_Noun	çalkantı	çalkantı	Noun	None	çalkantı	0	null	0
 Anonymous_Noun_Prop	Anonymous	anonymous	Noun	Prop	anonymous	0	null	 PronunciationGuessed
 Essentials_Noun_Prop	Essentials	essentials	Noun	Prop	essentials	0	null	 PronunciationGuessed
@@ -19427,7 +19424,6 @@ iğnedenlik_Noun	iğnedenlik	iğnedenlik	Noun	None	iğnedenlik	0	null	 Voicing E
 Keyes_Noun_Prop	Keyes	keyes	Noun	Prop	keyes	0	null	 PronunciationGuessed
 Defence_Noun_Prop	Defence	defence	Noun	Prop	defence	0	null	 PronunciationGuessed
 Ujfalusi_Noun_Prop	Ujfalusi	ujfalusi	Noun	Prop	ujfalusi	0	null	 PronunciationGuessed
-Yağın_Noun_Prop	Yağın	yağın	Noun	Prop	yağın	0	null	 PronunciationGuessed
 Abramovich_Noun_Prop	Abramovich	abramovich	Noun	Prop	abramovich	0	null	 PronunciationGuessed
 Bengisoy_Noun_Prop	Bengisoy	bengisoy	Noun	Prop	bengisoy	0	null	 PronunciationGuessed
 şahika_Noun	şahika	şahika	Noun	None	şahika	0	null	0
@@ -22514,6 +22510,7 @@ Aysun_Noun_Prop	Aysun	aysun	Noun	Prop	aysun	0	null	 PronunciationGuessed
 Çorumspor_Noun_Prop	Çorumspor	çorumspor	Noun	Prop	çorumspor	0	null	 PronunciationGuessed
 Pocahontas_Noun_Prop	Pocahontas	pocahontas	Noun	Prop	pocahontas	0	null	 PronunciationGuessed
 fiilî_Adj	fiilî	fiilî	Adj	None	fiili	0	null	0
+fiilimsi_Noun	fiilimsi	fiilimsi	Noun	None	fiilimsi	0	null	0
 temdit_Noun	temdit	temdit	Noun	None	temdit	0	null	 Voicing
 Edviye_Noun_Prop	Edviye	edviye	Noun	Prop	edviye	0	null	 PronunciationGuessed
 Şuvalov_Noun_Prop	Şuvalov	şuvalov	Noun	Prop	şuvalov	0	null	 PronunciationGuessed
@@ -31919,8 +31916,6 @@ marketing_Noun	marketing	marketing	Noun	None	marketing	0	null	0
 galibiyet_Noun	galibiyet	galibiyet	Noun	None	galibiyet	0	null	 NoVoicing
 tekrar_Noun	tekrar	tekrar	Noun	None	tekrar	0	null	0
 kontrendikasyon_Noun	kontrendikasyon	kontrendikasyon	Noun	None	kontrendikasyon	0	null	 Ext
-Atm_Noun_Abbrv	Atm	atm	Noun	Abbrv	ateme	0	null	0
-Atp_Noun_Abbrv	Atp	atp	Noun	Abbrv	atepe	0	null	0
 Ato_Noun_Abbrv	Ato	ato	Noun	Abbrv	ato	0	null	 PronunciationGuessed
 tehalüf_Noun	tehalüf	tehalüf	Noun	None	tehalüf	0	null	0
 nimbus_Noun	nimbus	nimbus	Noun	None	nimbus	0	null	0
@@ -41566,7 +41561,7 @@ metazori_Adv	metazori	metazori	Adv	None	metazori	0	null	0
 Fado_Noun_Prop	Fado	fado	Noun	Prop	fado	0	null	 PronunciationGuessed
 Vries_Noun_Prop	Vries	vries	Noun	Prop	vries	0	null	 PronunciationGuessed
 geyikdili_Noun	geyikdili	geyikdili	Noun	None	geyikdili	0	null	 CompoundP3sg
-İnternet_Noun_Prop	İnternet	internet	Noun	Prop	internet	0	null	 NoVoicing PronunciationGuessed
+internet_Noun	internet	internet	Noun	None	internet	0	null	 NoVoicing
 Karavelioğlu_Noun_Prop	Karavelioğlu	karavelioğlu	Noun	Prop	karavelioğlu	0	null	 PronunciationGuessed
 kifaflanmak_Verb	kifaflanmak	kifaflan	Verb	None	kifaflan	0	null	 Aorist_I
 Bulgan_Noun_Prop	Bulgan	bulgan	Noun	Prop	bulgan	0	null	 PronunciationGuessed
@@ -44735,7 +44730,6 @@ hissedar_Noun	hissedar	hissedar	Noun	None	hissedar	0	null	0
 Prudential_Noun_Prop	Prudential	prudential	Noun	Prop	prudential	0	null	 PronunciationGuessed
 Mecitözü_Noun_Prop	Mecitözü	mecitözü	Noun	Prop	mecitözü	0	null	 NounConsInsert_n PronunciationGuessed
 Vivet_Noun_Prop	Vivet	vivet	Noun	Prop	vivet	0	null	 PronunciationGuessed
-Azim_Noun_Prop	Azim	azim	Noun	Prop	azim	0	null	 PronunciationGuessed
 Tevil_Noun_Prop	Tevil	tevil	Noun	Prop	tevil	0	null	 PronunciationGuessed
 işgünü_Noun	işgünü	işgünü	Noun	None	işgünü	0	null	 CompoundP3sg Ext
 Darvinci_Noun_Prop	Darvinci	darvinci	Noun	Prop	darvinci	0	null	 NoQuote PronunciationGuessed
@@ -47428,7 +47422,6 @@ aft_Noun	aft	aft	Noun	None	aft	0	null	 NoVoicing
 simitçi_Noun	simitçi	simitçi	Noun	None	simitçi	0	null	0
 Arslanboğa_Noun_Prop	Arslanboğa	arslanboğa	Noun	Prop	arslanboğa	0	null	 PronunciationGuessed
 Dulles_Noun_Prop	Dulles	dulles	Noun	Prop	dulles	0	null	 PronunciationGuessed
-mehdî_Noun	mehdî	mehdî	Noun	None	mehdi	0	null	0
 Bozoğlu_Noun_Prop	Bozoğlu	bozoğlu	Noun	Prop	bozoğlu	0	null	 PronunciationGuessed
 Tüylüoğlu_Noun_Prop	Tüylüoğlu	tüylüoğlu	Noun	Prop	tüylüoğlu	0	null	 PronunciationGuessed
 Babi_Noun_Prop	Babi	babi	Noun	Prop	babi	0	null	 PronunciationGuessed
@@ -50068,7 +50061,6 @@ Ekvatoral_Adj_Prop	Ekvatoral	ekvatoral	Adj	Prop	ekvatoral	0	null	 PronunciationG
 onbiraylık_Noun	onbiraylık	onbiraylık	Noun	None	onbiraylık	0	null	 Voicing
 japone_Adj	japone	japone	Adj	None	japone	0	null	0
 Özdener_Noun_Prop	Özdener	özdener	Noun	Prop	özdener	0	null	 PronunciationGuessed
-Yaşın_Noun_Prop	Yaşın	yaşın	Noun	Prop	yaşın	0	null	 PronunciationGuessed
 Lavrion_Noun_Prop	Lavrion	lavrion	Noun	Prop	lavrion	0	null	 PronunciationGuessed
 apsis_Noun	apsis	apsis	Noun	None	apsis	0	null	0
 Yaşıl_Noun_Prop	Yaşıl	yaşıl	Noun	Prop	yaşıl	0	null	 PronunciationGuessed
