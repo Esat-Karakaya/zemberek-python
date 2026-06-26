@@ -1,46 +1,16 @@
 ================================================================================
-ENCODE-DECODE ROUND-TRIP TEST LOG - 2026-06-26 11:47:12
+ENCODE-DECODE ROUND-TRIP TEST LOG - 2026-06-26 13:25:14
 ================================================================================
 Total tweets processed:  3999
-Successful round-trips:  3992
-Failed round-trips:      7
-Success Rate:            99.82%
+Successful round-trips:  3998
+Failed round-trips:      1
+Success Rate:            99.97%
 ================================================================================
 
 DETAILED FAILURES:
 --------------------------------------------------------------------------------
-Failure #1 (Excel Row 312):
-  Original:  'beni seninle muhattap eden hayatın vizyonsuzluğuna da baya bir kızgınım.'
-  Decoded:   'beni senle muhattap eden hayatın vizyonsuzluğuna da baya bir kızgınım.'
-  Tokens:    ['b', 'e', 'n', '<|Noun|>', '<|Acc|>', ' ', 's', 'e', 'n', '<|Noun|>', '<|Ins|>', ' ', 'm', 'u', 'h', 'a', 't', 't', 'a', 'p', ' ', 'e', 'd', 'e', '<|Noun|>', '<|P2sg|>', ' ', 'h', 'a', 'y', 'a', 't', '<|Noun|>', '<|Gen|>', ' ', 'v', 'i', 'z', 'y', 'o', 'n', '<|Noun|>', '<|Without|>', '<|Ness|>', '<|P2sg|>', '<|Dat|>', ' ', 'd', 'a', ' ', 'b', 'a', 'y', '<|Verb|>', '<|Opt|>', ' ', 'b', 'i', 'r', ' ', 'k', 'ı', 'z', 'g', 'ı', 'n', '<|Noun|>', '<|A1sg|>', '.']
---------------------------------------------------------------------------------
-Failure #2 (Excel Row 379):
-  Original:  'Beni seninle muhattap eden hayatın vizyonsuzluğunada baya bir kızgınım.'
-  Decoded:   'Beni senle muhattap eden hayatın vizyonsuzluğunada baya bir kızgınım.'
-  Tokens:    ['B', 'e', 'n', '<|Noun|>', '<|Acc|>', ' ', 's', 'e', 'n', '<|Noun|>', '<|Ins|>', ' ', 'm', 'u', 'h', 'a', 't', 't', 'a', 'p', ' ', 'e', 'd', 'e', '<|Noun|>', '<|P2sg|>', ' ', 'h', 'a', 'y', 'a', 't', '<|Noun|>', '<|Gen|>', ' ', 'v', 'i', 'z', 'y', 'o', 'n', 's', 'u', 'z', 'l', 'u', 'ğ', 'u', 'n', 'a', 'd', 'a', ' ', 'b', 'a', 'y', '<|Verb|>', '<|Opt|>', ' ', 'b', 'i', 'r', ' ', 'k', 'ı', 'z', 'g', 'ı', 'n', '<|Noun|>', '<|A1sg|>', '.']
---------------------------------------------------------------------------------
-Failure #3 (Excel Row 429):
-  Original:  'Seninle yaşamak isteyipte yaşayamadığım her şey için bu hayata ayrı ayrı kızgınım'
-  Decoded:   'Senle yaşamak isteyipte yaşayamadığım her şey için bu hayata ayrı ayrı kızgınım'
-  Tokens:    ['S', 'e', 'n', '<|Noun|>', '<|Ins|>', ' ', 'y', 'a', 'ş', 'a', '<|Verb|>', '<|Inf1|>', ' ', 'i', 's', 't', 'e', 'y', 'i', 'p', 't', 'e', ' ', 'y', 'a', 'ş', 'a', '<|Verb|>', '<|Unable|>', '<|PastPart|>', '<|P1sg|>', ' ', 'h', 'e', 'r', ' ', 'ş', 'e', 'y', ' ', 'i', 'ç', 'i', 'n', ' ', 'b', 'u', ' ', 'h', 'a', 'y', 'a', 't', '<|Noun|>', '<|Dat|>', ' ', 'a', 'y', 'r', 'ı', ' ', 'a', 'y', 'r', 'ı', ' ', 'k', 'ı', 'z', 'g', 'ı', 'n', '<|Noun|>', '<|A1sg|>']
---------------------------------------------------------------------------------
-Failure #4 (Excel Row 906):
-  Original:  'Bu vahşet seninle birbirimizden nefret edelim diye Korku aklımızı öfke vicdanımızı körleştirsin diye Bunu ancak biz durdurabiliriz '
-  Decoded:   'Bu vahşet senle birbirimizden nefret edelim diye Korku aklımızı öfke vicdanımızı körleştirsin diye Bunu ancak biz durdurabiliriz '
-  Tokens:    ['B', 'u', ' ', 'v', 'a', 'h', 'ş', 'e', 't', ' ', 's', 'e', 'n', '<|Noun|>', '<|Ins|>', ' ', 'b', 'i', 'r', 'b', 'i', 'r', 'i', '<|Noun|>', '<|P1pl|>', '<|Abl|>', ' ', 'n', 'e', 'f', 'r', 'e', 't', ' ', 'e', 'd', 'e', '<|Noun|>', '<|With|>', '<|P1sg|>', ' ', 'd', 'i', 'y', 'e', ' ', 'K', 'o', 'r', 'k', 'u', ' ', 'a', 'k', 'ı', 'l', '<|Noun|>', '<|P1pl|>', '<|Acc|>', ' ', 'ö', 'f', 'k', 'e', ' ', 'v', 'i', 'c', 'd', 'a', 'n', '<|Noun|>', '<|P1pl|>', '<|Acc|>', ' ', 'k', 'ö', 'r', '<|Noun|>', '<|Become|>', '<|Caus|>', '<|A3sg|>', ' ', 'd', 'i', 'y', 'e', ' ', 'B', 'u', 'n', '<|Noun|>', '<|Acc|>', ' ', 'a', 'n', 'c', 'a', 'k', ' ', 'b', 'i', 'z', ' ', 'd', 'u', 'r', 'd', 'u', 'r', '<|Verb|>', '<|Able|>', '<|Aor|>', '<|A1pl|>', ' ']
---------------------------------------------------------------------------------
-Failure #5 (Excel Row 1814):
-  Original:  'insanları mutlu etmeye çalışmanın boşa zaman kaybı olduğunu. Seninle mutlu olanları bul :) '
-  Decoded:   'insanları mutlu etmeye çalışmanın boşa zaman kaybı olduğunu. Senle mutlu olanları bul :) '
-  Tokens:    ['i', 'n', 's', 'a', 'n', '<|Noun|>', '<|P3pl|>', ' ', 'm', 'u', 't', 'l', 'u', ' ', 'e', 't', '<|Verb|>', '<|Neg|>', '<|Opt|>', ' ', 'ç', 'a', 'l', 'ı', 'ş', '<|Verb|>', '<|Inf2|>', '<|Gen|>', ' ', 'b', 'o', 'ş', 'a', ' ', 'z', 'a', 'm', 'a', 'n', ' ', 'k', 'a', 'y', 'ı', 'p', '<|Noun|>', '<|Acc|>', ' ', 'o', 'l', '<|Verb|>', '<|PastPart|>', '<|P2sg|>', '<|Acc|>', '.', ' ', 'S', 'e', 'n', '<|Noun|>', '<|Ins|>', ' ', 'm', 'u', 't', 'l', 'u', ' ', 'o', 'l', '<|Verb|>', '<|PresPart|>', '<|P3pl|>', ' ', 'b', 'u', 'l', ' ', ':', ')', ' ']
---------------------------------------------------------------------------------
-Failure #6 (Excel Row 2501):
+Failure #1 (Excel Row 2501):
   Original:  'Hala yüzünüz kızarmadan gülebiliyorsunuz ya şaşkınlık verici.'
   Decoded:   'Hala yüzün kızarmadan gülebiliyorsunuz ya şaşkınlık verici.'
   Tokens:    ['H', 'a', 'l', 'a', ' ', 'y', 'ü', 'z', '<|Verb|>', '<|A2pl|>', ' ', 'k', 'ı', 'z', 'a', 'r', '<|Verb|>', '<|WithoutHavingDoneSo|>', ' ', 'g', 'ü', 'l', '<|Verb|>', '<|Able|>', '<|Prog1|>', '<|A2pl|>', ' ', 'y', 'a', ' ', 'ş', 'a', 'ş', 'k', 'ı', 'n', '<|Noun|>', '<|Ness|>', ' ', 'v', 'e', 'r', 'i', 'c', 'i', '.']
---------------------------------------------------------------------------------
-Failure #7 (Excel Row 3229):
-  Original:  'Yüzünü öyle özledim ki, Seninleyken gözlerimi kırptığım için bile pişmanım... '
-  Decoded:   'Yüzünü öyle özledim ki, Senleyken gözlerimi kırptığım için bile pişmanım... '
-  Tokens:    ['Y', 'ü', 'z', '<|Noun|>', '<|P2sg|>', '<|Acc|>', ' ', 'ö', 'y', 'l', 'e', ' ', 'ö', 'z', 'l', 'e', '<|Verb|>', '<|Past|>', '<|A1sg|>', ' ', 'k', 'i', ',', ' ', 'S', 'e', 'n', '<|Noun|>', '<|Ins|>', '<|While|>', ' ', 'g', 'ö', 'z', '<|Noun|>', '<|A3pl|>', '<|P1sg|>', '<|Acc|>', ' ', 'k', 'ı', 'r', 'p', '<|Verb|>', '<|PastPart|>', '<|P1sg|>', ' ', 'i', 'ç', 'i', 'n', ' ', 'b', 'i', 'l', 'e', ' ', 'p', 'i', 'ş', 'm', 'a', 'n', '<|Noun|>', '<|A1sg|>', '.', '.', '.', ' ']
 --------------------------------------------------------------------------------

@@ -56760,6 +56760,7 @@ sem_Noun	sem	sem	Noun	None	sem	0	null	 NoVoicing Doubling
 sel_Noun	sel	sel	Noun	None	sel	0	null	 NoVoicing
 mukavva_Noun	mukavva	mukavva	Noun	None	mukavva	0	null	0
 sen_Pron_Pers	sen	sen	Pron	Pers	sen	0	null	0
+senin_Noun	senin	senin	Noun	None	senin	0	null	0
 hemofil_Adj	hemofil	hemofil	Adj	None	hemofil	0	null	0
 ses_Noun	ses	ses	Noun	None	ses	0	null	 NoVoicing
 Walsh_Noun_Prop	Walsh	walsh	Noun	Prop	walsh	0	null	 NoVoicing PronunciationGuessed
@@ -63901,7 +63902,6 @@ higroskopik_Adj	higroskopik	higroskopik	Adj	None	higroskopik	0	null	 Voicing
 Kuruçeşme_Noun_Prop	Kuruçeşme	kuruçeşme	Noun	Prop	kuruçeşme	0	null	 PronunciationGuessed
 beyanat_Noun	beyanat	beyanat	Noun	None	beyanat	0	null	 NoVoicing
 salepgiller_Noun	salepgiller	salepgiller	Noun	None	salepgiller	0	null	 ImplicitPlural
-İslâm_Noun_Prop	İslâm	islam	Noun	Prop	islam	0	null	 NoQuote PronunciationGuessed
 Mourinho_Noun_Prop	Mourinho	mourinho	Noun	Prop	mourinho	0	null	 PronunciationGuessed
 eklenti_Noun	eklenti	eklenti	Noun	None	eklenti	0	null	0
 Heynckes_Noun_Prop	Heynckes	heynckes	Noun	Prop	heynckes	0	null	 PronunciationGuessed
