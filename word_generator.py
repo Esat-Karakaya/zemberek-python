@@ -55,33 +55,44 @@ class CustomWordGenerator:
         s_pos = SecondaryPos.ProperNoun if word_type == "NamedEntity" else SecondaryPos.None_
         return p_pos, s_pos
 
+    def _filter_lexicon_items(self, items: List[DictionaryItem], word_type: str, p_pos: PrimaryPos = None) -> List[DictionaryItem]:
+        if p_pos is not None:
+            items = [item for item in items if item.primary_pos == p_pos]
+        else:
+            items = [item for item in items if item.primary_pos != PrimaryPos.Verb]
+
+        if word_type == "Noun":
+            items = [item for item in items if item.secondary_pos != SecondaryPos.ProperNoun]
+        elif word_type == "NamedEntity":
+            proper_items = [item for item in items if item.secondary_pos == SecondaryPos.ProperNoun]
+            if proper_items:
+                items = proper_items
+
+        return items
+
     def _find_lexicon_items(self, root: str, word_type: str, p_pos: PrimaryPos, lexicon) -> List[DictionaryItem]:
         lex_key = root
         if word_type == "Verb":
             lex_key = self._add_Inf1_suffix(root)
         
-        items = [item for item in lexicon.item_map.get(lex_key, []) if item.primary_pos == p_pos]
+        items = self._filter_lexicon_items(lexicon.item_map.get(lex_key, []), word_type, p_pos)
         
         if not items and (root.istitle() or root.isupper()):
             alt_lex_key = root.translate(self.alphabet.lower_map).lower()
             if word_type == "Verb":
                 alt_lex_key = self._add_Inf1_suffix(alt_lex_key)
-            items = [item for item in lexicon.item_map.get(alt_lex_key, []) if item.primary_pos == p_pos]
+            items = self._filter_lexicon_items(lexicon.item_map.get(alt_lex_key, []), word_type, p_pos)
 
         # If still no items found, try any available POS as a fallback
         # (but exclude Verb to avoid inappropriate morphological rules)
         if not items:
-            items = [item for item in lexicon.item_map.get(lex_key, []) if item.primary_pos != PrimaryPos.Verb]
+            items = self._filter_lexicon_items(lexicon.item_map.get(lex_key, []), word_type)
             if not items and (root.istitle() or root.isupper()):
                 alt_lex_key = root.translate(self.alphabet.lower_map).lower()
                 if word_type == "Verb":
                     alt_lex_key = self._add_Inf1_suffix(alt_lex_key)
-                items = [item for item in lexicon.item_map.get(alt_lex_key, []) if item.primary_pos != PrimaryPos.Verb]
+                items = self._filter_lexicon_items(lexicon.item_map.get(alt_lex_key, []), word_type)
 
-        if word_type == "NamedEntity":
-            proper_items = [item for item in items if item.secondary_pos == SecondaryPos.ProperNoun]
-            if proper_items:
-                items = proper_items
         return items
 
     def _get_stem_candidates(self, root: str, items: List[DictionaryItem], word_type: str, p_pos: PrimaryPos, s_pos: SecondaryPos) -> List[StemTransition]:
