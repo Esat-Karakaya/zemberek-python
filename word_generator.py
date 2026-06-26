@@ -112,13 +112,18 @@ class CustomWordGenerator:
             candidates.append(self._create_stem_transition(root, p_pos, s_pos))
         return candidates
 
+    def _turkish_lower(self, s: str) -> str:
+        return s.translate(self.alphabet.lower_map).lower()
+
     def _apply_post_processing(self, root: str, generated_surface: str, word_type: str) -> str:
         is_named_entity = word_type == "NamedEntity"
         is_number = self.alphabet.contains_digit(root)
+        root_lower = self._turkish_lower(root)
+        generated_lower = self._turkish_lower(generated_surface)
         
-        if (is_named_entity or is_number) and generated_surface.lower() != root.lower():
-            if generated_surface.lower().startswith(root.lower()):
-                suffix = generated_surface[len(root):].lower()
+        if (is_named_entity or is_number) and generated_lower != root_lower:
+            if generated_lower.startswith(root_lower):
+                suffix = generated_lower[len(root_lower):]
                 return root + "'" + suffix
         
         return match_capitilization(root, generated_surface)
@@ -163,8 +168,10 @@ class CustomWordGenerator:
 
     def _update_forced_surface(self, current_surface: str, generated_surface: str, is_named_entity: bool, apostrophe_added: bool) -> tuple[str, bool]:
         if is_named_entity and not apostrophe_added and generated_surface != current_surface:
-            if generated_surface.startswith(current_surface):
-                suffix_surface = generated_surface[len(current_surface):]
+            current_lower = self._turkish_lower(current_surface)
+            generated_lower = self._turkish_lower(generated_surface)
+            if generated_lower.startswith(current_lower):
+                suffix_surface = generated_lower[len(current_lower):]
                 return f"{current_surface}'{suffix_surface}", True
             else:
                 return generated_surface, False
