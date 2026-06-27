@@ -123,6 +123,7 @@ class TurkishMorphotactics:
     aor = add_morpheme(Morpheme.instance("Aorist", "Aor"))
     fut = add_morpheme(Morpheme.instance("Future", "Fut"))
     imp = add_morpheme(Morpheme.instance("Imparative", "Imp"))
+    req = add_morpheme(Morpheme.instance("Request", "Req"))
     opt = add_morpheme(Morpheme.instance("Optative", "Opt"))
     desr = add_morpheme(Morpheme.instance("Desire", "Desr"))
     neces = add_morpheme(Morpheme.instance("Necessity", "Neces"))
@@ -350,6 +351,7 @@ class TurkishMorphotactics:
         self.vNegProg1_S = MorphemeState.non_terminal("vNegProg1_S", self.neg)
         self.vUnableProg1_S = MorphemeState.non_terminal("vUnableProg1_S", self.unable)
         self.vImp_S = MorphemeState.non_terminal("vImp_S", self.imp)
+        self.vReq_ST = MorphemeState.terminal("vReq_ST", self.req)
         self.vImpYemekYi_S = MorphemeState.non_terminal("vImpYemekYi_S", self.imp)
         self.vImpYemekYe_S = MorphemeState.non_terminal("vImpYemekYe_S", self.imp)
         self.vCausT_S = MorphemeState.non_terminal_derivative("vCaus_S", self.caus)
@@ -1017,9 +1019,10 @@ class TurkishMorphotactics:
 
     def connect_verbs(self):
         self.verbRoot_S.add_empty(self.vImp_S)
+        self.verbRoot_S.add_(self.vReq_ST, "+yInIz")
         self.vImp_S.add_empty(self.vA2sg_ST).add_(self.vA3sg_ST, "sIn").add_(self.vA2pl_ST,
                                                                               "+yIn").add_(
-            self.vA2pl_ST, "+yInIz").add_(self.vA3pl_ST, "sInlAr")
+            self.vA3pl_ST, "sInlAr")
         self.verbRoot_S.add_(self.vCausT_S, "t", Conditions.has(r_attribute=RootAttribute.Causative_t).or_(
             Conditions.LastDerivationIs(self.vCausTir_S)).and_not(
             Conditions.LastDerivationIsAny((self.vCausT_S, self.vPass_S, self.vAble_S))))

@@ -97,6 +97,7 @@ idx2morpheme_id =[
     "Aor",
     "Fut",
     "Imp",
+    "Req",
     "Opt",
     "Desr",
     "Neces",
