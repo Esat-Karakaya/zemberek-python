@@ -1,16 +1,10 @@
 ================================================================================
-ENCODE-DECODE ROUND-TRIP TEST LOG - 2026-06-26 13:25:14
+ENCODE-DECODE ROUND-TRIP TEST LOG - 2026-06-26 19:26:55
 ================================================================================
 Total tweets processed:  3999
-Successful round-trips:  3998
-Failed round-trips:      1
-Success Rate:            99.97%
+Successful round-trips:  3999
+Failed round-trips:      0
+Success Rate:            100.00%
 ================================================================================
 
-DETAILED FAILURES:
---------------------------------------------------------------------------------
-Failure #1 (Excel Row 2501):
-  Original:  'Hala yüzünüz kızarmadan gülebiliyorsunuz ya şaşkınlık verici.'
-  Decoded:   'Hala yüzün kızarmadan gülebiliyorsunuz ya şaşkınlık verici.'
-  Tokens:    ['H', 'a', 'l', 'a', ' ', 'y', 'ü', 'z', '<|Verb|>', '<|A2pl|>', ' ', 'k', 'ı', 'z', 'a', 'r', '<|Verb|>', '<|WithoutHavingDoneSo|>', ' ', 'g', 'ü', 'l', '<|Verb|>', '<|Able|>', '<|Prog1|>', '<|A2pl|>', ' ', 'y', 'a', ' ', 'ş', 'a', 'ş', 'k', 'ı', 'n', '<|Noun|>', '<|Ness|>', ' ', 'v', 'e', 'r', 'i', 'c', 'i', '.']
---------------------------------------------------------------------------------
+All tests passed successfully! No mismatches found.
