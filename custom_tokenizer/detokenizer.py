@@ -1,13 +1,7 @@
-import sys
-from pathlib import Path
 from typing import List
 from collections import OrderedDict
 
-# Add the parent directory to sys.path to allow importing from the root
-sys.path.append(str(Path(__file__).resolve().parent.parent))
-
-from word_generator import CustomWordGenerator
-
+from custom_tokenizer.word_generator import CustomWordGenerator
 
 class MorphDetokenizer:
     def __init__(self, tk_start: str = "<|", tk_end: str = "|>", cache_limit: int = 100):

@@ -2,9 +2,7 @@ import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 
-from utils import get_morphotactics
-from word_generator import CustomWordGenerator
-from zemberek.morphology.morphotactics.turkish_morphotactics import get_morpheme_map
+from custom_tokenizer.word_generator import CustomWordGenerator
 import logging
 
 # Configure logging to show errors but avoid noise

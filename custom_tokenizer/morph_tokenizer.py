@@ -1,12 +1,7 @@
-import sys
-from pathlib import Path
-# Add the parent directory to sys.path to allow importing from the root
-sys.path.append(str(Path(__file__).resolve().parent.parent))
-
 from typing import List
 from zemberek.morphology.analysis.word_analysis import WordAnalysis
 from zemberek import TurkishSentenceExtractor
-from utils import get_morphology, match_capitilization, is_morph_analysis_ok
+from custom_tokenizer.utils import get_morphology, match_capitilization, is_morph_analysis_ok
 
 from zemberek.core.turkish import PrimaryPos, SecondaryPos
 from custom_tokenizer.detokenizer import MorphDetokenizer

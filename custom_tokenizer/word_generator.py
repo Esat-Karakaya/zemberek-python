@@ -1,4 +1,4 @@
-from utils import get_morphotactics, match_capitilization
+from custom_tokenizer.utils import get_morphotactics, match_capitilization
 from zemberek.morphology.morphotactics.morpheme import Morpheme
 from zemberek.morphology.lexicon.dictionary_item import DictionaryItem
 from zemberek.morphology.morphotactics.stem_transition import StemTransition
@@ -9,7 +9,7 @@ from zemberek.core.turkish.primary_pos import PrimaryPos
 from zemberek.core.turkish.secondary_pos import SecondaryPos
 from zemberek.core.turkish.turkish_alphabet import TurkishAlphabet
 from zemberek.morphology.generator.word_generator import WordGenerator
-from dictionary import morpheme_map
+from custom_tokenizer.dictionary import morpheme_map
 from zemberek.morphology.analysis.tr.pronunciation_guesser import PronunciationGuesser
 import logging
 from typing import List, Union, Literal, Set
