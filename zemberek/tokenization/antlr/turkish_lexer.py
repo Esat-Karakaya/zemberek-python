@@ -1,7 +1,6 @@
-import os
+import importlib
 import re
 
-from pkg_resources import resource_filename
 from typing import Set, List, TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -22,7 +21,8 @@ from zemberek.tokenization.antlr.custom_lexer_ATN_simulator import CustomLexerAT
 class TurkishLexer(Lexer):
     _ATN: 'ATN'
     abbreviations: Set[str] = set()
-    fi = resource_filename("zemberek", os.path.join("resources", "abbreviations.txt"))
+    with importlib.resources.path("zemberek.resources", "abbreviations.txt") as p:
+        fi = str(p)
     with open(fi, "r", encoding="utf-8") as f:
         for line in f:
             if len(line.strip()) > 0:
