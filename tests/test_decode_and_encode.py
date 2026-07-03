@@ -6,7 +6,7 @@ import logging
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 import pandas as pd
-from custom_tokenizer.morph_tokenizer import MorphTokenizer
+from pre_bpe_morph_tr.morph_tokenizer import MorphTokenizer
 
 # Configure logging to hide noisy library messages
 logging.basicConfig(level=logging.ERROR)

@@ -1,1 +1,1 @@
-from custom_tokenizer.morph_tokenizer import MorphTokenizer
+from pre_bpe_morph_tr.morph_tokenizer import MorphTokenizer

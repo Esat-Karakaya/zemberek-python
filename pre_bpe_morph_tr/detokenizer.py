@@ -1,7 +1,7 @@
 from typing import List
 from collections import OrderedDict
 
-from custom_tokenizer.word_generator import CustomWordGenerator
+from pre_bpe_morph_tr.word_generator import CustomWordGenerator
 
 class MorphDetokenizer:
     def __init__(self, tk_start: str = "<|", tk_end: str = "|>", cache_limit: int = 100):

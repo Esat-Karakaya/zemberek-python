@@ -4,11 +4,22 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pre_bpe_morph_tr"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
     "antlr4-python3-runtime==4.8",
     "numpy>=1.19.0",
 ]
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
 
-[tool.setuptools]
-packages = ["zemberek", "custom_tokenizer"]
+[tool.setuptools.packages.find]
+include = [
+    "pre_bpe_morph_tr*",
+    "zemberek*",
+]
+
+[project.urls]
+Homepage = "https://github.com/Esat-Karakaya/zemberek-python/tree/llm_tooling"

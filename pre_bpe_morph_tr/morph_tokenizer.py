@@ -1,10 +1,10 @@
 from typing import List
 from zemberek.morphology.analysis.word_analysis import WordAnalysis
 from zemberek import TurkishSentenceExtractor
-from custom_tokenizer.utils import get_morphology, match_capitilization, is_morph_analysis_ok
+from pre_bpe_morph_tr.utils import get_morphology, match_capitilization, is_morph_analysis_ok
 
 from zemberek.core.turkish import PrimaryPos, SecondaryPos
-from custom_tokenizer.detokenizer import MorphDetokenizer
+from pre_bpe_morph_tr.detokenizer import MorphDetokenizer
 from zemberek.core.turkish.root_attribute import RootAttribute
 
 class MorphTokenizer:

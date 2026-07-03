@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 
-from custom_tokenizer.word_generator import CustomWordGenerator
+from pre_bpe_morph_tr.word_generator import CustomWordGenerator
 import logging
 
 # Configure logging to show errors but avoid noise
