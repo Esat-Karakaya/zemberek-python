@@ -5,7 +5,7 @@ This package recognizes verbs, nouns, and named entities and their suffixes. Bef
 
 ## Usage
 ```python
-from pre_bpe_morph_tr import MorphTokenizer
+from pre_bpe_morph_tr.morph_tokenizer import MorphTokenizer
 tokenizer=MorphTokenizer("<|", "|>")
 
 tokenizer.tokenize("gülüveriniz")
@@ -17,3 +17,10 @@ tokenizer.detokenize(['k', 'o', 'ş', '<|Verb|>', '<|Fut|>', '<|A1sg|>'])
 
 ## Developed for language model
 Since this is developed for LM training, I tried to avoid preprocessing text (like converting "hal" to "hâl", or lowercasing words). The text should remain unchanged when encoded and then decoded.
+
+## Notes
+Keep in mind that this was created for research only and is kind of slow.
+If you come across an error that says "ModuleNotFoundError: No module named 'pkg_resources'" that you have to install setuptools. Run:
+```bash
+pip install setuptools==81.0.0 # Newer versions may not work
+```
